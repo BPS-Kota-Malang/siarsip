@@ -37,7 +37,7 @@ class UploadController extends Controller
     public function edit(string $id)
     {
         $upload = Upload::findorfail($id);
-        return view('uploads.edit-file', compact('upload'));
+        return view('uploads.edit-upload', compact('upload'));
     }
 
     /**

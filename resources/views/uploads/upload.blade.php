@@ -39,18 +39,23 @@
                     </thead>
                     <tbody>
                         @foreach ($dataUpload as $data)
-                      <tr>
-                        <td class="text-center">{{ $loop->iteration }}</td>
-                        <td>{{ $data->activity}}</td>
-                        <td>{{ $data->preview_link }}</td>
-                        <td>{{ $data->download_link }}</td>
-                        <td>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#edit-file"><i class="fas fa-edit"></i></a> |
-                            <a href="{{ route('delete-file',$data->id) }}"><i
-                                    class="fas fa-trash-alt" style="color: red"></i></a>
-                        </td>
-                      </tr>
-                      @endforeach
+                            <tr>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td>{{ $data->activity}}</td>
+                                <td>{{ $data->preview_link }}</td>
+                                <td>{{ $data->download_link }}</td>
+                                <td>
+                                    <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+
+                                    <a href="{{ route('delete-file',$data->id) }}">
+                                        <i class="fas fa-trash-alt" style="color: red"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+
                     </tbody>
                   </table>
                 </div>
@@ -132,6 +137,7 @@
             <div class="modal-body">
                 <form action="{{ route('update-file',$data->id) }}" class="needs-validation" novalidate="" method="POST">
                   @csrf
+                  @method('PUT')
                   <div class="card-body">
                     <div class="form-group row">
                       <label class="col-sm-2 col-form-label">Kegiatan</label>
