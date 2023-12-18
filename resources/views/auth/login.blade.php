@@ -9,7 +9,7 @@
             </div>
             @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif
+            @endif
             <div class="card card-primary">
               <div class="card-header" style="display: flex; justify-content: center; align-items: center;"><h3>Login</h3></div>
 
@@ -29,11 +29,11 @@
                     <div class="form-group mb-2">
                         <div class="d-block">
                             <label for="password" class="control-label">Password</label>
-                          <div class="float-right">
+                          {{-- <div class="float-right">
                             <a href="/forgotpassword" class="text-small">
                               Forgot Password?
                             </a>
-                          </div>
+                          </div> --}}
                         </div>
                         <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}">
                     {{-- @if($errors->has('password'))

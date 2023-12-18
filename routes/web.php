@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,10 +43,15 @@ Route::get('/logout', function () {
     return view('auth.logout');
 })->name('logout');
 
+Route::get('/user-profile', [UserController::class, 'showProfile'])->name('user-profile');
+Route::post('/user-profile', [UserController::class, 'update_profile']);
+Route::get('/user-profile', function () {
+    return view('user.user-profile');
+})->name('user-profile');
+
 Route::get('/kegiatan',[App\Http\Controllers\KegiatanController::class, 'index'])->name('kegiatan');
 Route::get('/add-kegiatan',[App\Http\Controllers\KegiatanController::class, 'create'])->name('add-kegiatan');
 Route::post('/save-kegiatan',[App\Http\Controllers\KegiatanController::class, 'store'])->name('save-kegiatan');
 Route::get('/edit-kegiatan,{id}',[App\Http\Controllers\KegiatanController::class, 'edit'])->name('edit-kegiatan');
 Route::post('/update-kegiatan,{id}',[App\Http\Controllers\KegiatanController::class, 'update'])->name('update-kegiatan');
 Route::get('/delete-kegiatan,{id}',[App\Http\Controllers\KegiatanController::class, 'destroy'])->name('delete-kegiatan');
-
