@@ -21,7 +21,13 @@ class ActivityController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD:app/Http/Controllers/ActivityController.php
         return view('activity.add-activity');
+=======
+
+
+        return view('kegiatan.add-kegiatan');
+>>>>>>> upload_branch:app/Http/Controllers/KegiatanController.php
     }
 
     /**
@@ -29,7 +35,13 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD:app/Http/Controllers/ActivityController.php
         Activity::create([
+=======
+
+
+        Kegiatan::create([
+>>>>>>> upload_branch:app/Http/Controllers/KegiatanController.php
             'name'=>$request->name,
             'finance_code'=>$request->finance_code,
             'division'=>$request->division,

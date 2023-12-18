@@ -57,3 +57,12 @@ Route::get('/edit-activity,{id}',[App\Http\Controllers\ActivityController::class
 Route::post('/update-activity,{id}',[App\Http\Controllers\ActivityController::class, 'update'])->name('update-activity');
 Route::get('/delete-activity,{id}',[App\Http\Controllers\ActivityController::class, 'destroy'])->name('delete-activity');
 
+
+//upload file
+Route::get('/archive',[App\Http\Controllers\UploadController::class, 'index'])->name('archive');
+Route::get('/add-file',[App\Http\Controllers\UploadController::class, 'create'])->name('add-file');
+Route::post('/save-file',[App\Http\Controllers\UploadController::class, 'store'])->name('save-file');
+Route::get('/edit-file,{id}',[App\Http\Controllers\UploadController::class, 'edit'])->name('edit-file');
+Route::post('/update-file,{id}',[App\Http\Controllers\UploadController::class, 'update'])->name('update-file');
+Route::get('/delete-file,{id}',[App\Http\Controllers\UploadController::class, 'destroy'])->name('delete-file');
+
