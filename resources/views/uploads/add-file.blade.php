@@ -4,6 +4,7 @@
 @include('layouts.navbar')
 @include('layouts.sidebar')
 
+
 <!-- Main Content -->
 <div class="main-content">
     <section class="section">

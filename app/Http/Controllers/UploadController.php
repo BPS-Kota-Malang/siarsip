@@ -11,13 +11,14 @@ class UploadController extends Controller
     public function index()
     {
         $dataUpload = Upload::all();
-        return view('uploads.upload',compact('dataUpload'));
+        $kegiatans = Kegiatan::pluck('name', 'id');
+        return view('uploads.upload',compact('dataUpload','kegiatans'));
+
     }
 
     public function create()
     {
-        $kegiatans = Kegiatan::pluck('name', 'id');
-        return view('uploads.add-file', compact('kegiatans'));
+        return view('uploads.add-file');
     }
 
     public function store(Request $request)

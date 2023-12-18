@@ -18,9 +18,11 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <div class="card-header">
-                <a href="{{ route('add-file') }}" class="btn btn-primary">Tambah File</a>
-              </div>
+                <div class="card-header">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#add-file">Tambah Kegiatan</button>
+                </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-striped" id="table-1">
@@ -43,7 +45,9 @@
                         <td>{{ $data->preview_link }}</td>
                         <td>{{ $data->download_link }}</td>
                         <td>
-                            <a href="{{ route('edit-file',$data->id) }}"><i class="fas fa-edit"></i></a> | <a href="{{ route('delete-file',$data->id) }}"><i class="fas fa-trash-alt" style="color: red"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#edit-file"><i class="fas fa-edit"></i></a> |
+                            <a href="{{ route('delete-file',$data->id) }}"><i
+                                    class="fas fa-trash-alt" style="color: red"></i></a>
                         </td>
                       </tr>
                       @endforeach
@@ -55,6 +59,113 @@
           </div>
         </div>
       </div>
+       <!-- Modal Add-->
+  <div class="modal fade center-modal" id="add-file" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Kegiatan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('save-file') }}" class="needs-validation" novalidate="" method="POST">
+                  @csrf
+                  <div class="card-body">
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Activity</label>
+                      <div class="col-sm-10">
+                          <select class="form-control" id="activity" name="activity">
+                              @foreach ($kegiatans as $id => $name)
+                                  <option value="{{ $name }}">{{ $name }}</option>
+                              @endforeach
+                          </select>
+                        <div class="invalid-feedback">
+                              kegiatan belum diisi
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Preview Link</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="preview_link" name="preview_link" required="">
+                        <div class="invalid-feedback">
+                          //
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Download Link</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="download_link" name="download_link">
+                        <div class="valid-feedback">
+                          Good job!
+                        </div>
+                      </div>
+                    </div>
+                    {{-- <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">ID User</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="id_user" name="id_user">
+                        <div class="valid-feedback">
+                          Good job!
+                        </div>
+                      </div>
+                    </div> --}}
+                  </div>
+                  <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-primary">add file</button>
+                  </div>
+                </form>
+              </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit-->
+<div class="modal fade center-modal" id="edit-file" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Kegiatan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('update-file',$data->id) }}" class="needs-validation" novalidate="" method="POST">
+                  @csrf
+                  <div class="card-body">
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Kegiatan</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="activity" name="activity" required="" value="{{ $data->activity }}">
+                        <div class="invalid-feedback">
+                          What's your name?
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Preview Link</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="preview_link" name="preview_link" required="" value="{{ $data->preview_link }}">
+                        <div class="invalid-feedback">
+                          Oh no! Email is invalid.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Download Link</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="download_link" name="download_link" value="{{ $data->download_link }}">
+                        <div class="valid-feedback">
+                          Good job!
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                  </div>
+                </form>
+              </div>
     </section>
   </div>
   @endsection
