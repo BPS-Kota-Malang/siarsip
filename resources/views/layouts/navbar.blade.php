@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+<div class="main-wrapper main-wrapper-1">
+    <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar">
     <form class="form-inline mr-auto">
       <ul class="navbar-nav mr-3">
@@ -217,3 +219,4 @@
       </li>
     </ul>
   </nav>
+</div>

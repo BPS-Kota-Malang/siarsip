@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kegiatan', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('finance_code', 200);
+            $table->string('finance_code', 200)->nullable();
             $table->string('division', 255);
             $table->timestamps();
         });
