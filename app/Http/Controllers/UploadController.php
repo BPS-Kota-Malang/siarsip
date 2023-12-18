@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Kegiatan;
 use App\Models\Upload;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class UploadController extends Controller
     public function index()
     {
         $dataUpload = Upload::all();
-        $kegiatans = Kegiatan::pluck('name', 'id');
+        $kegiatans = Activity::pluck('name', 'id');
         return view('uploads.upload',compact('dataUpload','kegiatans'));
 
     }
