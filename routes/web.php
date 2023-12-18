@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DivisionController;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -66,3 +67,4 @@ Route::get('/edit-file,{id}',[App\Http\Controllers\UploadController::class, 'edi
 Route::post('/update-file,{id}',[App\Http\Controllers\UploadController::class, 'update'])->name('update-file');
 Route::get('/delete-file,{id}',[App\Http\Controllers\UploadController::class, 'destroy'])->name('delete-file');
 
+Route::resource('division', DivisionController::class);
