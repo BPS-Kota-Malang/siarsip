@@ -19,7 +19,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="{{ route('add-kegiatan') }}" class="btn btn-primary">Tambah Kegiatan</a>
+                <a href="{{ route('add-activity') }}" class="btn btn-primary">Tambah Kegiatan</a>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -43,7 +43,7 @@
                         <td>{{ $data->finance_code }}</td>
                         <td>{{ $data->division }}</td>
                         <td>
-                            <a href="{{ route('edit-kegiatan',$data->id) }}"><i class="fas fa-edit"></i></a> | <a href="{{ route('delete-kegiatan',$data->id) }}"><i class="fas fa-trash-alt" style="color: red"></i></a>
+                            <a href="{{ route('edit-activity',$data->id) }}"><i class="fas fa-edit"></i></a> | <a href="{{ route('delete-activity',$data->id) }}"><i class="fas fa-trash-alt" style="color: red"></i></a>
                         </td>
                       </tr>
                       @endforeach

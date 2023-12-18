@@ -21,7 +21,7 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <form action="{{ route('update-kegiatan',$kegiatan->id) }}" class="needs-validation" novalidate="" method="POST">
+              <form action="{{ route('update-activity',$kegiatan->id) }}" class="needs-validation" novalidate="" method="POST">
                 @csrf
                 <div class="card-body">
                   <div class="form-group row">

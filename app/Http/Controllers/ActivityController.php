@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kegiatan;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 
-class KegiatanController extends Controller
+class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $datakegiatan = Kegiatan::all();
-        return view('kegiatan.kegiatan',compact('datakegiatan'));
+        $datakegiatan = Activity::all();
+        return view('activity.activity',compact('datakegiatan'));
     }
 
     /**
@@ -21,7 +21,7 @@ class KegiatanController extends Controller
      */
     public function create()
     {
-        return view('kegiatan.add-kegiatan');
+        return view('activity.add-activity');
     }
 
     /**
@@ -29,13 +29,13 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        Kegiatan::create([
+        Activity::create([
             'name'=>$request->name,
             'finance_code'=>$request->finance_code,
             'division'=>$request->division,
         ]);
 
-        return redirect('kegiatan')->with('success', 'Tambah Data Berhasil!');
+        return redirect('activity')->with('success', 'Tambah Data Berhasil!');
     }
 
     /**
@@ -51,8 +51,8 @@ class KegiatanController extends Controller
      */
     public function edit(string $id)
     {
-        $kegiatan = Kegiatan::findorfail($id);
-        return view('kegiatan.edit-kegiatan', compact('kegiatan'));
+        $kegiatan = Activity::findorfail($id);
+        return view('activity.edit-activity', compact('kegiatan'));
     }
 
     /**
@@ -60,10 +60,10 @@ class KegiatanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $kegiatan = Kegiatan::findorfail($id);
+        $kegiatan = Activity::findorfail($id);
         $kegiatan->update($request->all());
 
-        return redirect('kegiatan')->with('success', 'Data Berhasil Update!');
+        return redirect('activity')->with('success', 'Data Berhasil Update!');
     }
 
     /**
@@ -71,7 +71,7 @@ class KegiatanController extends Controller
      */
     public function destroy(string $id)
     {
-        $kegiatan = Kegiatan::findorfail($id);
+        $kegiatan = Activity::findorfail($id);
         $kegiatan->delete();
 
         return back()->with('info', 'Data Berhasil Dihapus!');

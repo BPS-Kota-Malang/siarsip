@@ -21,7 +21,7 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <form action="{{ route('save-kegiatan') }}" class="needs-validation" novalidate="" method="POST">
+              <form action="{{ route('save-activity') }}" class="needs-validation" novalidate="" method="POST">
                 @csrf
                 <div class="card-body">
                   <div class="form-group row">
