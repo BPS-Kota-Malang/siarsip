@@ -37,6 +37,11 @@ Route::get('/index', function () {
     return view('index');
 });
 
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/logout', function () {
+    return view('auth.logout');
+})->name('logout');
+
 Route::get('/kegiatan',[App\Http\Controllers\KegiatanController::class, 'index'])->name('kegiatan');
 Route::get('/add-kegiatan',[App\Http\Controllers\KegiatanController::class, 'create'])->name('add-kegiatan');
 Route::post('/save-kegiatan',[App\Http\Controllers\KegiatanController::class, 'store'])->name('save-kegiatan');
