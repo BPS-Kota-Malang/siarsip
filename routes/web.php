@@ -49,9 +49,11 @@ Route::get('/user-profile', function () {
     return view('user.user-profile');
 })->name('user-profile');
 
-Route::get('/kegiatan',[App\Http\Controllers\KegiatanController::class, 'index'])->name('kegiatan');
-Route::get('/add-kegiatan',[App\Http\Controllers\KegiatanController::class, 'create'])->name('add-kegiatan');
-Route::post('/save-kegiatan',[App\Http\Controllers\KegiatanController::class, 'store'])->name('save-kegiatan');
-Route::get('/edit-kegiatan,{id}',[App\Http\Controllers\KegiatanController::class, 'edit'])->name('edit-kegiatan');
-Route::post('/update-kegiatan,{id}',[App\Http\Controllers\KegiatanController::class, 'update'])->name('update-kegiatan');
-Route::get('/delete-kegiatan,{id}',[App\Http\Controllers\KegiatanController::class, 'destroy'])->name('delete-kegiatan');
+
+Route::get('/activity',[App\Http\Controllers\ActivityController::class, 'index'])->name('activity');
+Route::get('/add-activity',[App\Http\Controllers\ActivityController::class, 'create'])->name('add-activity');
+Route::post('/save-activity',[App\Http\Controllers\ActivityController::class, 'store'])->name('save-activity');
+Route::get('/edit-activity,{id}',[App\Http\Controllers\ActivityController::class, 'edit'])->name('edit-activity');
+Route::post('/update-activity,{id}',[App\Http\Controllers\ActivityController::class, 'update'])->name('update-activity');
+Route::get('/delete-activity,{id}',[App\Http\Controllers\ActivityController::class, 'destroy'])->name('delete-activity');
+

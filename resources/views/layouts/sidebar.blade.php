@@ -12,7 +12,7 @@
         <li class="menu-header active">Dashboard</li>
         <li class="active"><a class="nav-link" href="/index"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
         <li class="menu-header">Kegiatan</li>
-        <li><a class="nav-link" href="/kegiatan"><i class="far fa-square"></i> <span>Data Kegiatan</span></a></li>
+        <li><a class="nav-link" href="{{ route('activity') }}"><i class="far fa-square"></i> <span>Data Kegiatan</span></a></li>
         {{-- <li class="dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
           <ul class="dropdown-menu">
