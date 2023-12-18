@@ -44,3 +44,12 @@ Route::get('/edit-kegiatan,{id}',[App\Http\Controllers\KegiatanController::class
 Route::post('/update-kegiatan,{id}',[App\Http\Controllers\KegiatanController::class, 'update'])->name('update-kegiatan');
 Route::get('/delete-kegiatan,{id}',[App\Http\Controllers\KegiatanController::class, 'destroy'])->name('delete-kegiatan');
 
+
+//upload file
+Route::get('/archive',[App\Http\Controllers\UploadController::class, 'index'])->name('archive');
+Route::get('/add-file',[App\Http\Controllers\UploadController::class, 'create'])->name('add-file');
+Route::post('/save-file',[App\Http\Controllers\UploadController::class, 'store'])->name('save-file');
+Route::get('/edit-file,{id}',[App\Http\Controllers\UploadController::class, 'edit'])->name('edit-file');
+Route::post('/update-file,{id}',[App\Http\Controllers\UploadController::class, 'update'])->name('update-file');
+Route::get('/delete-file,{id}',[App\Http\Controllers\UploadController::class, 'destroy'])->name('delete-file');
+

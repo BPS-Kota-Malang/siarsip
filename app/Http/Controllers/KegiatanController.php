@@ -21,6 +21,8 @@ class KegiatanController extends Controller
      */
     public function create()
     {
+
+
         return view('kegiatan.add-kegiatan');
     }
 
@@ -29,6 +31,8 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
+
+
         Kegiatan::create([
             'name'=>$request->name,
             'finance_code'=>$request->finance_code,
