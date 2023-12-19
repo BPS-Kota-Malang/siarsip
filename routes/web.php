@@ -37,8 +37,8 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/forgot-password', [AuthController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('/reset/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
-Route::post('/reset', [AuthController::class, 'resetPassword'])->name('password.update');
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
 Route::get('/index', function () {
     return view('index');
