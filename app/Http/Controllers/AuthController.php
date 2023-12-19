@@ -8,6 +8,10 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
+
 
 class AuthController extends Controller
 {
@@ -31,11 +35,15 @@ public function login(Request $request)
             ->withInput();
     }
 
+    // $remember = true;
     $user = User::where('username',$request->username)->first();
 
     if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            $token = $user->createToken("auth-token")->plainTextToken;
             Auth::login($user);
+
+            $token = $user->createToken("auth-token")->plainTextToken;
+            $user->update(['remember_token' => $token]);
+
             return redirect('/index')->with('success', 'Login berhasil!');
     } else {
         return redirect('/login')
@@ -86,9 +94,68 @@ public function login(Request $request)
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        $guard = 'web'; // Sesuaikan dengan guard yang digunakan
+
+        // Hapus seluruh cookie sesi
+        Session::flush();
+
+        // Logout pengguna
+        Auth::guard($guard)->logout();
+
         return redirect('/login')->with('success', 'Terimakasih sudah logout! Silakan login kembali.');
-        $request->user()->currentAccessToken()->delete();
+    }
+
+    // Menampilkan form reset password
+    public function showResetForm(Request $request, $token = null)
+    {
+        return view('auth.reset-password')->with(
+            ['token' => $token, 'email' => $request->email]
+        );
+    }
+
+    public function showLinkRequestForm(Request $request)
+    {
+        return view('auth.forgot-password');
+    }
+
+    // Mengirim email tautan reset password
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+    return $status === Password::RESET_LINK_SENT
+                ? back()->with(['status' => __($status)])
+                : back()->withErrors(['email' => __($status)]);
+}
+
+    // Menangani proses reset password
+    public function resetPassword(Request $request)
+    {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|confirmed|min:6',
+    ]);
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) {
+            $user->forceFill([
+                'password' => bcrypt($password),
+                // 'remember_token' => Str::random(60),
+            ])->save();
+            // Hapus token "remember me" setelah reset password
+            $user->tokens()->delete();
+        }
+    );
+
+    return $status == Password::PASSWORD_RESET
+                ? redirect('/login')->with(['status' => __($status)])
+                : back()->withErrors(['email' => [__($status)]]);
     }
 
     }

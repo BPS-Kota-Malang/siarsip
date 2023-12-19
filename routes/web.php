@@ -35,14 +35,19 @@ Route::get('/login', function () {
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::get('/forgot-password', [AuthController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/reset/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset', [AuthController::class, 'resetPassword'])->name('password.update');
+
 Route::get('/index', function () {
     return view('index');
 });
 
-Route::post('/logout', [AuthController::class, 'logout']);
-Route::get('/logout', function () {
-    return view('auth.logout');
-})->name('logout');
+Route::middleware(['web'])->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/user-profile', [UserController::class, 'showProfile'])->name('user-profile');
 Route::post('/user-profile', [UserController::class, 'update_profile']);
