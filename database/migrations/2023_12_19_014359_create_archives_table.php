@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('uploads', function (Blueprint $table) {
+        Schema::create('archives', function (Blueprint $table) {
             $table->id();
             $table->string('preview_link'); // Tambahkan tanda kutip pada nama kolom
             $table->string('download_link'); // Tambahkan tipe data pada kolom
-            $table->string('kegiatan'); // Tambahkan tipe data dan unsigned pada kolom // Tambahkan tipe data dan unsigned pada kolom
+            $table->string('activity'); // Tambahkan tipe data dan unsigned pada kolom // Tambahkan tipe data dan unsigned pada kolom
             $table->timestamps();
 
             // Tambahkan indeks untuk foreign key
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('uploads');
+        Schema::dropIfExists('archives');
     }
 };

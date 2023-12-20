@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
-use App\Models\Kegiatan;
-use App\Models\Upload;
+use App\Models\Archive;
 use Illuminate\Http\Request;
 
-class UploadController extends Controller
+class ArchiveController extends Controller
 {
     public function index()
     {
-        $dataUpload = Upload::all();
+        $dataUpload = Archive::all();
         $kegiatans = Activity::pluck('name', 'id');
         return view('uploads.upload',compact('dataUpload','kegiatans'));
 
@@ -24,7 +23,7 @@ class UploadController extends Controller
 
     public function store(Request $request)
     {
-        Upload::create([
+        Archive::create([
             'activity'=>$request->activity,
             'preview_link'=>$request->preview_link,
             'download_link'=>$request->download_link,
@@ -37,8 +36,8 @@ class UploadController extends Controller
 
     public function edit(string $id)
     {
-        $upload = Upload::findorfail($id);
-        return view('uploads.edit-upload', compact('upload'));
+        $upload = Archive::findorfail($id);
+        return view('uploads.upload', compact('upload'));
     }
 
     /**
@@ -46,7 +45,7 @@ class UploadController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $upload= Upload::findorfail($id);
+        $upload= Archive::findorfail($id);
         $upload->update($request->all());
 
         return redirect('archive')->with('success', 'Data Berhasil Update!');
@@ -57,7 +56,7 @@ class UploadController extends Controller
      */
     public function destroy(string $id)
     {
-        $upload= Upload::findorfail($id);
+        $upload= Archive::findorfail($id);
         $upload->delete();
 
         return back()->with('info', 'Data Berhasil Dihapus!');
