@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-<<<<<<< HEAD
-<<<<<<< HEAD
+{{-- <<<<<<< HEAD
+<<<<<<< HEAD --}}
   <title>SI Arsip &mdash; Stisla</title>
-=======
+{{-- ======= --}}
   <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
->>>>>>> activity_branch
-=======
+{{-- >>>>>>> activity_branch
+======= --}}
   <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
->>>>>>> upload_branch
+{{-- >>>>>>> upload_branch --}}
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -102,7 +102,7 @@
     });
 </script>
 
-
   @include('sweetalert::alert')
+
 </body>
 </html>

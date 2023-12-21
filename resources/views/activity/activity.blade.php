@@ -38,29 +38,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($datakegiatan as $data)
-                                    <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $data->name }}</td>
-                                        <td>{{ $data->finance_code }}</td>
-                                        <td>{{ $data->division }}</td>
-                                        <td>
-
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
-                                            <a href="{{ route('delete-activity',$data->id) }}"><i
-                                                    class="fas fa-trash-alt" style="color: red"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                        @foreach ($datakegiatan as $data)
+                                        <tr>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>{{ $data->name }}</td>
+                                            <td>{{ $data->finance_code }}</td>
+                                            <td>{{ $data->division }}</td>
+                                            <td>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
+                                                <a href="{{ route('delete-activity',$data->id) }}" class="delete"><i class="fas fa-trash-alt" style="color: red"></i></a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Modal Add-->
     <div class="modal fade center-modal" id="add-activity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -95,6 +93,11 @@
                                 <label class="col-sm-2 col-form-label">Divisi</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="division" name="division">
+                                    {{-- <select class="form-control" name="division" id="division">
+                                        @foreach ($datakegiatan as $data)
+                                            <option value="{{ $data }}">{{ $data->division }}</option>
+                                        @endforeach
+                                    </select> --}}
                                     <div class="valid-feedback">
                                         Lengkap!
                                     </div>
@@ -110,8 +113,10 @@
             </div>
         </div>
     </div>
+    {{-- @include('activity.add-activity') --}}
 
     <!-- Modal Edit-->
+    {{-- @foreach ($datakegiatan as $data) --}}
     <div class="modal fade center-modal" id="edit-activity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -120,6 +125,44 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    @if($datakegiatan->isEmpty())
+                    <form action="#" class="needs-validation" novalidate="" method="POST">
+                        @csrf
+                        <div class="card-body">
+                          <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Nama </label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="name" name="name" required="" value="">
+                              <div class="invalid-feedback">
+                                Tolong isi Nama Kegiatan!
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Finance Code</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="finance_code" name="finance_code" value="">
+                              <div class="invalid-feedback">
+                                Maaf, Kode tidak valid.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Divisi</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="division" name="division" value="">
+                              <div class="valid-feedback">
+                                Lengkap!
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                      </form>
+                    @else
                     <form action="{{ route('update-activity',$data->id) }}" class="needs-validation" novalidate="" method="POST">
                         @csrf
                         <div class="card-body">
@@ -135,7 +178,7 @@
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Finance Code</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="finance_code" name="finance_code" required="" value="{{ $data->finance_code }}">
+                              <input type="text" class="form-control" id="finance_code" name="finance_code" value="{{ $data->finance_code }}">
                               <div class="invalid-feedback">
                                 Maaf, Kode tidak valid.
                               </div>
@@ -156,10 +199,13 @@
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                       </form>
+                      @endif
                 </div>
             </div>
         </div>
     </div>
+    {{-- @endforeach --}}
+    {{-- @include('activity.edit-activity') --}}
 
     </section>
 </div>

@@ -127,6 +127,7 @@
 </div>
 
 <!-- Modal Edit-->
+@foreach ($dataUpload as $data)
 <div class="modal fade center-modal" id="edit-file" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -172,6 +173,7 @@
                   </div>
                 </form>
               </div>
+              @endforeach
     </section>
   </div>
   @endsection

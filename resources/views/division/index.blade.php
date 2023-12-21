@@ -108,6 +108,7 @@
     </div>
 
     <!-- Modal Edit-->
+    @foreach ($allDivision as $data)
     <div class="modal fade center-modal" id="editDivision" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -139,7 +140,7 @@
             </div>
         </div>
     </div>
-
+    @endforeach
     </section>
 </div>
 @endsection
