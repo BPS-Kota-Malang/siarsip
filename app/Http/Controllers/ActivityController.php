@@ -76,4 +76,5 @@ class ActivityController extends Controller
 
         return back()->with('info', 'Data Berhasil Dihapus!');
     }
+
 }

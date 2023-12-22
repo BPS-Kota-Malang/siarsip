@@ -45,8 +45,14 @@
                                             <td>{{ $data->finance_code }}</td>
                                             <td>{{ $data->division }}</td>
                                             <td>
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
-                                                <a href="{{ route('delete-activity',$data->id) }}" class="delete"><i class="fas fa-trash-alt" style="color: red"></i></a>
+                                                <div class="icon-container">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a>
+                                                <form method="POST" action="{{ route('delete-activity',$data->id) }}">
+                                                    @csrf
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                     <a href="{{ route('delete-activity',$data->id) }}" class="confirm-button"><i class="fas fa-trash-alt" style="color: red"></i></a>
+                                                </form>
+                                                </div>
                                             </td>
                                         </tr>
                                         @endforeach

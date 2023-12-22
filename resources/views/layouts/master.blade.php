@@ -30,6 +30,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+
   <!-- Start GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
   <script>
@@ -96,6 +97,7 @@
 
         var modal = $(this);
         modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #id').val(id);
         modal.find('.modal-body #activity').val(activity);
         modal.find('.modal-body #preview_link').val(previewLink);
         modal.find('.modal-body #download_link').val(downloadLink);
@@ -104,5 +106,27 @@
 
   @include('sweetalert::alert')
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+  <script type="text/javascript">
+
+    $('.confirm-button').click(function(event) {
+        var form =  $(this).closest("form");
+        event.preventDefault();
+        swal({
+            title: `Apakah yakin akan menghapus data?`,
+            text: "Data akan dihapus permanen.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+    });
+
+</script>
 </body>
 </html>
