@@ -87,6 +87,8 @@
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/custom.js') }}"></script>
 
+  <!-- Script Modal Edit-->
+
   <script>
     $('#edit-file').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -103,18 +105,37 @@
         modal.find('.modal-body #download_link').val(downloadLink);
     });
 </script>
+<script>
+    $('#edit-activity').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var name = button.data('name');
+        var financeCode = button.data('finance_code');
+        var division = button.data('division');
+
+        var modal = $(this);
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #name').val(name);
+        modal.find('.modal-body #financeCode').val(financeCode);
+        modal.find('.modal-body #division').val(division);
+    });
+  </script>
+
 
   @include('sweetalert::alert')
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+  <!-- SweetAlert Confirmation delete -->
   <script type="text/javascript">
 
     $('.confirm-button').click(function(event) {
         var form =  $(this).closest("form");
         event.preventDefault();
         swal({
-            title: `Apakah yakin akan menghapus data?`,
+            title: `Apakah yakin akan menghapus data ?`,
             text: "Data akan dihapus permanen.",
             icon: "warning",
             buttons: true,
@@ -128,5 +149,7 @@
     });
 
 </script>
+
+
 </body>
 </html>

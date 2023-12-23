@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     use HasFactory;
-    protected $table = "activity";
+
+    protected $table = "activities";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'name', 'finance_code', 'division'
+        'id', 'name', 'division'
     ];
+
+    public function archives()
+    {
+        return $this->hasMany(Activity::class, 'activity_id');
+    }
 }

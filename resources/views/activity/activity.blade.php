@@ -46,11 +46,15 @@
                                             <td>{{ $data->division }}</td>
                                             <td>
                                                 <div class="icon-container">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a>
+                                                {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity" data-id="{{ $data->id }}"><i class="fas fa-edit"></i></a> --}}
+                                                <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-activity" data-id="{{ $data->id }}" data-name="{{ $data->name }}" data-finance-code="{{ $data->finance_code }}" data-division="{{ $data->division}}">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+
                                                 <form method="POST" action="{{ route('delete-activity',$data->id) }}">
                                                     @csrf
                                                     <input name="_method" type="hidden" value="DELETE">
-                                                     <a href="{{ route('delete-activity',$data->id) }}" class="confirm-button"><i class="fas fa-trash-alt" style="color: red"></i></a>
+                                                     <a href="{{ route('delete-activity',$data->id) }}" class="confirm-button" ><i class="fas fa-trash-alt" style="color: red"></i></a>
                                                 </form>
                                                 </div>
                                             </td>
@@ -80,7 +84,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Nama </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" name="name" required="">
+                                    <input type="text" class="form-control" id="name" name="name" >
                                     <div class="invalid-feedback">
                                         Tolong isi Nama Kegiatan!
                                     </div>
@@ -184,7 +188,7 @@
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Finance Code</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="finance_code" name="finance_code" value="{{ $data->finance_code }}">
+                              <input type="text" class="form-control" id="financeCode" name="financeCode" value="{{ $data->finance_code }}">
                               <div class="invalid-feedback">
                                 Maaf, Kode tidak valid.
                               </div>
