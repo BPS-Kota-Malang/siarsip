@@ -15,7 +15,7 @@ class ActivitySeeder extends Seeder
     public function run()
     {
         // Menambahkan satu baris data
-        DB::table('activity')->insert([
+        DB::table('activities')->insert([
             'name' => 'Perjanjian Kinerja',
             'finance_code' => null,
             'division' => 'UMUM',
@@ -264,6 +264,6 @@ class ActivitySeeder extends Seeder
             ],
         ];
 
-        DB::table('activity')->insert($activity);
+        DB::table('activities')->insert($activity);
     }
 }

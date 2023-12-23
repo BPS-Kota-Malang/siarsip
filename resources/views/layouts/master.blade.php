@@ -88,13 +88,13 @@
     $('#edit-file').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var id = button.data('id');
-        var activity = button.data('activity_id');
+        var activity = button.data('activity');
         var previewLink = button.data('preview-link');
         var downloadLink = button.data('download-link');
 
         var modal = $(this);
         modal.find('.modal-body #id').val(id);
-        modal.find('.modal-body #activity').val(activity);
+        modal.find('.modal-body #activity_id').val(activity);
         modal.find('.modal-body #preview_link').val(previewLink);
         modal.find('.modal-body #download_link').val(downloadLink);
     });

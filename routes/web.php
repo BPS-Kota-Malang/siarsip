@@ -64,7 +64,7 @@ Route::get('/archive',[App\Http\Controllers\ArchiveController::class, 'index'])-
 Route::get('/add-file',[App\Http\Controllers\ArchiveController::class, 'create'])->name('add-file');
 Route::post('/save-file',[App\Http\Controllers\ArchiveController::class, 'store'])->name('save-file');
 Route::get('/edit-file,{id}',[App\Http\Controllers\ArchiveController::class, 'edit'])->name('edit-file');
-Route::post('/update-file,{id}',[App\Http\Controllers\ArchiveController::class, 'update'])->name('update-file');
+Route::put('/update-file,{id}',[App\Http\Controllers\ArchiveController::class, 'update'])->name('update-file');
 Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
 
 Route::resource('division', DivisionController::class);
