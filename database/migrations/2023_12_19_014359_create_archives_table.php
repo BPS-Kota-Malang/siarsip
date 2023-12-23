@@ -9,26 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
-            $table->string('preview_link'); // Tambahkan tanda kutip pada nama kolom
-            $table->string('download_link'); // Tambahkan tipe data pada kolom
-            $table->string('activity'); // Tambahkan tipe data dan unsigned pada kolom // Tambahkan tipe data dan unsigned pada kolom
+            $table->foreignId('activity_id')->constrained(); // foreign key
+            $table->string('preview_link');
+            $table->string('download_link');
+            // ... tambahkan kolom lain sesuai kebutuhan
             $table->timestamps();
-
-            // Tambahkan indeks untuk foreign key
-            // $table->foreign('id_kegiatan')->references('id')->on('kegiatan');
-            // $table->foreign('id_user')->references('id')->on('users');
         });
-
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('archives');
     }

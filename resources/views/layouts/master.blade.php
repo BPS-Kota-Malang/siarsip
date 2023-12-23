@@ -99,6 +99,13 @@
         modal.find('.modal-body #download_link').val(downloadLink);
     });
 </script>
+<script>
+    // Fungsi untuk menunjukkan modal
+    function showEditModal(id) {
+        var modal = new bootstrap.Modal(document.getElementById('edit-file' + id));
+        modal.show();
+    }
+ </script>
 
 
   @include('sweetalert::alert')

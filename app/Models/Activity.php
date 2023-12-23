@@ -13,4 +13,9 @@ class Activity extends Model
     protected $fillable = [
         'id', 'name', 'finance_code', 'division'
     ];
+
+    public function archives()
+    {
+        return $this->hasMany(Archive::class, 'activity_id');
+    }
 }
