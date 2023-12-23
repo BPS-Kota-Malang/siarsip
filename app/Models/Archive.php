@@ -11,7 +11,7 @@ class Archive extends Model
     protected $table = "archives";
     protected $primaryKey = "id";
     protected $fillable = [
-        'activity', 'preview_link', 'download_link',
+        'activity_id', 'preview_link', 'download_link',
     ];
 
     public function activity()

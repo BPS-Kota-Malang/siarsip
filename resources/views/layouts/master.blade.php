@@ -88,7 +88,7 @@
     $('#edit-file').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var id = button.data('id');
-        var activity = button.data('activity');
+        var activity = button.data('activity_id');
         var previewLink = button.data('preview-link');
         var downloadLink = button.data('download-link');
 

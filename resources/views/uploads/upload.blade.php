@@ -39,22 +39,29 @@
                     </thead>
                     <tbody>
                         @foreach ($dataUpload as $data)
-                            <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td>{{ $data->activity}}</td>
-                                <td>{{ $data->preview_link }}</td>
-                                <td>{{ $data->download_link }}</td>
-                                <td>
-                                    <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>
+                                @if ($data->activity)
+                                    {{ $data->activity->name }}
+                                @else
+                                    No activity found for ID: {{ $data->activity_id }}
+                                @endif
+                            </td>
+                            <td>{{ $data->preview_link }}</td>
+                            <td>{{ $data->download_link }}</td>
+                            <td>
+                                <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
 
-                                    <a href="{{ route('delete-file',$data->id) }}">
-                                        <i class="fas fa-trash-alt" style="color: red"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            @endforeach
+                                <a href="{{ route('delete-file', $data->id) }}">
+                                    <i class="fas fa-trash-alt" style="color: red"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+
 
                     </tbody>
                   </table>
@@ -79,9 +86,9 @@
                     <div class="form-group row">
                       <label class="col-sm-2 col-form-label">Activity</label>
                       <div class="col-sm-10">
-                          <select class="form-control" id="activity" name="activity">
+                          <select class="form-control" id="activity_id" name="activity_id">
                               @foreach ($kegiatans as $id => $name)
-                                  <option value="{{ $name }}">{{ $name }}</option>
+                                  <option value="{{ $id }}">{{ $name }}</option>
                               @endforeach
                           </select>
                         <div class="invalid-feedback">

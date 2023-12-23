@@ -24,7 +24,7 @@ class ArchiveController extends Controller
     public function store(Request $request)
     {
         Archive::create([
-            'activity'=>$request->activity,
+            'activity_id'=>$request->activity_id,
             'preview_link'=>$request->preview_link,
             'download_link'=>$request->download_link,
             // 'id_user'=>$request->id_user,

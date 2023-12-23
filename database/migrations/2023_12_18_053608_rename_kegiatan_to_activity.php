@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('activity', function (Blueprint $table) {
-            Schema::rename('kegiatan', 'activity');
+        Schema::table('activities', function (Blueprint $table) {
+            Schema::rename('kegiatan', 'activities');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('activity', function (Blueprint $table) {
-            Schema::rename('activity', 'kegiatan');
+        Schema::table('activities', function (Blueprint $table) {
+            Schema::rename('activities', 'kegiatan');
         });
     }
 };
