@@ -19,8 +19,11 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('/login');
+    }
     return view('auth.login');
-});
+})->name('login');
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -42,8 +45,7 @@ Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','web','PreventBackHistory'])->group(function () {
 Route::get('/index', function () {
     return view('index');
 });
@@ -70,11 +72,9 @@ Route::post('/save-file',[App\Http\Controllers\UploadController::class, 'store']
 Route::get('/edit-file,{id}',[App\Http\Controllers\UploadController::class, 'edit'])->name('edit-file');
 Route::post('/update-file,{id}',[App\Http\Controllers\UploadController::class, 'update'])->name('update-file');
 Route::get('/delete-file,{id}',[App\Http\Controllers\UploadController::class, 'destroy'])->name('delete-file');
-});
 
-Route::middleware(['web'])->group(function () {
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-});
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 Route::resource('division', DivisionController::class);
