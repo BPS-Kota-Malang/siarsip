@@ -53,6 +53,7 @@
 
                                                 <form method="POST" action="{{ route('delete-activity',$data->id) }}">
                                                     @csrf
+                                                    @method('delete')
                                                     <input name="_method" type="hidden" value="DELETE">
                                                      <a href="{{ route('delete-activity',$data->id) }}" class="confirm-button" ><i class="fas fa-trash-alt" style="color: red"></i></a>
                                                 </form>
@@ -175,6 +176,7 @@
                     @else
                     <form action="{{ route('update-activity',$data->id) }}" class="needs-validation" novalidate="" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="card-body">
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nama </label>

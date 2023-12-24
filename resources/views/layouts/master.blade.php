@@ -121,6 +121,13 @@
         modal.find('.modal-body #division').val(division);
     });
   </script>
+  <script>
+    // Fungsi untuk menunjukkan modal
+    function showEditModal(id) {
+        var modal = new bootstrap.Modal(document.getElementById('edit-activity' + id));
+        modal.show();
+    }
+ </script>
 
 
   @include('sweetalert::alert')

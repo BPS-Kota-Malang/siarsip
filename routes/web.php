@@ -55,7 +55,7 @@ Route::get('/activity',[App\Http\Controllers\ActivityController::class, 'index']
 Route::get('/add-activity',[App\Http\Controllers\ActivityController::class, 'create'])->name('add-activity');
 Route::post('/save-activity',[App\Http\Controllers\ActivityController::class, 'store'])->name('save-activity');
 Route::get('/edit-activity,{id}',[App\Http\Controllers\ActivityController::class, 'edit'])->name('edit-activity');
-Route::post('/update-activity,{id}',[App\Http\Controllers\ActivityController::class, 'update'])->name('update-activity');
+Route::put('/update-activity,{id}',[App\Http\Controllers\ActivityController::class, 'update'])->name('update-activity');
 Route::delete('/delete-activity,{id}',[App\Http\Controllers\ActivityController::class, 'destroy'])->name('delete-activity');
 
 
