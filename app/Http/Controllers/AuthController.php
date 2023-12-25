@@ -38,6 +38,7 @@ class AuthController extends Controller
 
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password], $remember)) {
             $user = Auth::user();
+            $request->session()->put('user_id', $user->id);
 
             // Membuat dan menyimpan token "remember me"
             $token = $user->createToken("auth-token")->plainTextToken;

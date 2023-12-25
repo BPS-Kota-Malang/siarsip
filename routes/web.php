@@ -17,16 +17,11 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
     if (Auth::check()) {
-        return redirect('/login');
+        return redirect('/index');
     }
     return view('auth.login');
-})->name('login');
-
-Route::get('/welcome', function () {
-    return view('welcome');
 });
 
 Route::get('/login', function () {
@@ -37,11 +32,22 @@ Route::get('/login', function () {
 })->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::get('/register', function () {
+    if (Auth::check()) {
+        return redirect('/index');
+    }
+    return view('auth.register');
+})->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/forgot-password', [AuthController::class, 'showLinkRequestForm'])->name('password.request');
+Route::get('/forgot-password', function () {
+    if (Auth::check()) {
+        return redirect('/index');
+    }
+    return view('auth.forgot-password');
+})->name('password.request');
 Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
@@ -75,6 +81,7 @@ Route::get('/delete-file,{id}',[App\Http\Controllers\UploadController::class, 'd
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-});
 
 Route::resource('division', DivisionController::class);
+
+});
