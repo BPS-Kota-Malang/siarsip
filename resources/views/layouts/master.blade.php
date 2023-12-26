@@ -142,7 +142,7 @@
         var form =  $(this).closest("form");
         event.preventDefault();
         swal({
-            title: `Apakah yakin akan menghapus data ?`,
+            title: `Yakin akan menghapus data ?`,
             text: "Data akan dihapus permanen.",
             icon: "warning",
             buttons: true,
