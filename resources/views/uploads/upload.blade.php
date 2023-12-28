@@ -39,22 +39,24 @@
                     </thead>
                     <tbody>
                         @foreach ($dataUpload as $data)
-                            <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td>{{ $data->activity}}</td>
-                                <td>{{ $data->preview_link }}</td>
-                                <td>{{ $data->download_link }}</td>
-                                <td>
-                                    <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ optional($data->activity)->name }}</td>
+                            <td>{{ $data->preview_link }}</td>
+                            <td>{{ $data->download_link }}</td>
+                            <td>
+                                <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity_id }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
 
-                                    <a href="{{ route('delete-file',$data->id) }}">
-                                        <i class="fas fa-trash-alt" style="color: red"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            @endforeach
+
+                                <a href="{{ route('delete-file', $data->id) }}">
+                                    <i class="fas fa-trash-alt" style="color: red"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+
 
                     </tbody>
                   </table>
@@ -79,9 +81,9 @@
                     <div class="form-group row">
                       <label class="col-sm-2 col-form-label">Activity</label>
                       <div class="col-sm-10">
-                          <select class="form-control" id="activity" name="activity">
+                          <select class="form-control" id="activity_id" name="activity_id">
                               @foreach ($kegiatans as $id => $name)
-                                  <option value="{{ $name }}">{{ $name }}</option>
+                                  <option value="{{ $id }}">{{ $name }}</option>
                               @endforeach
                           </select>
                         <div class="invalid-feedback">
@@ -107,15 +109,6 @@
                         </div>
                       </div>
                     </div>
-                    {{-- <div class="form-group row">
-                      <label class="col-sm-2 col-form-label">ID User</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="id_user" name="id_user">
-                        <div class="valid-feedback">
-                          Good job!
-                        </div>
-                      </div>
-                    </div> --}}
                   </div>
                   <div class="card-footer text-right">
                     <button type="submit" class="btn btn-primary">add file</button>
@@ -132,29 +125,76 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Kegiatan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit File</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                @if($dataUpload->isEmpty())
+                    <form action="#" class="needs-validation" novalidate="" method="POST">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Activity</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="activity" name="activity_id" value="{$data->activity->name}">
+                                        @foreach ($kegiatans as $id => $name)
+                                            <option value="{{ $id }}">{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                  <div class="invalid-feedback">
+                                        kegiatan belum diisi
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Preview Link</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="preview_link" name="preview_link" required="" value="">
+                                  <div class="invalid-feedback">
+                                    Oh no! Preview link is Empty.
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Download Link</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="download_link" name="download_link" value="">
+                                  <div class="valid-feedback">
+                                    Good job!
+                                  </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                      </form>
+                    @else
                 <form action="{{ route('update-file',$data->id) }}" class="needs-validation" novalidate="" method="POST">
                   @csrf
                   @method('PUT')
                   <div class="card-body">
                     <div class="form-group row">
-                      <label class="col-sm-2 col-form-label">Kegiatan</label>
+                      <label class="col-sm-2 col-form-label">Activity</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="activity" name="activity" required="" value="{{ $data->activity }}">
+                          <select class="form-control" id="activity" name="activity_id" value="{$data->activity->name}">
+                              @foreach ($kegiatans as $id => $name)
+                                  <option value="{{ $id }}">{{ $name }}</option>
+                              @endforeach
+                          </select>
                         <div class="invalid-feedback">
-                          What's your name?
+                              kegiatan belum diisi
                         </div>
                       </div>
                     </div>
+
                     <div class="form-group row">
-                      <label class="col-sm-2 col-form-label">Preview Link</label>
+                      <label class="col-sm-2 col-form-label">Preview Linkk</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control" id="preview_link" name="preview_link" required="" value="{{ $data->preview_link }}">
                         <div class="invalid-feedback">
-                          Oh no! Email is invalid.
+                          Oh no! Link is invalid
                         </div>
                       </div>
                     </div>
@@ -163,7 +203,7 @@
                       <div class="col-sm-10">
                         <input type="text" class="form-control" id="download_link" name="download_link" value="{{ $data->download_link }}">
                         <div class="valid-feedback">
-                          Good job!
+                          File berhasil ditambah
                         </div>
                       </div>
                     </div>
@@ -172,6 +212,7 @@
                     <button type="submit" class="btn btn-primary">Simpan Data</button>
                   </div>
                 </form>
+                @endif
               </div>
               @endforeach
     </section>
