@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kegiatan', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 255);
-            $table->string('finance_code', 200)->nullable();
-            $table->string('division', 255);
-            $table->timestamps();
+        Schema::table('activities', function (Blueprint $table) {
+            Schema::rename('activity', 'activities');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kegiatan');
+        Schema::table('activities', function (Blueprint $table) {
+            //
+        });
     }
 };

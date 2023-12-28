@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+<div class="main-wrapper main-wrapper-1">
+    <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar">
     <form class="form-inline mr-auto">
       <ul class="navbar-nav mr-3">
@@ -199,21 +201,25 @@
         <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
         <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->username }}</div></a>
         <div class="dropdown-menu dropdown-menu-right">
-          <div class="dropdown-title">Logged in 5 min ago</div>
-          <a href="features-profile.html" class="dropdown-item has-icon">
+          <div class="dropdown"></div>
+          <a href="{{ route('user-profile') }}" class="dropdown-item has-icon">
             <i class="far fa-user"></i> Profile
-          </a>
-          <a href="features-activities.html" class="dropdown-item has-icon">
-            <i class="fas fa-bolt"></i> Activities
-          </a>
-          <a href="features-settings.html" class="dropdown-item has-icon">
-            <i class="fas fa-cog"></i> Settings
-          </a>
+        </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item has-icon text-danger">
+          @auth
+            <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @endauth
+          {{-- <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">
             <i class="fas fa-sign-out-alt"></i> Logout
-          </a>
+          </a> --}}
         </div>
       </li>
     </ul>
   </nav>
+</div>

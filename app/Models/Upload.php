@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kegiatan extends Model
+class Upload extends Model
 {
     use HasFactory;
-    protected $table = "kegiatan";
+    protected $table = "uploads";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'name', 'finance_code', 'division'
+        'id','activity', 'preview_link', 'download_link'
     ];
 }

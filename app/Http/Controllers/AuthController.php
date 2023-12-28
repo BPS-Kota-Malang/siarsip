@@ -84,4 +84,11 @@ public function login(Request $request)
     return redirect('/login')->with('success', 'Registrasi berhasil! Silakan login.');
 }
 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect('/login')->with('success', 'Terimakasih sudah logout! Silakan login kembali.');
+        $request->user()->currentAccessToken()->delete();
+    }
+
     }
