@@ -15,18 +15,18 @@
             </div>
         </div>
         <div class="section-body">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6">
                     <div class="card">
                         <form method="POST" action="{{ route('user-profile') }}" class="needs-validation" novalidate="">
                             <div class="card-header" style="display: flex; justify-content: center; align-items: center;">
-                                <h3>User Profile</h3>
+                                <h3>Profile</h3>
                             </div>
                             <div class="card-body">
                                 @csrf
                                 <div class="form-group mb-2">
                                     <label for="name">Name</label>
-                                    <input id="name" type="text" class="form-control" name="name" autofocus value="{{ Auth::user()->name }}">
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ Auth::user()->name }}">
                                     <div class="invalid-feedback">
                                         Please fill in your name
                                     </div>
@@ -45,6 +45,47 @@
                                     <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}">
                                     <div class="invalid-feedback">
                                         Please fill in your email
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <form method="POST" action="{{ route('update-password') }}" class="needs-validation" novalidate="">
+                            <div class="card-header" style="display: flex; justify-content: center; align-items: center;">
+                                <h3>Password</h3>
+                            </div>
+                            <div class="card-body">
+                                @csrf
+                                <div class="form-group mb-2">
+                                    <label for="current_password">Current Password</label>
+                                    <input id="current_password" type="text" class="form-control" name="current_password">
+                                    <div class="invalid-feedback">
+                                        Please fill in your current password
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label for="new_password">New Password</label>
+                                    <input id="new_password" type="text" class="form-control" name="new_password">
+                                    <div class="invalid-feedback">
+                                        Please fill in your new password
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label for="confirm_password">Confirmation Password</label>
+                                    <input id="confirm_password" type="text" class="form-control" name="confirm_password">
+                                    <div class="invalid-feedback">
+                                        Please fill in your confirmation password
                                     </div>
                                 </div>
 

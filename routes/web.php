@@ -34,11 +34,13 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/register', function () {
     if (Auth::check()) {
-        return redirect('/index');
+        return redirect('/login');
     }
     return view('auth.register');
 })->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/register/checkSlug',[AuthController::class, 'checkSlug']);
 
 Route::get('/forgot-password', function () {
     if (Auth::check()) {
@@ -51,7 +53,7 @@ Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
-Route::middleware(['auth','web','PreventBackHistory'])->group(function () {
+Route::middleware(['auth','web'])->group(function () {
 Route::get('/index', function () {
     return view('index');
 });
@@ -63,6 +65,8 @@ Route::get('/user-profile', function () {
     return view('user.user-profile');
 })->name('user-profile');
 Route::post('/user-profile', [UserController::class, 'update_profile']);
+
+Route::post('/update-password', [UserController::class, 'updatePassword'])->name('update-password');
 
 Route::get('/activity',[App\Http\Controllers\ActivityController::class, 'index'])->name('activity');
 Route::get('/add-activity',[App\Http\Controllers\ActivityController::class, 'create'])->name('add-activity');

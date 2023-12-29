@@ -30,22 +30,22 @@
                                 </div>
 
                                 <div class="form-group col-6 mb-2">
-                                    <label for="username">Username</label>
-                                    <input id="username" type="text" class="form-control" name="username"
-                                        value="{{ old('username') }}">
+                                    <label for="email">Email</label>
+                                    <input id="email" type="email" class="form-control" name="email"
+                                        value="{{ old('email') }}">
                                     <div class="invalid-feedback">
-                                        Please fill in your username
+                                        Please fill in your email
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col-6 mb-2">
-                                    <label for="email">Email</label>
-                                    <input id="email" type="email" class="form-control" name="email"
-                                        value="{{ old('email') }}">
+                                    <label for="username">Username</label>
+                                    <input id="username" type="text" class="form-control" name="username"
+                                        value="{{ old('username') }}">
                                     <div class="invalid-feedback">
-                                        Please fill in your email
+                                        Please fill in your username
                                     </div>
                                 </div>
 
@@ -74,5 +74,22 @@
         </div>
     </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const email = document.querySelector('#email');
+            const username = document.querySelector('#username');
+
+            email.addEventListener('input', function() {
+                // Mengambil bagian sebelum "@" dari alamat email
+                const emailParts = email.value.split('@');
+                const usernameValue = emailParts.length > 0 ? emailParts[0] : '';
+
+                // Memasukkan nilai ke dalam field username
+                username.value = usernameValue;
+            });
+        });
+    </script>
+
+
 </section>
-</div>
