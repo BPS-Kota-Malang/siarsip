@@ -36,7 +36,7 @@ class ActivityController extends Controller
             'division'=>$request->division,
         ]);
 
-        return redirect('activity')->with('success', 'Tambah Data Berhasil!');+
+        return redirect('activity')->with('success', 'Tambah Data Berhasil!');
     }
 
     /**
