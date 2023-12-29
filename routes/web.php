@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::get('/', function () {
 });
 
 Route::get('/welcome', function () {
-    return view('welcome');
+    return view('uploads.welcomee');
 });
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -67,4 +68,6 @@ Route::get('/edit-file,{id}',[App\Http\Controllers\ArchiveController::class, 'ed
 Route::put('/update-file,{id}',[App\Http\Controllers\ArchiveController::class, 'update'])->name('update-file');
 Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
 
+//Route::post('upload','HomeController@upload');
+Route::post('/upload',[App\Http\Controllers\HomeController::class, 'upload'])->name('upload');
 Route::resource('division', DivisionController::class);
