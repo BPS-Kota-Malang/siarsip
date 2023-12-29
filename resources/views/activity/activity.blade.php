@@ -21,7 +21,10 @@
                     <div class="card-header">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#add-activity">Tambah Kegiatan</button>
+                            data-bs-target="#add-activity" style="margin-right: 10px;"><i class="fas fa-plus"></i> Tambah Kegiatan</button>
+                        <a href="/export-activity"><button type="button" class="btn btn-primary" style="margin-right: 10px;"><i class="fas fa-file-export"></i> Export Kegiatan</button></a>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#import-activity"><i class="fas fa-file-import"></i> Import Kegiatan</button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -184,11 +187,7 @@
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Finance Code</label>
                             <div class="col-sm-10">
-<<<<<<< HEAD
-                              <input type="text" class="form-control" id="financeCode" name="financeCode" value="{{ $data->finance_code }}">
-=======
                               <input type="text" class="form-control" id="finance_code" name="finance_code" value="{{ $data->finance_code }}">
->>>>>>> 3e1374f68346d48fa101465ad641039f83f45c44
                               <div class="invalid-feedback">
                                 Maaf, Kode tidak valid.
                               </div>
@@ -216,6 +215,38 @@
     </div>
     {{-- @endforeach --}}
     {{-- @include('activity.edit-activity') --}}
+
+    <!-- Modal Import-->
+    <div class="modal fade center-modal" id="import-activity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Import Kegiatan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('import-activity') }}" class="needs-validation" novalidate="" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <input type="file" class="form-control" id="file" name="file" required="">
+                                    <div class="invalid-feedback">
+                                        Tolong upload sebuah file!
+                                    </div>
+                                    <label class="col-sm-12 col-form-label">- Format file yang di Upload dalam bentuk (.xlxs) </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </section>
 </div>

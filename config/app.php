@@ -160,6 +160,7 @@ return [
          * Package Service Providers...
          */
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -185,6 +186,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
     'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-
+    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
 ];

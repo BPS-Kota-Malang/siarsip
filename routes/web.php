@@ -57,6 +57,8 @@ Route::post('/save-activity',[App\Http\Controllers\ActivityController::class, 's
 Route::get('/edit-activity,{id}',[App\Http\Controllers\ActivityController::class, 'edit'])->name('edit-activity');
 Route::put('/update-activity,{id}',[App\Http\Controllers\ActivityController::class, 'update'])->name('update-activity');
 Route::delete('/delete-activity,{id}',[App\Http\Controllers\ActivityController::class, 'destroy'])->name('delete-activity');
+Route::get('/export-activity',[App\Http\Controllers\ActivityController::class, 'activityexport'])->name('export-activity');
+Route::post('/import-activity',[App\Http\Controllers\ActivityController::class, 'activityimport'])->name('import-activity');
 
 
 //upload file
