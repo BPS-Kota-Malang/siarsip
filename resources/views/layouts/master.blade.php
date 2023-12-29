@@ -3,15 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-{{-- <<<<<<< HEAD
-<<<<<<< HEAD --}}
   <title>SI Arsip &mdash; Stisla</title>
-{{-- ======= --}}
   <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
-{{-- >>>>>>> activity_branch
-======= --}}
   <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
-{{-- >>>>>>> upload_branch --}}
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -101,6 +95,7 @@
         modal.find('.modal-body #id').val(id);
         modal.find('.modal-body #id').val(id);
         modal.find('.modal-body #activity').val(activity);
+        modal.find('.modal-body #activity_id').val(activity);
         modal.find('.modal-body #preview_link').val(previewLink);
         modal.find('.modal-body #download_link').val(downloadLink);
     });
@@ -125,6 +120,10 @@
     // Fungsi untuk menunjukkan modal
     function showEditModal(id) {
         var modal = new bootstrap.Modal(document.getElementById('edit-activity' + id));
+    }
+    // Fungsi untuk menunjukkan modal
+    function showEditModal(id) {
+        var modal = new bootstrap.Modal(document.getElementById('edit-file' + id));
         modal.show();
     }
  </script>

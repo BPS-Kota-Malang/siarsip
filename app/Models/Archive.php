@@ -1,21 +1,21 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Activity extends Model
+class Archive extends Model
 {
     use HasFactory;
-    protected $table = "activities";
+
+    protected $table = "archives";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'name', 'division'
+        'activity_id', 'preview_link', 'download_link',
     ];
 
-    public function archives()
+    public function activity()
     {
-        return $this->hasMany(Activity::class, 'activity_id');
+        return $this->belongsTo(Activity::class, 'activity_id');
     }
 }
