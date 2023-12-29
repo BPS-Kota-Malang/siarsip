@@ -6,13 +6,6 @@
 
   <title>SI Arsip &mdash; Stisla</title>
   <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
-  <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
-
-  <title>SI Arsip &mdash; Stisla</title>
-
-  <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
-
-  <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -100,18 +93,12 @@
 
         var modal = $(this);
         modal.find('.modal-body #id').val(id);
-<<<<<<< HEAD
-        modal.find('.modal-body #id').val(id);
-        modal.find('.modal-body #activity').val(activity);
-=======
         modal.find('.modal-body #activity_id').val(activity);
->>>>>>> 3e1374f68346d48fa101465ad641039f83f45c44
         modal.find('.modal-body #preview_link').val(previewLink);
         modal.find('.modal-body #download_link').val(downloadLink);
     });
 </script>
 <script>
-<<<<<<< HEAD
     $('#edit-activity').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var id = button.data('id');
@@ -131,11 +118,10 @@
     // Fungsi untuk menunjukkan modal
     function showEditModal(id) {
         var modal = new bootstrap.Modal(document.getElementById('edit-activity' + id));
-=======
+    }
     // Fungsi untuk menunjukkan modal
     function showEditModal(id) {
         var modal = new bootstrap.Modal(document.getElementById('edit-file' + id));
->>>>>>> 3e1374f68346d48fa101465ad641039f83f45c44
         modal.show();
     }
  </script>

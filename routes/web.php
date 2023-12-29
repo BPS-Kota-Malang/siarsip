@@ -17,39 +17,52 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('/index');
+    }
     return view('auth.login');
 });
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
 Route::get('/login', function () {
+    if (Auth::check()) {
+        return redirect('/index');
+    }
     return view('auth.login');
 })->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::get('/register', function () {
+    if (Auth::check()) {
+        return redirect('/index');
+    }
+    return view('auth.register');
+})->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::get('/forgot-password', function () {
+    if (Auth::check()) {
+        return redirect('/index');
+    }
+    return view('auth.forgot-password');
+})->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
+Route::middleware(['auth','web','PreventBackHistory'])->group(function () {
 Route::get('/index', function () {
     return view('index');
 });
 
-Route::post('/logout', [AuthController::class, 'logout']);
-Route::get('/logout', function () {
-    return view('auth.logout');
-})->name('logout');
-
-Route::get('/user-profile', [UserController::class, 'showProfile'])->name('user-profile');
-Route::post('/user-profile', [UserController::class, 'update_profile']);
 Route::get('/user-profile', function () {
+    if (!Auth::check()) {
+        return redirect('/login');
+    }
     return view('user.user-profile');
 })->name('user-profile');
-
+Route::post('/user-profile', [UserController::class, 'update_profile']);
 
 Route::get('/activity',[App\Http\Controllers\ActivityController::class, 'index'])->name('activity');
 Route::get('/add-activity',[App\Http\Controllers\ActivityController::class, 'create'])->name('add-activity');
@@ -57,7 +70,6 @@ Route::post('/save-activity',[App\Http\Controllers\ActivityController::class, 's
 Route::get('/edit-activity,{id}',[App\Http\Controllers\ActivityController::class, 'edit'])->name('edit-activity');
 Route::put('/update-activity,{id}',[App\Http\Controllers\ActivityController::class, 'update'])->name('update-activity');
 Route::delete('/delete-activity,{id}',[App\Http\Controllers\ActivityController::class, 'destroy'])->name('delete-activity');
-
 
 //upload file
 Route::get('/archive',[App\Http\Controllers\ArchiveController::class, 'index'])->name('archive');
@@ -67,4 +79,9 @@ Route::get('/edit-file,{id}',[App\Http\Controllers\ArchiveController::class, 'ed
 Route::put('/update-file,{id}',[App\Http\Controllers\ArchiveController::class, 'update'])->name('update-file');
 Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
 
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::resource('division', DivisionController::class);
+
+});

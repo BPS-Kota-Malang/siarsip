@@ -49,7 +49,7 @@
                                                 {{-- <form action="{{ route('delete-activity',$data->id) }}" method="POST">
                                                     @csrf
                                                     @method('delete') --}}
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a>
                                                 <a href="#"><i class="fas fa-trash-alt" style="color: red"></i></a>
                                                 {{-- </form> --}}
                                             </td>
@@ -184,11 +184,7 @@
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Finance Code</label>
                             <div class="col-sm-10">
-<<<<<<< HEAD
-                              <input type="text" class="form-control" id="financeCode" name="financeCode" value="{{ $data->finance_code }}">
-=======
                               <input type="text" class="form-control" id="finance_code" name="finance_code" value="{{ $data->finance_code }}">
->>>>>>> 3e1374f68346d48fa101465ad641039f83f45c44
                               <div class="invalid-feedback">
                                 Maaf, Kode tidak valid.
                               </div>
@@ -214,9 +210,7 @@
             </div>
         </div>
     </div>
-    {{-- @endforeach --}}
-    {{-- @include('activity.edit-activity') --}}
 
-    </section>
+</section>
 </div>
 @endsection

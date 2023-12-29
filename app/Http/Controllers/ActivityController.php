@@ -29,13 +29,14 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->finance_code);
         Activity::create([
             'name'=>$request->name,
             'finance_code'=>$request->finance_code,
             'division'=>$request->division,
         ]);
 
-        return redirect('activity')->with('success', 'Tambah Data Berhasil!');
+        return redirect('activity')->with('success', 'Tambah Data Berhasil!');+
     }
 
     /**
