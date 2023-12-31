@@ -92,6 +92,7 @@ Route::get('/edit-employee,{id}',[App\Http\Controllers\EmployeeController::class
 Route::put('/update-employee,{id}',[App\Http\Controllers\EmployeeController::class, 'update'])->name('update-employee');
 Route::delete('/delete-employee,{id}',[App\Http\Controllers\EmployeeController::class, 'destroy'])->name('delete-employee');
 Route::get('/export-employee',[App\Http\Controllers\EmployeeController::class, 'employeeexport'])->name('export-employee');
+Route::get('/download-custom-template', [App\Http\Controllers\EmployeeController::class, 'downloadCustomTemplate'])->name('download-custom-employee-template');
 Route::post('/import-employee',[App\Http\Controllers\EmployeeController::class, 'employeeimport'])->name('import-employee');
 
 Route::resource('division', DivisionController::class);

@@ -14,12 +14,25 @@ class EmployeeImport implements ToModel
     */
     public function model(array $row)
     {
-        return new Employee([
-            'nama' => $row[1],
-            'division_id' => $row[2],
-            'NIP' => $row[3],
-            'user_id' => $row[4],
-            'pangkat' => $row[5]
-        ]);
+        if ($row[1] !== null) {
+            return new Employee([
+                'nama' => $row[1],
+                'division_id' => (int)$row[2],
+                'NIP' => $row[3],
+                'user_id' => $row[4],
+                'pangkat' => $row[5],
+            ]);
+        }
+
+        // Jika nilai 'nama' null, kembalikan null
+        return null;
+
+        // return new Employee([
+        //     'nama' => $row[1],
+        //     'division_id' => $row[2],
+        //     'NIP' => $row[3],
+        //     'user_id' => $row[4],
+        //     'pangkat' => $row[5]
+        // ]);
     }
 }

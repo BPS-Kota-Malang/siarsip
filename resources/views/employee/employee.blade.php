@@ -39,7 +39,7 @@
                                             <th>Nama</th>
                                             <th>Divisi</th>
                                             <th>NIP</th>
-                                            <th>User</th>
+                                            <th>Email</th>
                                             <th>Pangkat</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -100,12 +100,18 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Divisi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="division_id" name="division_id">
+                                    {{-- <input type="text" class="form-control" id="division_id" name="division_id"> --}}
                                     {{-- <select class="form-control" name="division_id" id="division_id">
                                         @foreach ($datapegawai as $data)
                                             <option value="{{ $data }}">{{ $data->division->Name }}</option>
                                         @endforeach
                                     </select> --}}
+                                    <select class="form-control" name="division_id" id="division_id">
+                                        <option value="" disabled selected>Pilih Divisi</option>
+                                        @foreach ($divisions as $division)
+                                            <option value="{{ $division->id }}">{{ $division->Name }}</option>
+                                        @endforeach
+                                    </select>
                                     <div class="invalid-feedback">
                                         Tolong Isi Nama Divisi!
                                     </div>
@@ -121,16 +127,22 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">User</label>
+                                <label class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="user_id" name="user_id">
+                                    {{-- <input type="text" class="form-control" id="user_id" name="user_id"> --}}
                                     {{-- <select class="form-control" name="user_id" id="user_id">
                                         @foreach ($datapegawai as $data)
                                             <option value="{{ $data }}">{{ $data->user->email }}</option>
                                         @endforeach
                                     </select> --}}
+                                    <select class="form-control" name="user_id" id="user_id">
+                                        <option value="" disabled selected>Pilih Email</option>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->email }}</option>
+                                        @endforeach
+                                    </select>
                                     <div class="invalid-feedback">
-                                        Tolong Isi User!
+                                        Maaf, Email tidak valid!
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +195,13 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Divisi</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="division_id" name="division_id" value="">
+                                        {{-- <input type="text" class="form-control" id="division_id" name="division_id" value=""> --}}
+                                        <select class="form-control" name="division_id" id="division_id">
+                                            <option value="" disabled selected>Pilih Divisi</option>
+                                            @foreach ($users as $division)
+                                                <option value="{{ $division->id }}">{{ $division->Name }}</option>
+                                            @endforeach
+                                        </select>
                                         <div class="invalid-feedback">
                                             Tolong Isi Nama Divisi!
                                         </div>
@@ -200,11 +218,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">User</label>
+                                    <label class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="user_id" name="user_id" value="">
+                                        {{-- <input type="text" class="form-control" id="user_id" name="user_id" value=""> --}}
+                                        <select class="form-control" name="user_id" id="user_id">
+                                            <option value="" disabled selected>Pilih Email</option>
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->email }}</option>
+                                            @endforeach
+                                        </select>
                                         <div class="invalid-feedback">
-                                            Maaf, User tidak valid.
+                                            Maaf, Email tidak valid.
                                         </div>
                                     </div>
                                 </div>
@@ -243,8 +267,14 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Divisi</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="division_id" name="division_id"
-                                            value="{{ $data->division}}">
+                                        {{-- <input type="text" class="form-control" id="division_id" name="division_id"
+                                            value="{{ $data->division->Name}}"> --}}
+                                            <select class="form-control" name="division_id" id="division_id">
+                                                <option value="" disabled selected>Pilih Divisi</option>
+                                                @foreach ($divisions as $division)
+                                                    <option value="{{ $division->id }}">{{ $division->Name }}</option>
+                                                @endforeach
+                                            </select>
                                         <div class="invalid-feedback">
                                             Tolong Isi Nama Divisi!
                                         </div>
@@ -261,12 +291,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">User</label>
+                                    <label class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="user_id" name="user_id"
-                                            value="{{ $data->user}}">
+                                        {{-- <input type="text" class="form-control" id="user_id" name="user_id"
+                                            value="{{ $data->user->email}}"> --}}
+                                            <select class="form-control" name="user_id" id="user_id">
+                                                <option value="" disabled selected>Pilih Email</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->id }}">{{ $user->email }}</option>
+                                                @endforeach
+                                            </select>
                                         <div class="invalid-feedback">
-                                            Maaf,User tidak valid.
+                                            Maaf, Email tidak valid.
                                         </div>
                                     </div>
                                 </div>
@@ -321,6 +357,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <a href="{{ route('download-custom-employee-template') }}" class="btn btn-info mb-2">Unduh Template</a>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>

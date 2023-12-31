@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Exports\EmployeeExport;
 use App\Imports\EmployeeImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CustomEmployeeTemplateExport;
 
 class EmployeeController extends Controller
 {
@@ -18,12 +19,19 @@ class EmployeeController extends Controller
     public function index()
     {
         $datapegawai = Employee::all();
-        return view('employee.employee',compact('datapegawai'));
+        $divisions = Division::all();
+        $users = User::all();
+        return view('employee.employee',compact('datapegawai','divisions', 'users'));
     }
 
     public function employeeexport()
     {
         return Excel::download(new EmployeeExport,'data-pegawai.xlsx');
+    }
+
+    public function downloadCustomTemplate()
+    {
+        return Excel::download(new CustomEmployeeTemplateExport, 'custom_employee_template.xlsx');
     }
 
     public function employeeimport(Request $request)
@@ -49,14 +57,6 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'division_id' => 'required',
-            'NIP' => 'required',
-            'user_id' => 'required',
-            'pangkat' => 'required',
-        ]);
-
         Employee::create([
             'nama'=>$request->nama,
             'division_id'=>$request->division_id,
@@ -91,14 +91,6 @@ class EmployeeController extends Controller
     public function update(Request $request, string $id)
     {
         $pegawai = Employee::findorfail($id);
-        $request->validate([
-            'nama' => 'required',
-            'division_id' => 'required',
-            'NIP' => 'required',
-            'user_id' => 'required',
-            'pangkat' => 'required',
-        ]);
-
         $pegawai->update();
 
         return redirect('employee')->with('success', 'Data Berhasil Update!');
