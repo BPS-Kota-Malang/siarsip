@@ -85,9 +85,19 @@ Route::get('/edit-file,{id}',[App\Http\Controllers\ArchiveController::class, 'ed
 Route::put('/update-file,{id}',[App\Http\Controllers\ArchiveController::class, 'update'])->name('update-file');
 Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
 
+Route::get('/employee',[App\Http\Controllers\EmployeeController::class, 'index'])->name('employee');
+Route::get('/add-employee',[App\Http\Controllers\EmployeeController::class, 'create'])->name('add-employee');
+Route::post('/save-employee',[App\Http\Controllers\EmployeeController::class, 'store'])->name('save-employee');
+Route::get('/edit-employee,{id}',[App\Http\Controllers\EmployeeController::class, 'edit'])->name('edit-employee');
+Route::put('/update-employee,{id}',[App\Http\Controllers\EmployeeController::class, 'update'])->name('update-employee');
+Route::delete('/delete-employee,{id}',[App\Http\Controllers\EmployeeController::class, 'destroy'])->name('delete-employee');
+Route::get('/export-employee',[App\Http\Controllers\EmployeeController::class, 'employeeexport'])->name('export-employee');
+Route::post('/import-employee',[App\Http\Controllers\EmployeeController::class, 'employeeimport'])->name('import-employee');
+
+Route::resource('division', DivisionController::class);
+
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource('division', DivisionController::class);
 
 });

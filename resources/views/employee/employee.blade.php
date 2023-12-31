@@ -21,7 +21,12 @@
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#add-employee" style="margin-right: 10px;"><i class="fas fa-plus"></i>
-                                Tambah Divisi</button>
+                                Tambah Pegawai</button>
+                            <a href="/export-employee"><button type="button" class="btn btn-primary"
+                                    style="margin-right: 10px;"><i class="fas fa-file-export"></i> Export
+                                    Pegawai</button></a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#import-employee"><i class="fas fa-file-import"></i> Import Pegawai</button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -32,23 +37,29 @@
                                                 #
                                             </th>
                                             <th>Nama</th>
-                                            <th>Kode</th>
+                                            <th>Divisi</th>
+                                            <th>NIP</th>
+                                            <th>User</th>
+                                            <th>Pangkat</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($datadivisi as $data)
+                                        @foreach ($datapegawai as $data)
                                             <tr>
                                                 {{-- <input type="hidden" class="delete_id" value="{{ $data->id }}"> --}}
                                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                                <td>{{ $data->Nama }}</td>
-                                                <td>{{ $data->Code }}</td>
+                                                <td>{{ $data->nama }}</td>
+                                                <td>{{ $data->division->Name}}</td>
+                                                <td>{{ $data->NIP }}</td>
+                                                <td>{{ $data->user->email}}</td>
+                                                <td>{{ $data->pangkat }}</td>
                                                 <td>
-                                                    {{-- <form action="{{ route('delete-division',$data->id) }}" method="POST">
+                                                    {{-- <form action="{{ route('delete-employee',$data->id) }}" method="POST">
                                                     @csrf
                                                     @method('delete') --}}
                                                     <a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#edit-division"><i class="fas fa-edit"></i></a> |
+                                                        data-bs-target="#edit-employee"><i class="fas fa-edit"></i></a> |
                                                     <a href="#"><i class="fas fa-trash-alt"
                                                             style="color: red"></i></a>
                                                     {{-- </form> --}}
@@ -65,12 +76,12 @@
     </div>
 
     <!-- Modal Add-->
-    <div class="modal fade center-modal" id="add-division" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade center-modal" id="add-employee" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Divisi</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Pegawai</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
