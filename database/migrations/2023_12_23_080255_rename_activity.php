@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('activities', function (Blueprint $table) {
+        Schema::table('activity', function (Blueprint $table) {
             Schema::rename('activity', 'activities');
         });
     }

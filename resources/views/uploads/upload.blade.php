@@ -32,6 +32,7 @@
                           No
                         </th>
                         <th>Kegiatan</th>
+                        <th>Phase</th>
                         <th>Preview Link</th>
                         <th>Download Link</th>
                         <th>Action</th>
@@ -42,6 +43,7 @@
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ optional($data->activity)->name }}</td>
+                            <td>{{ $data->phase }}</td>
                             <td>{{ $data->preview_link }}</td>
                             <td>{{ $data->download_link }}</td>
                             <td>
@@ -92,11 +94,25 @@
                       </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Phase</label>
+                        <div class="col-sm-10">
+                            <select name="kategori" id="kategori" required>
+                                @if($dataUpload)
+                                    @foreach(\App\Models\Archive::getPossibleEnumValues('phase') as $phase)
+                                        <option value="{{ $phase }}">{{ $phase }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <div class="valid-feedback">Good job!</div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="form-group row">
                       <label class="col-sm-2 col-form-label">Preview Link</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control" id="preview_link" name="preview_link" required="">
                         <div class="invalid-feedback">
-                          //
+                          Preview Link salah
                         </div>
                       </div>
                     </div>
@@ -149,7 +165,23 @@
                         </div>
                       </div>
                     </div>
-
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Phase</label>
+                        <div class="col-sm-10">
+                            <select name="kategori" id="kategori" required>
+                                @if($dataUpload->isEmpty())
+                                 <p>data kosong</p>
+                                    @else
+                                @if($dataUpload)
+                                    @foreach(\App\Models\Archive::getPossibleEnumValues('phase') as $phase)
+                                        <option value="{{ $phase }}">{{ $phase }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <div class="valid-feedback">Good job!</div>
+                        </div>
+                    </div>
+                </div>
                     <div class="form-group row">
                       <label class="col-sm-2 col-form-label">Preview Linkk</label>
                       <div class="col-sm-10">
@@ -173,6 +205,7 @@
                     <button type="submit" class="btn btn-primary">Simpan Data</button>
                   </div>
                 </form>
+                @endif
                 @endif
               </div>
               @endforeach
