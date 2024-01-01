@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('archives', function (Blueprint $table) {
             $table->enum('phase', ['persiapan', 'pelaksanaan', 'pengolahan', 'diseminasi', 'laporan', 'dokumentasi'])->default('persiapan');
+            $table->string('file_content')->nullable();
         });
 
     }

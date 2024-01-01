@@ -14,7 +14,7 @@ class Archive extends Model
     protected $table = "archives";
     protected $primaryKey = "id";
     protected $fillable = [
-        'activity_id', 'preview_link', 'download_link','phase'
+        'activity_id', 'preview_link', 'download_link','phase','file_content'
     ];
     public static function getPossibleEnumValues($column)
     {
