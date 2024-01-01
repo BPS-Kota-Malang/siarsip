@@ -11,7 +11,7 @@ class Activity extends Model
     protected $table = "activities";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'name', 'finance_code', 'division'
+        'id', 'name', 'division', 'finance_code'
     ];
 
     public function archives()

@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('divisions', function (Blueprint $table) {
-            $table->id();
-            $table->string('Name');
-            $table->string('Code');
-            $table->timestamps();
+        Schema::table('activities', function (Blueprint $table) {
+            Schema::rename('activity', 'activities');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('divisions');
+        Schema::table('activities', function (Blueprint $table) {
+            //
+        });
     }
 };

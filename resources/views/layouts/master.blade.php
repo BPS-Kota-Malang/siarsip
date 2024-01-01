@@ -5,11 +5,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
 
   <title>SI Arsip &mdash; Stisla</title>
-
   <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
-
-  <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
-
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -28,6 +24,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+
   <!-- Start GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
   <script>
@@ -84,6 +81,8 @@
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/custom.js') }}"></script>
 
+  <!-- Script Modal Edit-->
+
   <script>
     $('#edit-file').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -100,6 +99,26 @@
     });
 </script>
 <script>
+    $('#edit-activity').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var name = button.data('name');
+        var financeCode = button.data('finance_code');
+        var division = button.data('division');
+
+        var modal = $(this);
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #name').val(name);
+        modal.find('.modal-body #financeCode').val(financeCode);
+        modal.find('.modal-body #division').val(division);
+    });
+  </script>
+  <script>
+    // Fungsi untuk menunjukkan modal
+    function showEditModal(id) {
+        var modal = new bootstrap.Modal(document.getElementById('edit-activity' + id));
+    }
     // Fungsi untuk menunjukkan modal
     function showEditModal(id) {
         var modal = new bootstrap.Modal(document.getElementById('edit-file' + id));
@@ -109,5 +128,32 @@
 
 
   @include('sweetalert::alert')
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+  <!-- SweetAlert Confirmation delete -->
+  <script type="text/javascript">
+
+    $('.confirm-button').click(function(event) {
+        var form =  $(this).closest("form");
+        event.preventDefault();
+        swal({
+            title: `Yakin akan menghapus data ?`,
+            text: "Data akan dihapus permanen.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+    });
+
+</script>
+
+
 </body>
 </html>

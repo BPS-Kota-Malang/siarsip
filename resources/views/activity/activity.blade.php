@@ -49,7 +49,11 @@
                                                 {{-- <form action="{{ route('delete-activity',$data->id) }}" method="POST">
                                                     @csrf
                                                     @method('delete') --}}
+<<<<<<< HEAD
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
+=======
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a>
+>>>>>>> origin/dev_branch
                                                 <a href="#"><i class="fas fa-trash-alt" style="color: red"></i></a>
                                                 {{-- </form> --}}
                                             </td>
@@ -79,7 +83,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Nama </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" name="name" required="">
+                                    <input type="text" class="form-control" id="name" name="name" >
                                     <div class="invalid-feedback">
                                         Tolong isi Nama Kegiatan!
                                     </div>
@@ -170,6 +174,7 @@
                     @else
                     <form action="{{ route('update-activity',$data->id) }}" class="needs-validation" novalidate="" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="card-body">
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nama </label>
@@ -212,6 +217,6 @@
     {{-- @endforeach --}}
     {{-- @include('activity.edit-activity') --}}
 
-    </section>
+</section>
 </div>
 @endsection

@@ -120,6 +120,7 @@
 </div>
 
 <!-- Modal Edit-->
+@foreach ($dataUpload as $data)
 <div class="modal fade center-modal" id="edit-file" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -129,46 +130,7 @@
             </div>
             <div class="modal-body">
                 @if($dataUpload->isEmpty())
-                    <form action="#" class="needs-validation" novalidate="" method="POST">
-                        @csrf
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Activity</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" id="activity" name="activity_id" value="{$data->activity->name}">
-                                        @foreach ($kegiatans as $id => $name)
-                                            <option value="{{ $id }}">{{ $name }}</option>
-                                        @endforeach
-                                    </select>
-                                  <div class="invalid-feedback">
-                                        kegiatan belum diisi
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Preview Link</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="preview_link" name="preview_link" required="" value="">
-                                  <div class="invalid-feedback">
-                                    Oh no! Preview link is Empty.
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Download Link</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="download_link" name="download_link" value="">
-                                  <div class="valid-feedback">
-                                    Good job!
-                                  </div>
-                                </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                      </form>
+                    <p>data kosong</p>
                     @else
                 <form action="{{ route('update-file',$data->id) }}" class="needs-validation" novalidate="" method="POST">
                   @csrf
@@ -213,6 +175,7 @@
                 </form>
                 @endif
               </div>
+              @endforeach
     </section>
   </div>
   @endsection

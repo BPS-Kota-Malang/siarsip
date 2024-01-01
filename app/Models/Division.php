@@ -12,4 +12,9 @@ class Division extends Model
     protected $fillable = [
         'id', 'name'
     ];
+
+    public function Employee()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }
