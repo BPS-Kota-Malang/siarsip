@@ -8,7 +8,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Data Kegiatan</h1>
+            <h1>Data Tim Kerja</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Modules</a></div>
@@ -21,7 +21,7 @@
                     <div class="card-header">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#add-activity">Tambah Kegiatan</button>
+                            data-bs-target="#add-division">Tambah Tim Kerja</button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -32,24 +32,22 @@
                                             #
                                         </th>
                                         <th>Nama</th>
-                                        <th>Finance Code</th>
-                                        <th>Divisi</th>
+                                        <th>Kode Tim Kerja</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        @foreach ($datakegiatan as $data)
+                                        @foreach ($allDivision as $data)
                                         <tr>
                                             {{-- <input type="hidden" class="delete_id" value="{{ $data->id }}"> --}}
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>{{ $data->name }}</td>
-                                            <td>{{ $data->finance_code }}</td>
-                                            <td>{{ $data->division }}</td>
+                                            <td>{{ $data->Name }}</td>
+                                            <td>{{ $data->Code }}</td>
                                             <td>
                                                 {{-- <form action="{{ route('delete-activity',$data->id) }}" method="POST">
                                                     @csrf
                                                     @method('delete') --}}
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-division"><i class="fas fa-edit"></i></a>
                                                 <a href="#"><i class="fas fa-trash-alt" style="color: red"></i></a>
                                                 {{-- </form> --}}
                                             </td>
@@ -65,7 +63,7 @@
     </div>
 
     <!-- Modal Add-->
-    <div class="modal fade center-modal" id="add-activity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade center-modal" id="add-division" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -73,7 +71,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('save-activity') }}" class="needs-validation" novalidate="" method="POST">
+                    <form action="{{ route('division.store') }}" class="needs-validation" novalidate="" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="form-group row">
@@ -88,7 +86,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Code</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="division" name="division">
+                                    <input type="text" class="form-control" id="code" name="code">
                                     <div class="valid-feedback">
                                         Lengkap!
                                     </div>
@@ -108,7 +106,7 @@
 
     <!-- Modal Edit-->
     {{-- @foreach ($datakegiatan as $data) --}}
-    <div class="modal fade center-modal" id="edit-activity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade center-modal" id="edit-division" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -116,7 +114,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @if($datakegiatan->isEmpty())
+                    @if($allDivision->isEmpty())
                     <form action="#" class="needs-validation" novalidate="" method="POST">
                         @csrf
                         <div class="card-body">
@@ -130,20 +128,11 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Finance Code</label>
+                            <label class="col-sm-2 col-form-label">Code</label>
                             <div class="col-sm-10">
                               <input type="text" class="form-control" id="finance_code" name="finance_code" value="">
                               <div class="invalid-feedback">
                                 Maaf, Kode tidak valid.
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Divisi</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="division" name="division" value="">
-                              <div class="valid-feedback">
-                                Lengkap!
                               </div>
                             </div>
                           </div>
