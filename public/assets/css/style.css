@@ -2477,6 +2477,18 @@ body.layout-2 .main-footer {
   padding-left: 0;
   padding-right: 0; }
 
+  .avatar-placeholder {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    background-color: #3498db;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
 body.layout-3 .navbar {
   left: 0;
   right: 0; }

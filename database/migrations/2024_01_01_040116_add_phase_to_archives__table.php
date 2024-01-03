@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('activity', function (Blueprint $table) {
-            Schema::rename('kegiatan', 'activity');
+        Schema::table('archives', function (Blueprint $table) {
+            $table->enum('phase', ['persiapan', 'pelaksanaan', 'pengolahan', 'diseminasi', 'laporan', 'dokumentasi'])->default('persiapan');
+            $table->string('file_content')->nullable();
         });
+
     }
 
     /**
@@ -21,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('activities', function (Blueprint $table) {
-            Schema::rename('activities', 'kegiatan');
+        Schema::table('archives', function (Blueprint $table) {
+            $table->dropColumn('phase');
         });
     }
 };
