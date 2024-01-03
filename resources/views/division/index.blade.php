@@ -40,8 +40,8 @@
                                     @foreach ($allDivision as $data)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $data->Name }}</td>
-                                        <td>{{ $data->Code }}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->code }}</td>
                                         <td>
 
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#editDivision"><i class="fas fa-edit"></i></a> |
