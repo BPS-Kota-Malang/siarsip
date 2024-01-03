@@ -32,6 +32,7 @@
                                             #
                                         </th>
                                         <th>Nama</th>
+                                        <th>Code</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -39,7 +40,8 @@
                                     @foreach ($allDivision as $data)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->Name }}</td>
+                                        <td>{{ $data->Code }}</td>
                                         <td>
 
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#editDivision"><i class="fas fa-edit"></i></a> |
@@ -108,8 +110,7 @@
     </div>
 
     <!-- Modal Edit-->
-    @foreach ($allDivision as $data)
-    <div class="modal fade center-modal" id="editDivision" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade center-modal" id="edit-activity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -117,30 +118,47 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('updateDivision',$data->id) }}" class="needs-validation" novalidate="" method="POST">
+                    <form action="{{ route('division.store') }}" class="needs-validation" novalidate="" method="POST">
                         @csrf
                         <div class="card-body">
-                          <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nama </label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="name" name="name" required="" value="{{ $data->name }}">
-                              <div class="invalid-feedback">
-                                Tolong isi Nama Kegiatan!
-                              </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Nama </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="name" name="name" required="">
+                                    <div class="invalid-feedback">
+                                        Tolong isi Nama Kegiatan!
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Finance Code</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="finance_code" name="finance_code" required="">
+                                    <div class="invalid-feedback">
+                                        Maaf, kode tidak valid.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Divisi</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="division" name="division">
+                                    <div class="valid-feedback">
+                                        Lengkap!
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
-                      </form>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    @endforeach
+
     </section>
 </div>
 @endsection
