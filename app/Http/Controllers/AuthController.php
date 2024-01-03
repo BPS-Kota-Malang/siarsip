@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class AuthController extends Controller
 {
@@ -61,12 +63,16 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'min:3', 'max:225'],
-            'username' => ['required', 'min:3', 'max:10'],
-            'email' => 'required|email',
+            'username' => ['required', 'max:225'],
+            'email' => [
+                'required',
+                'email',
+                'regex:/^[A-Za-z0-9._%+-]+@bps\.go\.id$/',
+            ],
             'password' => 'required|min:5|max:255',
         ], [
             'required' => ':attribute harus diisi.',
-            'email' => ':attribute harus berupa email yang valid.',
+            'email' => ':attribute harus berupa email yang valid dari domain BPS.',
             'min' => 'panjang :attribute minimal :min karakter.',
         ]);
 
@@ -156,5 +162,16 @@ class AuthController extends Controller
         Auth::guard($guard)->logout();
 
         return redirect('/login')->with('success', 'Terimakasih sudah logout! Silakan login kembali.');
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $email = $request->input('email');
+
+        // Mengambil bagian sebelum "@" dari alamat email sebagai slug
+        $emailParts = explode('@', $email);
+        $username = count($emailParts) > 0 ? $emailParts[0] : '';
+
+        return response()->json(['username' => $username]);
     }
 }

@@ -35,11 +35,13 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/register', function () {
     if (Auth::check()) {
-        return redirect('/index');
+        return redirect('/login');
     }
     return view('auth.register');
 })->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/register/checkSlug',[AuthController::class, 'checkSlug']);
 
 Route::get('/forgot-password', function () {
     if (Auth::check()) {
@@ -52,7 +54,7 @@ Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
-Route::middleware(['auth','web','PreventBackHistory'])->group(function () {
+Route::middleware(['auth','web'])->group(function () {
 Route::get('/index', function () {
     return view('index');
 });
@@ -64,6 +66,8 @@ Route::get('/user-profile', function () {
     return view('user.user-profile');
 })->name('user-profile');
 Route::post('/user-profile', [UserController::class, 'update_profile']);
+
+Route::post('/update-password', [UserController::class, 'updatePassword'])->name('update-password');
 
 Route::get('/activity',[App\Http\Controllers\ActivityController::class, 'index'])->name('activity');
 Route::get('/add-activity',[App\Http\Controllers\ActivityController::class, 'create'])->name('add-activity');
@@ -82,11 +86,22 @@ Route::get('/edit-file,{id}',[App\Http\Controllers\ArchiveController::class, 'ed
 Route::put('/update-file,{id}',[App\Http\Controllers\ArchiveController::class, 'update'])->name('update-file');
 Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/employee',[App\Http\Controllers\EmployeeController::class, 'index'])->name('employee');
+Route::get('/add-employee',[App\Http\Controllers\EmployeeController::class, 'create'])->name('add-employee');
+Route::post('/save-employee',[App\Http\Controllers\EmployeeController::class, 'store'])->name('save-employee');
+Route::get('/edit-employee,{id}',[App\Http\Controllers\EmployeeController::class, 'edit'])->name('edit-employee');
+Route::put('/update-employee,{id}',[App\Http\Controllers\EmployeeController::class, 'update'])->name('update-employee');
+Route::delete('/delete-employee,{id}',[App\Http\Controllers\EmployeeController::class, 'destroy'])->name('delete-employee');
+Route::get('/export-employee',[App\Http\Controllers\EmployeeController::class, 'employeeexport'])->name('export-employee');
+Route::get('/download-custom-template', [App\Http\Controllers\EmployeeController::class, 'downloadCustomTemplate'])->name('download-custom-employee-template');
+Route::post('/import-employee',[App\Http\Controllers\EmployeeController::class, 'employeeimport'])->name('import-employee');
 
 //Route::post('upload','HomeController@upload');
 Route::post('/upload',[App\Http\Controllers\HomeController::class, 'upload'])->name('upload');
 Route::resource('division', DivisionController::class);
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 });

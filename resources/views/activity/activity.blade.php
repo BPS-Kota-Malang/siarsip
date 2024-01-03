@@ -78,10 +78,14 @@
                                                     @csrf
                                                     @method('delete') --}}
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
 =======
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a>
 >>>>>>> origin/dev_branch
+=======
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
+>>>>>>> login_branch
                                                 <a href="#"><i class="fas fa-trash-alt" style="color: red"></i></a>
                                                 {{-- </form> --}}
 <<<<<<< HEAD
@@ -258,8 +262,11 @@
     {{-- @include('activity.edit-activity') --}}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 </section>
 =======
+=======
+>>>>>>> login_branch
     <!-- Modal Import-->
     <div class="modal fade center-modal" id="import-activity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -293,6 +300,9 @@
     </div>
 
     </section>
+<<<<<<< HEAD
 >>>>>>> activity_branch
+=======
+>>>>>>> login_branch
 </div>
 @endsection

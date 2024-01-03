@@ -49,7 +49,6 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->finance_code);
         Activity::create([
             'name'=>$request->name,
             'finance_code'=>$request->finance_code,
