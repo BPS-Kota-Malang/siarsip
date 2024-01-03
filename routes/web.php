@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,8 @@ Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, '
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+//Route::post('upload','HomeController@upload');
+Route::post('/upload',[App\Http\Controllers\HomeController::class, 'upload'])->name('upload');
 Route::resource('division', DivisionController::class);
 
 });

@@ -7,10 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Upload extends Model
 {
-    use HasFactory;
-    protected $table = "uploads";
-    protected $primaryKey = "id";
-    protected $fillable = [
-        'id','activity', 'preview_link', 'download_link'
-    ];
+    protected $guarded= [];
+    public $timestamps = false;
 }

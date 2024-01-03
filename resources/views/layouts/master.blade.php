@@ -3,9 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+<<<<<<< HEAD
+  <title>SI Arsip &mdash; Stisla</title>
+  <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
+  <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
+=======
 
   <title>SI Arsip &mdash; Stisla</title>
   <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
+>>>>>>> e05e8fceb5ef2ee25d4555a4d5ea752cff2310f3
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -83,17 +89,26 @@
 
   <!-- Script Modal Edit-->
 
+
   <script>
     $('#edit-file').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var id = button.data('id');
         var activity = button.data('activity');
+        var phase = button.data('phase');
         var previewLink = button.data('preview-link');
         var downloadLink = button.data('download-link');
 
         var modal = $(this);
         modal.find('.modal-body #id').val(id);
+<<<<<<< HEAD
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #activity').val(activity);
         modal.find('.modal-body #activity_id').val(activity);
+=======
+        modal.find('.modal-body #activity_id').val(activity);
+        modal.find('.modal-body #phase').val(phase);
+>>>>>>> e05e8fceb5ef2ee25d4555a4d5ea752cff2310f3
         modal.find('.modal-body #preview_link').val(previewLink);
         modal.find('.modal-body #download_link').val(downloadLink);
     });
