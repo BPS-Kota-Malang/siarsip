@@ -10,11 +10,16 @@ class Division extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'name'
+        'id', 'name', 'code'
     ];
 
     public function Employee()
     {
         return $this->hasMany(Employee::class);
     }
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
 }

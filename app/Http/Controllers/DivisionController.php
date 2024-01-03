@@ -22,7 +22,7 @@ class DivisionController extends Controller
      */
     public function create()
     {
-        return view('division.add-division');
+        // return view('division.add-division');
     }
 
     /**
@@ -30,7 +30,12 @@ class DivisionController extends Controller
      */
     public function store(StoreDivisionRequest $request)
     {
-        //
+        Division::create([
+            'name'=>$request->name,
+            'code'=>$request->code,
+        ]);
+
+        return redirect('division')->with('success', 'Tambah Data Berhasil!');
     }
 
     /**

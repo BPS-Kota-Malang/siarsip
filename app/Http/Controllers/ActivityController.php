@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Exports\ActivityExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+use App\Imports\ActivityDivisionImport;
+use App\Imports\ActivityImport;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -14,6 +19,21 @@ class ActivityController extends Controller
     {
         $datakegiatan = Activity::all();
         return view('activity.activity',compact('datakegiatan'));
+    }
+
+    public function activityexport()
+    {
+        return Excel::download(new ActivityExport,'data-kegiatan.xlsx');
+    }
+
+    public function activityimport(Request $request)
+    {
+        $file = $request->file('file');
+        $nameFile = $file->getClientOriginalName();
+        $file->move('DataActivity', $nameFile);
+
+        Excel::import(new ActivityDivisionImport, public_path('/DataActivity/'.$nameFile));
+        return redirect('activity')->with('success', 'Data Berhasil Di Import!');
     }
 
     /**
