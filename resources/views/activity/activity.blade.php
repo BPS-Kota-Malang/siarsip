@@ -47,7 +47,7 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->finance_code }}</td>
-                                            <td>{{ $data->division }}</td>
+                                            <td>{{ $data->division->name }}</td>
                                             <td>
                                                 {{-- <form action="{{ route('delete-activity',$data->id) }}" method="POST">
                                                     @csrf

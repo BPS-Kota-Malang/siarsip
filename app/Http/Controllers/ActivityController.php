@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Exports\ActivityExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use App\Imports\ActivityDivisionImport;
 use App\Imports\ActivityImport;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class ActivityController extends Controller
         $nameFile = $file->getClientOriginalName();
         $file->move('DataActivity', $nameFile);
 
-        Excel::import(new ActivityImport, public_path('/DataActivity/'.$nameFile));
+        Excel::import(new ActivityDivisionImport, public_path('/DataActivity/'.$nameFile));
         return redirect('activity')->with('success', 'Data Berhasil Di Import!');
     }
 

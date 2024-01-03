@@ -11,12 +11,17 @@ class Activity extends Model
     protected $table = "activities";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'name', 'division', 'finance_code'
+        'id', 'name', 'finance_code', 'division_id'
     ];
 
     public function archives()
     {
         // return $this->hasMany(Activity::class, 'activity_id');
-        return $this->hasMany(Archive::class, 'activity_id');
+        return $this->hasMany(Archive::class, 'archive_id');
+    }
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
     }
 }

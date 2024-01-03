@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Activity;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithProgressBar;
 
 class ActivityImport implements ToModel
 {
