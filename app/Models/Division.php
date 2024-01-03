@@ -10,7 +10,7 @@ class Division extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'Name', 'Code'
+        'id', 'name', 'code'
     ];
 
     // Division.php

@@ -11,10 +11,12 @@ use Maatwebsite\Excel\Concerns\WithProgressBar;
 
 class ActivityDivisionImport implements ToCollection
 {
-    protected $divisionNonEmpty;
+    protected $divisionNameNonEmpty;
+    protected $divisionCodeNonEmpty;
 
     public function collection(Collection $rows)
     {
+        // $divisionNonEmpty = null;
 
         foreach ($rows as $key => $row) {
 
@@ -23,8 +25,8 @@ class ActivityDivisionImport implements ToCollection
                 continue;
             }
 
-            $number = $row[0];
-            $divisionName = $row[1] !== null ? $row[1] : $this->divisionNonEmpty;
+            $number = $row[0] !== null ? $row[0] : $this->divisionCodeNonEmpty;
+            $divisionName = $row[1] !== null ? $row[1] : $this->divisionNameNonEmpty;
             $activityName = $row[2];
             $financeCode = $row[3];
 
@@ -32,20 +34,21 @@ class ActivityDivisionImport implements ToCollection
             {
              // Find or create the Division
             $division = Division::firstOrCreate([
-                'Name' => $divisionName,
-                'Code' => $number
+                'name' => $divisionName,
+                'code' => $number
             ]);
 
-            $divisionID = $division->id;
+            // $divisionID = $division->id;
 
             // Set the current division to use in the next iteration
-            $this->divisionNonEmpty = $division -> name;
+            $this->divisionNameNonEmpty = $division -> name;
+            $this->divisionCodeNonEmpty = $division -> code;
 
             // Create the Activity and associate it with the Division
             $activity = new Activity([
                 'name'          => $activityName,
                 'finance_code'  => $financeCode,
-                'division_id'   => $divisionID
+                'division_id'   => $division->id
             ]);
             $activity->save();
 
