@@ -21,7 +21,7 @@
                 <div class="card">
                     <div class="card-header">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-file">Tambah Kegiatan</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-file">Add Archive</button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
