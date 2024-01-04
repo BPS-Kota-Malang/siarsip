@@ -44,7 +44,7 @@
                                         <td>{{ optional($data->activity)->name }}</td>
                                         <td>{{ $data->phase }}</td>
                                         <td>{{ $data->preview_link }}</td>
-                                        <td>{{ $data->download_link }}</td>
+                                        <td><a href="{{ route('download-file', $data->id) }}" class="btn btn-success">Download</a></td>
                                         <td>{{ $data->file_content}}</td>
                                         <td>
                                             <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity_id }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
@@ -106,18 +106,18 @@
                                     <div class="invalid-feedback">Preview Link salah</div>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Download Link</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="download_link" name="download_link">
                                     <div class="valid-feedback">Good job!</div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- Input untuk file -->
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Upload File</label>
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control" id="file" name="file_content">
+                                    <input type="file" class="form-control" id="file_content" name="file_content">
                                     <div class="valid-feedback">File berhasil diunggah</div>
                                 </div>
                             </div>
@@ -131,6 +131,9 @@
         </div>
     </div>
 
+    @if($dataUpload->isEmpty())
+    datakosong
+    @else
     <!-- Modal Edit -->
     <div class="modal fade center-modal" id="edit-file" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -194,7 +197,23 @@
             </div>
         </div>
     </div>
-
+<!-- Modal Download -->
+<div class="modal fade center-modal" id="download-file" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Download File</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('download-file', $data->id) }}" method="GET">
+                    <button type="submit" class="btn btn-success">Download File</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 </section>
 </div>
 

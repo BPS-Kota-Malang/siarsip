@@ -1,21 +1,23 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Doctrine\DBAL\Driver\AbstractMySQLDriver;
 use Illuminate\Support\Facades\DB;
 
 class Archive extends Model
 {
     use HasFactory;
 
-    protected static $enumCache = [];
     protected $table = "archives";
     protected $primaryKey = "id";
     protected $fillable = [
-        'activity_id', 'preview_link', 'download_link','phase','file_content'
+        'activity_id', 'preview_link', 'phase', 'file_content' // tambahkan download_link pada fillable
     ];
+
+    protected static $enumCache = [];
+
     public static function getPossibleEnumValues($column)
     {
         $instance = new static;
@@ -39,6 +41,7 @@ class Archive extends Model
 
         return self::$enumCache[$column];
     }
+
     public function activity()
     {
         return $this->belongsTo(Activity::class, 'activity_id');
