@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\User;
 use App\Models\Division;
 use App\Models\Employee;
@@ -10,6 +11,7 @@ use App\Exports\EmployeeExport;
 use App\Imports\EmployeeImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\CustomEmployeeTemplateExport;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -57,15 +59,24 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        Employee::create([
-            'nama'=>$request->nama,
-            'division_id'=>$request->division_id,
-            'NIP'=>$request->NIP,
-            'user_id'=>$request->user_id,
-            'pangkat'=>$request->pangkat,
-        ]);
+        // Buat user baru
+    $newUser = User::create([
+        'email' => $request->email,
+        'username' => $request->username,
+        'password' => bcrypt($request->password),
+    ]);
 
-        return redirect('employee')->with('success', 'Tambah Data Berhasil!');
+    // Buat pegawai dengan merujuk ke user yang baru dibuat
+    $pegawai = Employee::create([
+        'nama' => $request->nama,
+        'division_id' => $request->division_id,
+        'NIP' => $request->NIP,
+        'pangkat' => $request->pangkat,
+        'user_id' => $newUser->id, // Ambil id user yang baru dibuat
+    ]);
+
+    return redirect('employee')->with('success', 'Tambah Data Berhasil!');
+
     }
 
     /**
