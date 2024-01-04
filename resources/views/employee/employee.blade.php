@@ -59,7 +59,7 @@
                                                     @csrf
                                                     @method('delete') --}}
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#edit-employee-{{ $data->id }}"><i class="fas fa-edit"></i></a> |
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#delete-employee"><i class="fas fa-trash-alt" style="color: red"></i></a>
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#delete-employee-{{ $data->id }}"><i class="fas fa-trash-alt" style="color: red"></i></a>
                                                     {{-- </form> --}}
                                                 </td>
                                             </tr>
@@ -98,7 +98,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Divisi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="division_id" name="division_id">
+                                    <input type="text" class="form-control" id="division_name" name="division_name">
                                     {{-- <select class="form-control" name="division_id" id="division_id">
                                         @foreach ($datapegawai as $data)
                                             <option value="{{ $data }}">{{ $data->division->Name }}</option>
@@ -125,9 +125,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">User ID</label>
+                                <label class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="user_id" name="user_id">
+                                    <input type="text" class="form-control" id="email" name="email">
                                     {{-- <input type="hidden" name="user_id" value="{{ $newUserId }}"> --}}
                                     {{-- <select class="form-control" name="user_id" id="user_id">
                                         @foreach ($datapegawai as $data)
@@ -141,7 +141,16 @@
                                         @endforeach
                                     </select> --}}
                                     <div class="invalid-feedback">
-                                        Maaf, Email tidak valid!
+                                        Tolong isi Email dengan Benar (Gunakan domain bps.go.id)!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Username</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="username" name="username" readonly>
+                                    <div class="invalid-feedback">
+                                        Tolong isi Username!
                                     </div>
                                 </div>
                             </div>
@@ -212,13 +221,13 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Divisi</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="division_id" name="division_id" value="">
-                                        {{-- <select class="form-control" name="division_id" id="division_id">
+                                        {{-- <input type="text" class="form-control" id="division_name" name="division_name" value=""> --}}
+                                        <select class="form-control" name="division_id" id="division_id">
                                             <option value="" disabled selected>Pilih Divisi</option>
-                                            @foreach ($users as $division)
+                                            @foreach ($divisions as $division)
                                                 <option value="{{ $division->id }}">{{ $division->Name }}</option>
                                             @endforeach
-                                        </select> --}}
+                                        </select>
                                         <div class="invalid-feedback">
                                             Tolong Isi Nama Divisi!
                                         </div>
@@ -235,7 +244,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Email</label>
+                                    <label class="col-sm-2 col-form-label">User ID</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="user_id" name="user_id">
                                         {{-- <select class="form-control" name="user_id" id="user_id">
@@ -245,7 +254,7 @@
                                             @endforeach
                                         </select> --}}
                                         <div class="invalid-feedback">
-                                            Maaf, Email tidak valid.
+                                            Maaf, User ID tidak valid.
                                         </div>
                                     </div>
                                 </div>
@@ -266,7 +275,7 @@
                             </div>
                         </form>
                     @else
-                        <form action="{{ route('update-employee', $data->id) }}" class="needs-validation" novalidate=""
+                        <form action="{{ route('update-employee', ['id' => $data->id]) }}" class="needs-validation" novalidate=""
                             method="POST">
                             @csrf
                             @method('PUT')
@@ -284,14 +293,22 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Divisi</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="division_id" name="division_id"
-                                            value="{{ $data->division->Name}}">
-                                            {{-- <select class="form-control" name="division_id" id="division_id">
-                                                <option value="" disabled selected>Pilih Divisi</option>
+                                        {{-- <select class="form-control" name="division_id" id="division_id">
+                                            <option value="{{ $data->division_id }}" selected>{{ $data->division->Name }}</option>
+                                            @foreach ($divisions as $division)
+                                                <option value="{{ $division->id }}">{{ $division->Name }}</option>
+                                            @endforeach
+                                        </select> --}}
+                                        {{-- <input type="text" class="form-control" id="division_id" name="division_id"
+                                            value="{{ $data->division->Name}}"> --}}
+                                            <select class="form-control" name="division_id" id="division_id">
+                                                <option value="" disabled {{ $data->division_id ? '' : 'selected' }}>Pilih Divisi</option>
                                                 @foreach ($divisions as $division)
-                                                    <option value="{{ $division->id }}">{{ $division->Name }}</option>
+                                                    <option value="{{ $division->id }}" {{ $data->division_id == $division->id ? 'selected' : '' }}>
+                                                        {{ $division->Name }}
+                                                    </option>
                                                 @endforeach
-                                            </select> --}}
+                                            </select>
                                         <div class="invalid-feedback">
                                             Tolong Isi Nama Divisi!
                                         </div>
@@ -319,7 +336,7 @@
                                                 @endforeach
                                             </select> --}}
                                         <div class="invalid-feedback">
-                                            Maaf, Email tidak valid.
+                                            Maaf, User ID tidak valid.
                                         </div>
                                     </div>
                                 </div>
@@ -346,7 +363,7 @@
     </div>
 
     <!-- Modal Delete -->
-    <div class="modal fade" id="delete-employee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div class="modal fade" id="delete-employee-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -357,11 +374,11 @@
                     <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus data pegawai ini?</p>
+                    <p>Apakah Anda yakin ingin menghapus data pegawai {{ $data->nama }}?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <form action="{{ route('delete-employee', $data->id) }}" method="POST">
+                    <form action="{{ route('delete-employee', ['id' => $data->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Hapus</button>
@@ -412,4 +429,16 @@
 
     </section>
     </div>
+
+    <script>
+        // Fungsi untuk mengisi otomatis field username
+        function fillUsername() {
+            var email = document.getElementById('email').value;
+            var username = email.split('@')[0];
+            document.getElementById('username').value = username;
+        }
+
+        // Event listener untuk memanggil fungsi saat nilai email berubah
+        document.getElementById('email').addEventListener('change', fillUsername);
+    </script>
 @endsection

@@ -35,11 +35,16 @@ class EmployeeImport implements ToCollection
 
             // If the domain is valid, proceed
             if ($validDomain) {
-                // Find or create the Division
-                $division = Division::firstOrCreate([
-                    'name' => $divisionName,
-                    'code' => $number
-                ]);
+                // Find the Division by name
+                $division = Division::where('name', $divisionName)->first();
+
+                // Check if the division exists
+                if (!$division) {
+                    $division = Division::create([
+                        'name' => $divisionName,
+                        'code' => uniqid(), // Sesuaikan dengan logika pemberian kode yang sesuai
+                    ]);
+                }
 
                 // Find or create the User
                 $user = User::firstOrCreate(['email' => $userEmail], [
