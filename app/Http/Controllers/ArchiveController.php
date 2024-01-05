@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class ArchiveController extends Controller
 {
@@ -28,32 +29,38 @@ class ArchiveController extends Controller
         $request->validate([
             'activity_id' => 'required',
             'phase' => 'required',
-            'preview_link' => 'required',
-            'file_content' => 'required|mimes:pdf,doc,docx',
+            'file_content' => 'required',
         ]);
 
         $data = [
             'activity_id' => $request->input('activity_id'),
             'phase' => $request->input('phase'),
-            'preview_link' => $request->input('preview_link'),
         ];
 
         if ($request->hasFile('file_content')) {
-            $file = $request->file('file_content');
+            $files = $request->file('file_content');
             $activityName = Activity::find($data['activity_id'])->name;
-            $fileName = $activityName . '_' . Str::slug($data['phase']) . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/folder-upload', $fileName);
 
-            $data['file_path'] = 'folder-upload/' . $fileName; // Sesuaikan dengan storage:link
-            $data['file_content'] = $fileName;
-            $data['download_link'] = 'storage/app/public/folder-upload/' . $fileName; // Sesuaikan dengan storage:link
+            foreach ($files as $file) {
+                $now = Carbon::now();
+                $fileName = $now->format('Ymd_His') . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('public/folder-upload', $fileName);
+
+                $archiveData = [
+                    'activity_id' => $data['activity_id'],
+                    'phase' => $data['phase'],
+                    'preview_link' => 'storage/folder-upload/' . $fileName,
+                    'file_path' => 'folder-upload/' . $fileName,
+                    'file_content' => $fileName,
+                    'download_link' => 'storage/folder-upload/' . $fileName,
+                ];
+
+                Archive::create($archiveData);
+            }
         }
-
-        Archive::create($data);
 
         return redirect()->route('archive')->with('success', 'File berhasil diunggah.');
     }
-
 
     public function downloadFile($id)
     {

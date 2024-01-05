@@ -46,4 +46,9 @@ class Archive extends Model
     {
         return $this->belongsTo(Activity::class, 'activity_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

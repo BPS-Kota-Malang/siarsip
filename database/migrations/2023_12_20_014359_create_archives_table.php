@@ -25,4 +25,9 @@ return new class extends Migration
     {
         Schema::dropIfExists('archives');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 };

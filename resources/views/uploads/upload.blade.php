@@ -34,29 +34,32 @@
                                         <th>Preview Link</th>
                                         <th>Download Link</th>
                                         <th>File</th>
+                                        <th>User</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($dataUpload as $data)
-                                    <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ optional($data->activity)->name }}</td>
-                                        <td>{{ $data->phase }}</td>
-                                        <td>{{ $data->preview_link }}</td>
-                                        <td><a href="{{ route('download-file', $data->id) }}" class="btn btn-success">Download</a></td>
-                                        <td>{{ $data->file_content}}</td>
-                                        <td>
-                                            <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity_id }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{{ route('delete-file', $data->id) }}">
-                                                <i class="fas fa-trash-alt" style="color: red"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>{{ optional($data->activity)->name }}</td>
+                                            <td>{{ $data->phase }}</td>
+                                            <td><a href="{{ $data->preview_link }}" target="_blank" class="btn btn-info">Preview</a></td>
+                                            <td><a href="{{ route('download-file', $data->id) }}" class="btn btn-success">Download</a></td>
+                                            <td>{{ $data->file_content}}</td>
+                                            <td>
+                                                <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity_id }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="{{ route('delete-file', $data->id) }}">
+                                                    <i class="fas fa-trash-alt" style="color: red"></i>
+                                                </a>
+                                            </td>
+                                            <td>{{ optional($data->user)->name }}</td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -99,13 +102,13 @@
                                     <div class="valid-feedback">Good job!</div>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Preview Link</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="preview_link" name="preview_link" required="">
                                     <div class="invalid-feedback">Preview Link salah</div>
                                 </div>
-                            </div>
+                            </div> --}}
                             {{-- <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Download Link</label>
                                 <div class="col-sm-10">
@@ -117,10 +120,11 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Upload File</label>
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control" id="file_content" name="file_content">
+                                    <input type="file" class="form-control" id="file_content" name="file_content[]" multiple>
                                     <div class="valid-feedback">File berhasil diunggah</div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary">add file</button>
