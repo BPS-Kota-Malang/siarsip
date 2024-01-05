@@ -47,6 +47,7 @@
                                             <td><a href="{{ $data->preview_link }}" target="_blank" class="btn btn-info">Preview</a></td>
                                             <td><a href="{{ route('download-file', $data->id) }}" class="btn btn-success">Download</a></td>
                                             <td>{{ $data->file_content}}</td>
+                                            <td>{{ optional($data->user)->name }}</td>
                                             <td>
                                                 <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity_id }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
                                                     <i class="fas fa-edit"></i>
@@ -55,7 +56,7 @@
                                                     <i class="fas fa-trash-alt" style="color: red"></i>
                                                 </a>
                                             </td>
-                                            <td>{{ optional($data->user)->name }}</td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>

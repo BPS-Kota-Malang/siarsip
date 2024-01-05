@@ -12,9 +12,8 @@ class Archive extends Model
 
     protected $table = "archives";
     protected $primaryKey = "id";
-    protected $fillable = [
-        'activity_id', 'preview_link', 'phase', 'file_content' // tambahkan download_link pada fillable
-    ];
+    protected $fillable = ['activity_id', 'phase', 'user_id', 'preview_link', 'file_content', 'download_link'];
+
 
     protected static $enumCache = [];
 
@@ -49,6 +48,6 @@ class Archive extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

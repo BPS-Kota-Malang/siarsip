@@ -16,8 +16,12 @@ return new class extends Migration
             $table->foreignId('activity_id')->constrained(); // foreign key
             $table->string('preview_link');
             $table->string('download_link');
+            $table->enum('phase', ['persiapan', 'pelaksanaan', 'pengolahan', 'diseminasi', 'laporan', 'dokumentasi'])->default('persiapan');
+            $table->string('file_content')->nullable();
             // ... tambahkan kolom lain sesuai kebutuhan
             $table->timestamps();
+            $table->foreignId('user_id')->constrained(); // foreign key for user
+
         });
     }
 

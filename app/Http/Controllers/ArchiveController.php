@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ArchiveController extends Controller
 {
@@ -32,9 +33,11 @@ class ArchiveController extends Controller
             'file_content' => 'required',
         ]);
 
+        $userId = Auth::id();
         $data = [
             'activity_id' => $request->input('activity_id'),
             'phase' => $request->input('phase'),
+            'user_id' => $userId, // Add user_id to the data array
         ];
 
         if ($request->hasFile('file_content')) {
@@ -49,6 +52,7 @@ class ArchiveController extends Controller
                 $archiveData = [
                     'activity_id' => $data['activity_id'],
                     'phase' => $data['phase'],
+                    'user_id' => $data['user_id'],
                     'preview_link' => 'storage/folder-upload/' . $fileName,
                     'file_path' => 'folder-upload/' . $fileName,
                     'file_content' => $fileName,
