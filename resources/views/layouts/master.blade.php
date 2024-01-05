@@ -83,21 +83,27 @@
 
   <!-- Script Modal Edit-->
 
+
   <script>
     $('#edit-file').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var id = button.data('id');
         var activity = button.data('activity');
+        var phase = button.data('phase');
         var previewLink = button.data('preview-link');
         var downloadLink = button.data('download-link');
+        var file_content = button.data('file_content');
 
         var modal = $(this);
         modal.find('.modal-body #id').val(id);
         modal.find('.modal-body #activity_id').val(activity);
+        modal.find('.modal-body #phase').val(phase);
         modal.find('.modal-body #preview_link').val(previewLink);
-        modal.find('.modal-body #download_link').val(downloadLink);
+        modal.find('.modal-body #download_link').val(file_content);
     });
 </script>
+
+
 <script>
     $('#edit-activity').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);

@@ -13,6 +13,10 @@ class Division extends Model
         'id', 'name', 'code'
     ];
 
+    public function Employee()
+    {
+        return $this->hasMany(Employee::class);
+    }
     // Division.php
 
     public function activities()

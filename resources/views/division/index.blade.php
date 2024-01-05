@@ -7,7 +7,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Data Kegiatan</h1>
+            <h1>Data Tim Kerja</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Modules</a></div>
@@ -20,7 +20,11 @@
                     <div class="card-header">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+<<<<<<< HEAD
+                            data-bs-target="#add-division">Tambah Tim Kerja</button>
+=======
                             data-bs-target="#addDivision">Tambah Kegiatan</button>
+>>>>>>> login_branch
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -60,8 +64,12 @@
     </div>
 
     <!-- Modal Add-->
+<<<<<<< HEAD
+    <div class="modal fade center-modal" id="add-division" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+=======
     <div class="modal fade center-modal" id="add-division" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
+>>>>>>> login_branch
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -69,7 +77,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+<<<<<<< HEAD
+                    <form action="{{ route('division.store') }}" class="needs-validation" novalidate="" method="POST">
+=======
                     <form action="{{ route('save-employee') }}" class="needs-validation" novalidate="" method="POST">
+>>>>>>> login_branch
                         @csrf
                         <div class="card-body">
                             <div class="form-group row">
@@ -84,6 +96,9 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Divisi</label>
                                 <div class="col-sm-10">
+<<<<<<< HEAD
+                                    <input type="text" class="form-control" id="code" name="code">
+=======
                                     <input type="text" class="form-control" id="division_id" name="division_id">
                                     {{-- <select class="form-control" name="division_id" id="division_id">
                                         @foreach ($datapegawai as $data)
@@ -122,6 +137,7 @@
                                 <label class="col-sm-2 col-form-label">Pangkat</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="pangkat" name="pangkat">
+>>>>>>> login_branch
                                     <div class="valid-feedback">
                                         Lengkap!
                                     </div>
@@ -190,5 +206,9 @@
     </div>
 
     </section>
+<<<<<<< HEAD
+</div>
+=======
     </div>
+>>>>>>> login_branch
 @endsection

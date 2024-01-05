@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        return view('index');
+        // dd(auth()->user()->role);
+    }
+
     public function showProfile()
     {
         return view('user-profile');
@@ -78,5 +84,25 @@ class UserController extends Controller
         ]);
 
         return redirect('user-profile')->with('success', 'Password Berhasil Diperbarui!');
+    }
+
+    public function activity()
+    {
+        return view('activity.activity');
+    }
+
+    public function division()
+    {
+        return view('division.division');
+    }
+
+    public function archive()
+    {
+        return view('uploads.upload');
+    }
+
+    public function employee()
+    {
+        return view('employee.employee');
     }
 }
