@@ -33,18 +33,18 @@
                                 </div>
 
                                 <div class="form-group mb-2">
-                                    <label for="username">Username</label>
-                                    <input id="username" type="text" class="form-control" name="username" value="{{ Auth::user()->username }}">
-                                    <div class="invalid-feedback">
-                                        Please fill in your username
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-2">
                                     <label for="email">Email</label>
                                     <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}">
                                     <div class="invalid-feedback">
                                         Please fill in your email
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label for="username">Username</label>
+                                    <input id="username" type="text" class="form-control" name="username" value="{{ Auth::user()->username }}">
+                                    <div class="invalid-feedback">
+                                        Please fill in your username
                                     </div>
                                 </div>
 
@@ -107,4 +107,15 @@
 </footer>
 </div>
 </div>
+<script>
+    // Fungsi untuk mengisi otomatis field username
+    function fillUsername() {
+        var email = document.getElementById('email').value;
+        var username = email.split('@')[0];
+        document.getElementById('username').value = username;
+    }
+
+    // Event listener untuk memanggil fungsi saat nilai email berubah
+    document.getElementById('email').addEventListener('change', fillUsername);
+</script>
 @endsection
