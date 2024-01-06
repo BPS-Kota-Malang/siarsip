@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ArchiveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,7 @@ Route::put('/update-activity,{id}',[App\Http\Controllers\ActivityController::cla
 Route::delete('/delete-activity,{id}',[App\Http\Controllers\ActivityController::class, 'destroy'])->name('delete-activity');
 Route::get('/export-activity',[App\Http\Controllers\ActivityController::class, 'activityexport'])->name('export-activity');
 Route::post('/import-activity',[App\Http\Controllers\ActivityController::class, 'activityimport'])->name('import-activity');
+Route::post('/import-activity',[App\Http\Controllers\ActivityController::class, 'activityimport'])->name('import-activity');
 
 //upload file
 // Route::get('/archive',[App\Http\Controllers\ArchiveController::class, 'index'])->name('archive');
@@ -97,6 +99,9 @@ Route::post('/save-file',[App\Http\Controllers\ArchiveController::class, 'store'
 Route::get('/edit-file,{id}',[App\Http\Controllers\ArchiveController::class, 'edit'])->name('edit-file');
 Route::put('/update-file,{id}',[App\Http\Controllers\ArchiveController::class, 'update'])->name('update-file');
 Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
+Route::get('/download/{id}', [ArchiveController::class, 'downloadFile'])->name('download-file');
+
+
 
 // Route::get('/employee',[App\Http\Controllers\EmployeeController::class, 'index'])->name('employee');
 Route::get('/add-employee',[App\Http\Controllers\EmployeeController::class, 'create'])->name('add-employee');
