@@ -99,6 +99,7 @@
         modal.find('.modal-body #activity_id').val(activity);
         modal.find('.modal-body #phase').val(phase);
         modal.find('.modal-body #preview_link').val(previewLink);
+        modal.find('.modal-body #download_link').val(downloadLink);
         modal.find('.modal-body #download_link').val(file_content);
     });
 </script>

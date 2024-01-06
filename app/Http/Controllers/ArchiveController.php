@@ -56,7 +56,7 @@ class ArchiveController extends Controller
                     'preview_link' => 'storage/folder-upload/' . $fileName,
                     'file_path' => 'folder-upload/' . $fileName,
                     'file_content' => $fileName,
-                    'download_link' => 'storage/folder-upload/' . $fileName,
+                    // 'download_link' => 'storage/folder-upload/' . $fileName,
                 ];
 
                 Archive::create($archiveData);
@@ -89,20 +89,46 @@ class ArchiveController extends Controller
         return view('uploads.upload', compact('upload'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
-        $upload = Archive::findorfail($id);
-        $upload->update($request->all());
+        $data = Archive::findOrFail($id);
 
-        return redirect('archive')->with('success', 'Data Berhasil Update!');
+        // Validate request if needed
+        $request->validate([
+            'activity_id' => 'required',
+            'phase' => 'required',
+            'file_content' => 'required',
+        ]);
+
+        // Update only the necessary fields
+        $data->update([
+            'activity_id' => $request->input('activity_id'),
+            'phase' => $request->input('phase'),
+        ]);
+
+        // Check if a new file is being uploaded
+        if ($request->hasFile('file_content')) {
+            // Delete the old file
+            Storage::delete('public/folder-upload/' . $data->file_content);
+
+            // Process the new file
+            $file = $request->file('file_content');
+            $now = now();
+            $fileName = $now->format('Ymd_His') . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/folder-upload', $fileName);
+
+            // Update file-related fields in the database
+            $data->update([
+                'file_content' => $fileName,
+                'preview_link' => url('storage/folder-upload/' . $fileName),
+                'file_path' => 'folder-upload/' . $fileName,
+            ]);
+        }
+
+        return redirect()->route('archive')->with('success', 'Data Berhasil Update!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $upload = Archive::findorfail($id);

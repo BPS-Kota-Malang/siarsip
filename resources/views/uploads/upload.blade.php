@@ -140,7 +140,7 @@
     datakosong
     @else
     <!-- Modal Edit -->
-    <div class="modal fade center-modal" id="edit-file" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade center-modal" id="edit-file" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" enctype="multipart/form-data">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -151,7 +151,7 @@
                     @if($dataUpload->isEmpty())
                         <p>data kosong</p>
                     @else
-                        <form action="{{ route('update-file', $data->id) }}" class="needs-validation" novalidate="" method="POST">
+                        <form action="{{ route('update-file', $data->id) }}" class="needs-validation" novalidate="" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
@@ -178,7 +178,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Preview Linkk</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="preview_link" name="preview_link" required="" value="{{ $data->preview_link }}">
@@ -191,6 +191,16 @@
                                     <input type="text" class="form-control" id="download_link" name="download_link" value="{{ $data->download_link }}">
                                     <div class="valid-feedback">File berhasil ditambah</div>
                                 </div>
+                            </div> --}}
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">File Content</label>
+                            <div class="col-sm-10">
+                                @if ($data->file_content)
+                                    <p>File Sebelumnya: {{ $data->file_content }}</p>
+                                @endif
+                                <input type="file" class="form-control" id="file_content" name="file_content">
+                                <div class="valid-feedback">File berhasil ditambah</div>
                             </div>
                         </div>
                         <div class="card-footer text-right">
