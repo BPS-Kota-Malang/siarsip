@@ -73,7 +73,6 @@ Route::post('/update-password', [UserController::class, 'updatePassword'])->name
 Route::group(['middleware' => ['auth', 'web', 'cekrole:superadmin']], function () {
     Route::get('/employee', [App\Http\Controllers\UserController::class, 'employee'])->name('employee');
 });
-
 Route::group(['middleware' => ['auth', 'web', 'cekrole:superadmin,ketuatim,anggota']], function () {
     Route::get('/index', [App\Http\Controllers\UserController::class, 'index'])->name('index');
     Route::get('/activity', [App\Http\Controllers\UserController::class, 'activity'])->name('activity');
