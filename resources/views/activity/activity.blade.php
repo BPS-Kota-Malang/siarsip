@@ -61,14 +61,6 @@
                                                      <a href="{{ route('delete-activity',$data->id) }}" class="confirm-button" ><i class="fas fa-trash-alt" style="color: red"></i></a>
                                                 </form>
                                                 </div>
-                                                {{-- <form action="{{ route('delete-activity',$data->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('delete') --}}
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a>
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
-                                                <a href="#"><i class="fas fa-trash-alt" style="color: red"></i></a>
-                                                {{-- </form> --}}
                                             </td>
                                         </tr>
                                         @endforeach
@@ -202,8 +194,6 @@
                             <label class="col-sm-2 col-form-label">Finance Code</label>
                             <div class="col-sm-10">
                               <input type="text" class="form-control" id="financeCode" name="financeCode" value="{{ $data->finance_code }}">
-                              <input type="text" class="form-control" id="finance_code" name="finance_code" value="{{ $data->finance_code }}">
-                              <input type="text" class="form-control" id="finance_code" name="finance_code" value="{{ $data->finance_code }}">
                               <div class="invalid-feedback">
                                 Maaf, Kode tidak valid.
                               </div>
@@ -212,7 +202,7 @@
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Divisi</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="division" name="division" value="{{ $data->division }}">
+                              <input type="text" class="form-control" id="division" name="division" value="{{ $data->divisionName }}">
                               <div class="valid-feedback">
                                 Lengkap!
                               </div>
@@ -255,6 +245,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <a href="download-custom-activity-template" class="btn btn-info mb-2">Unduh Template</a>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>

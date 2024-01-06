@@ -88,8 +88,9 @@ Route::get('/edit-activity,{id}',[App\Http\Controllers\ActivityController::class
 Route::put('/update-activity,{id}',[App\Http\Controllers\ActivityController::class, 'update'])->name('update-activity');
 Route::delete('/delete-activity,{id}',[App\Http\Controllers\ActivityController::class, 'destroy'])->name('delete-activity');
 Route::get('/export-activity',[App\Http\Controllers\ActivityController::class, 'activityexport'])->name('export-activity');
+Route::get('/download-custom-template', [App\Http\Controllers\ActivityController::class, 'downloadTemplate'])->name('download-custom-activity-template');
 Route::post('/import-activity',[App\Http\Controllers\ActivityController::class, 'activityimport'])->name('import-activity');
-Route::post('/import-activity',[App\Http\Controllers\ActivityController::class, 'activityimport'])->name('import-activity');
+
 
 //upload file
 Route::get('/archive',[App\Http\Controllers\ArchiveController::class, 'index'])->name('archive');

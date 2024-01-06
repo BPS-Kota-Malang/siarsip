@@ -59,4 +59,19 @@ class User extends Authenticatable
             ]
         ];
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'superadmin'; // Gantilah dengan logika peran sesuai kebutuhan aplikasi Anda
+    }
+
+    public function isTeamLeader()
+    {
+        return $this->role === 'ketuatim';
+    }
+
+    public function isMember()
+    {
+        return $this->role === 'anggota';
+    }
 }

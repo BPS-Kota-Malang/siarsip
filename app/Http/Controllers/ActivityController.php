@@ -7,7 +7,9 @@ use App\Exports\ActivityExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\ActivityDivisionImport;
+use App\Policies\ActivityPolicy;
 use App\Imports\ActivityImport;
+use App\Exports\CustomActivityTemplateExport;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -24,6 +26,11 @@ class ActivityController extends Controller
     public function activityexport()
     {
         return Excel::download(new ActivityExport,'data-kegiatan.xlsx');
+    }
+
+    public function downloadTemplate()
+    {
+        return Excel::download(new CustomActivityTemplateExport, 'custom_activity_template.xlsx');
     }
 
     public function activityimport(Request $request)
@@ -69,8 +76,9 @@ class ActivityController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Activity $activity, string $id)
     {
+        $this->authorize('update', $activity);
         $kegiatan = Activity::findorfail($id);
         return view('activity.edit-activity', compact('kegiatan'));
     }
@@ -89,8 +97,9 @@ class ActivityController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Activity $activity, string $id)
     {
+        $this->authorize('delete', $activity);
         $kegiatan = Activity::findorfail($id);
         $kegiatan->delete();
 
