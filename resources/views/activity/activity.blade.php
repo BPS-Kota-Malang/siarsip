@@ -43,21 +43,11 @@
                                 <tbody>
                                         @foreach ($datakegiatan as $data)
                                         <tr>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-                                            {{-- <input type="hidden" class="delete_id" value="{{ $data->id }}"> --}}
->>>>>>> c1fd1a664e79992e9d9cb5706ca00315a8e01f08
-=======
-                                            {{-- <input type="hidden" class="delete_id" value="{{ $data->id }}"> --}}
->>>>>>> e05e8fceb5ef2ee25d4555a4d5ea752cff2310f3
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->finance_code }}</td>
                                             <td>{{ $data->division->name }}</td>
                                             <td>
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                 <div class="icon-container">
                                                 {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity" data-id="{{ $data->id }}"><i class="fas fa-edit"></i></a> --}}
                                                 <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-activity" data-id="{{ $data->id }}" data-name="{{ $data->name }}" data-finance-code="{{ $data->finance_code }}" data-division="{{ $data->division}}">
@@ -71,27 +61,14 @@
                                                      <a href="{{ route('delete-activity',$data->id) }}" class="confirm-button" ><i class="fas fa-trash-alt" style="color: red"></i></a>
                                                 </form>
                                                 </div>
-=======
-=======
->>>>>>> e05e8fceb5ef2ee25d4555a4d5ea752cff2310f3
                                                 {{-- <form action="{{ route('delete-activity',$data->id) }}" method="POST">
                                                     @csrf
                                                     @method('delete') --}}
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
-=======
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a>
->>>>>>> origin/dev_branch
-=======
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity"><i class="fas fa-edit"></i></a> |
->>>>>>> login_branch
                                                 <a href="#"><i class="fas fa-trash-alt" style="color: red"></i></a>
                                                 {{-- </form> --}}
-<<<<<<< HEAD
->>>>>>> c1fd1a664e79992e9d9cb5706ca00315a8e01f08
-=======
->>>>>>> e05e8fceb5ef2ee25d4555a4d5ea752cff2310f3
                                             </td>
                                         </tr>
                                         @endforeach
@@ -224,15 +201,9 @@
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Finance Code</label>
                             <div class="col-sm-10">
-<<<<<<< HEAD
-<<<<<<< HEAD
                               <input type="text" class="form-control" id="financeCode" name="financeCode" value="{{ $data->finance_code }}">
-=======
                               <input type="text" class="form-control" id="finance_code" name="finance_code" value="{{ $data->finance_code }}">
->>>>>>> c1fd1a664e79992e9d9cb5706ca00315a8e01f08
-=======
                               <input type="text" class="form-control" id="finance_code" name="finance_code" value="{{ $data->finance_code }}">
->>>>>>> e05e8fceb5ef2ee25d4555a4d5ea752cff2310f3
                               <div class="invalid-feedback">
                                 Maaf, Kode tidak valid.
                               </div>
@@ -260,13 +231,7 @@
     </div>
     {{-- @endforeach --}}
     {{-- @include('activity.edit-activity') --}}
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 </section>
-=======
-=======
->>>>>>> login_branch
     <!-- Modal Import-->
     <div class="modal fade center-modal" id="import-activity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -298,11 +263,5 @@
             </div>
         </div>
     </div>
-
     </section>
-<<<<<<< HEAD
->>>>>>> activity_branch
-=======
->>>>>>> login_branch
-</div>
 @endsection

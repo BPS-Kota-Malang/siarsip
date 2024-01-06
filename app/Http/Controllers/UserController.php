@@ -27,12 +27,19 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'min:3', 'max:225'],
             'username' => ['required', 'min:3', 'max:10'],
-            'email' => 'required|email',
+            'email' => [
+                'required',
+                'email',
+                'regex:/^[A-Za-z0-9._%+-]+@bps\.go\.id$/',
+            ],
         ], [
             'required' => ':attribute harus diisi.',
-            'email' => ':attribute harus berupa email yang valid.',
+            'email' => ':attribute harus berupa email yang valid dari domain BPS.',
             'min' => 'panjang :attribute minimal :min karakter.',
         ]);
+
+        preg_match('/^[a-zA-Z0-9._%+-]+/', $request->email, $matches);
+        $username = $matches[0];
 
         if ($validator->fails()) {
             return response()->json([
@@ -45,7 +52,7 @@ class UserController extends Controller
         $user = User::findOrFail(Auth::user()->id);
         $user->update([
             'name' => $request->name,
-            'username' => $request->username,
+            'username' => $username,
             'email' => $request->email,
         ]);
         return redirect('user-profile')->with('success', 'Profile Berhasil Update!');

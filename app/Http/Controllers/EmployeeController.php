@@ -20,10 +20,11 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $datapegawai = Employee::all();
+        $allEmployees = Employee::all();
         $divisions = Division::all();
         $users = User::all();
-        return view('employee.employee',compact('datapegawai','divisions', 'users'));
+
+        return view('employee.employee',compact('allEmployees','divisions', 'users'));
     }
 
     public function employeeexport()
@@ -78,7 +79,7 @@ class EmployeeController extends Controller
         ], [
             'name' => $request->nama,
             'username' => $username,
-            'password' => bcrypt('3573'), // Password default 3573 (sesuaikan kebutuhan)
+            'password' => bcrypt('3573'), // Password default 3573
     ]);
 
         // Temukan divisi berdasarkan nama
@@ -88,7 +89,7 @@ class EmployeeController extends Controller
         if (!$division) {
             $division = Division::create([
                 'name' => $request->division_name,
-                'code' => uniqid(), // Sesuaikan dengan logika pemberian kode yang sesuai
+                'code' => uniqid(),
             ]);
         }
 
@@ -118,7 +119,7 @@ class EmployeeController extends Controller
     public function edit(string $id)
     {
         $pegawai = Employee::findorfail($id);
-        $divisions = Division::all(); // Assuming you need the divisions for the dropdown
+        $divisions = Division::all();
         $users = User::all();
         return view('employee.edit-employee', compact('pegawai', 'divisions',  'user'));
     }

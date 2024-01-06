@@ -39,20 +39,20 @@
                                             <th>Nama</th>
                                             <th>Divisi</th>
                                             <th>NIP</th>
-                                            <th>User ID</th>
+                                            <th>User</th>
                                             <th>Pangkat</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($datapegawai as $data)
+                                        @foreach ($allEmployees as $data)
                                             <tr>
                                                 {{-- <input type="hidden" class="delete_id" value="{{ $data->id }}"> --}}
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td>{{ $data->nama }}</td>
-                                                <td>{{ $data->division->Name}}</td>
+                                                <td>{{ $data->division->name}}</td>
                                                 <td>{{ $data->NIP }}</td>
-                                                <td>{{ $data->user_id }}</td>
+                                                <td>{{ $data->user->username }}</td>
                                                 <td>{{ $data->pangkat }}</td>
                                                 <td>
                                                     {{-- <form action="{{ route('delete-employee',$data->id) }}" method="POST">
@@ -194,7 +194,7 @@
     {{-- @include('delete.add-employee') --}}
 
     <!-- Modal Edit-->
-    @foreach ($datapegawai as $data)
+    @foreach ($allEmployees as $data)
     <div class="modal fade center-modal" id="edit-employee-{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -204,7 +204,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @if ($datapegawai->isEmpty())
+                    @if ($allEmployees->isEmpty())
                         <form action="#" class="needs-validation" novalidate="" method="POST">
                             @csrf
                             <div class="card-body">
@@ -305,7 +305,7 @@
                                                 <option value="" disabled {{ $data->division_id ? '' : 'selected' }}>Pilih Divisi</option>
                                                 @foreach ($divisions as $division)
                                                     <option value="{{ $division->id }}" {{ $data->division_id == $division->id ? 'selected' : '' }}>
-                                                        {{ $division->Name }}
+                                                        {{ $division->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -325,10 +325,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">User ID</label>
+                                    <label class="col-sm-2 col-form-label">User</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="user_id" name="user_id"
-                                            value="{{ $data->user_id}}">
+                                            value="{{ $data->user->username}}" readonly>
                                             {{-- <select class="form-control" name="user_id" id="user_id">
                                                 <option value="" disabled selected>Pilih Email</option>
                                                 @foreach ($users as $user)
