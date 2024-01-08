@@ -108,7 +108,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-control" id="division" name="division">
                                         <option value="" disabled selected>Pilih Divisi</option>
-                                    @foreach ($kegiatans as $id => $name)
+                                    @foreach ($divisions as $id => $name)
                                             <option value="{{ $id }}" data-name="{{ $name }}">{{ $name }}</option>
                                         @endforeach
                                     </select>
@@ -202,12 +202,11 @@
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Divisi</label>
                             <div class="col-sm-10">
-                                <option value="" disabled {{ $data->division_id ? '' : 'selected' }}>Pilih Divisi</option>
-                                                @foreach ($divisions as $division)
-                                                    <option value="{{ $division->id }}" {{ $data->division_id == $division->id ? 'selected' : '' }}>
-                                                        {{ $division->name }}
-                                                    </option>
-                                                @endforeach
+                                <select class="form-control" name="division" id="division">
+                                    @foreach ($divisions as $id => $name)
+                                    <option value="{{ $id }}" {{ $data->division_id == $id ? 'selected' : '' }}>{{ $name }}</option>
+                                    @endforeach
+                                </select>
                               {{-- <input type="text" class="form-control" id="division" name="division" value="{{ $data->divisionName }}"> --}}
                               <div class="valid-feedback">
                                 Lengkap!

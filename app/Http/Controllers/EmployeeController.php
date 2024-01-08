@@ -134,9 +134,9 @@ class EmployeeController extends Controller
         $pegawai = Employee::findorfail($id);
         $pegawai->update([
             'nama' => $request->nama,
-            'division_id' => $request->division_id,
+            'division_id' => $request->division_name,
             'NIP' => $request->NIP,
-            'user_id' => $request->user_id,
+            // 'user_id' => $request->user_id,
             'pangkat' => $request->pangkat,
         ]);
 

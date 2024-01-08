@@ -90,8 +90,9 @@ class ArchiveController extends Controller
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(Archive $archive, Request $request, string $id)
     {
+        $this->authorize('update', $archive);
         $data = Archive::findOrFail($id);
 
         // Validate request if needed
@@ -129,10 +130,12 @@ class ArchiveController extends Controller
         return redirect()->route('archive')->with('success', 'Data Berhasil Update!');
     }
 
-    public function destroy(string $id)
+    public function destroy(Archive $archive, string $id)
     {
+        $this->authorize('delete', $archive);
         $upload = Archive::findorfail($id);
         $upload->delete();
+        $archive->delete();
 
         return back()->with('info', 'Data Berhasil Dihapus!');
     }

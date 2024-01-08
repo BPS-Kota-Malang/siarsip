@@ -21,8 +21,9 @@ class ActivityController extends Controller
     public function index()
     {
         $datakegiatan = Activity::all();
-        $kegiatans = Division::pluck('name', 'id');
-        return view('activity.activity',compact('datakegiatan', 'kegiatans'));
+        $divisions = Division::all();
+        $divisions = Division::pluck('name', 'id');
+        return view('activity.activity',compact('datakegiatan', 'divisions'));
     }
 
     public function activityexport()

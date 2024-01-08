@@ -2,9 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\User;
+// use App\Models\User;
 use App\Models\Archive;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Foundation\Auth\User;
 
 class ArchivePolicy
 {
@@ -16,7 +17,7 @@ class ArchivePolicy
         //
     }
 
-    public function update(User $user, Archive $activity)
+    public function update(User $user, Archive $archive)
     {
         // Super admin dapat mengedit seluruh data
         if ($user->isAdmin()) {
@@ -26,14 +27,14 @@ class ArchivePolicy
         }
 
      // Ketua tim dapat menghapus data dari timnya sendiri dan anggotanya dengan divisi yang sama
-if ($user->isTeamLeader()) {
-    return $activity->team_leader_id == $user->id || ($activity->added_by != $user->id && $activity->division == $user->division && $activity->team_id == $user->team_id);
-}
+        if ($user->isTeamLeader()) {
+            return $archive->team_leader_id == $user->id || ($archive->added_by != $user->id && $archive->division == $user->division && $archive->team_id == $user->team_id);
+        }
 
 
         // Anggota dapat mengedit data yang mereka tambahkan
         if ($user->isMember()) {
-            return $activity->added_by == $user->id
+            return $archive->added_by == $user->id
             ? Response::allow()
             : Response::deny('You do not own this post.');
         }
@@ -43,7 +44,7 @@ if ($user->isTeamLeader()) {
     }
 
 
-    public function delete(User $user, Archive $activity)
+    public function delete(User $user, Archive $archive)
    {
         // Super admin dapat mengedit seluruh data
         if ($user->isAdmin()) {
@@ -51,16 +52,18 @@ if ($user->isTeamLeader()) {
         }
 
         // Ketua tim dapat mengedit data dari timnya sendiri dan anggotanya
-        if ($user->isTeamLeader()) {
-            return $activity->team_leader_id == $user->id || $activity->added_by == $user->id;
+        elseif ($user->isTeamLeader()) {
+            return $archive->team_leader_id == $user->id || ($archive->added_by != $user->id && $archive->division == $user->division && $archive->team_id == $user->team_id);
         }
 
-        // Anggota dapat mengedit data yang mereka tambahkan
-        if ($user->isMember()) {
-            return $activity->added_by == $user->id;
+        // Anggota dapat mengedit atau menghapus data yang mereka tambahkan
+        elseif ($user->isMember()) {
+            return $archive->added_by == $user->id;
         }
 
+        else{
         // Akses default ditolak
         return false;
+        }
     }
 }
