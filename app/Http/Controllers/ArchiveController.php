@@ -153,7 +153,7 @@ class ArchiveController extends Controller
         $this->authorize('delete', $archive);
         $upload = Archive::findorfail($id);
         $upload->delete();
-        $archive->delete();
+        // $archive->delete();
 
         return back()->with('info', 'Data Berhasil Dihapus!');
     }
