@@ -31,8 +31,8 @@
                                         <th class="text-center">No</th>
                                         <th>Kegiatan</th>
                                         <th>Phase</th>
-                                        <th>Preview Link</th>
-                                        <th>Download Link</th>
+                                        <th>Preview</th>
+                                        <th>Download</th>
                                         <th>File</th>
                                         <th>User</th>
                                         <th>Action</th>
@@ -44,8 +44,15 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ optional($data->activity)->name }}</td>
                                             <td>{{ $data->phase }}</td>
-                                            <td><a href="{{ $data->preview_link }}" target="_blank" class="btn btn-info">Preview</a></td>
-                                            <td><a href="{{ route('download-file', $data->id) }}" class="btn btn-success">Download</a></td>
+                                            <td>
+                                                <a href="{{ $data->preview_link }}" target="_blank" class="btn btn-info" data-link="{{ $data->preview_link }}">
+                                                    <i class="fa fa-eye"></i><span class="visually-hidden">Preview</span>
+                                                </a>
+                                                <a href="javascript:void(0)" class="btn btn-info copy-link" data-link="{{ $data->preview_link }}">
+                                                    <i class="fa fa-file"></i><span class="visually-hidden">Copy</span>
+                                                </a>
+                                            </td>
+                                            <td><a href="{{ route('download-file', $data->id) }}" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i><span class="visually-hidden">Download</span></a></td>
                                             <td>{{ $data->file_content}}</td>
                                             <td>{{ optional($data->user)->username }}</td>
                                             <td>
@@ -178,21 +185,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Preview Linkk</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="preview_link" name="preview_link" required="" value="{{ $data->preview_link }}">
-                                    <div class="invalid-feedback">Oh no! Link is invalid</div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Download Link</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="download_link" name="download_link" value="{{ $data->download_link }}">
-                                    <div class="valid-feedback">File berhasil ditambah</div>
-                                </div>
-                            </div> --}}
-                        </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">File Content</label>
                             <div class="col-sm-10">
