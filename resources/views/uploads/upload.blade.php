@@ -192,7 +192,7 @@
                                     <div class="valid-feedback">File berhasil ditambah</div>
                                 </div>
                             </div> --}}
-                        </div>
+
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">File Content</label>
                             <div class="col-sm-10">
