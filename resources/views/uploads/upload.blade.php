@@ -31,8 +31,8 @@
                                         <th class="text-center">No</th>
                                         <th>Kegiatan</th>
                                         <th>Phase</th>
-                                        <th>Preview Link</th>
-                                        <th>Download Link</th>
+                                        <th>Preview</th>
+                                        <th>Download</th>
                                         <th>File</th>
                                         <th>User</th>
                                         <th>Action</th>
