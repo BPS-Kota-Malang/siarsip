@@ -17,6 +17,8 @@ class Employee extends Model
         'pangkat',
     ];
 
+
+
     public function User()
     {
         return $this->belongsTo(User::class);

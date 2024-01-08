@@ -83,8 +83,9 @@ class ArchiveController extends Controller
         return redirect()->route('archive')->with('error', 'File tidak ditemukan.');
     }
 
-    public function edit(string $id)
+    public function edit(Activity $activity, string $id)
     {
+        $this->authorize('update', $activity);
         $upload = Archive::findorfail($id);
         return view('uploads.upload', compact('upload'));
     }
@@ -103,8 +104,9 @@ class ArchiveController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Archive $archive,string $id)
     {
+        $this->authorize('delete', $archive);
         $upload = Archive::findorfail($id);
         $upload->delete();
 

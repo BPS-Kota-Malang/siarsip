@@ -4,11 +4,12 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Cviebrock\EloquentSluggable\Sluggable;
 
 class User extends Authenticatable
 {
@@ -22,9 +23,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'username',
         'password',
     ];
+
+    protected static $enumCache = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -58,6 +62,30 @@ class User extends Authenticatable
                 'source' => 'email'
             ]
         ];
+    }
+
+    public static function getPossibleEnumValues($column)
+    {
+        $instance = new static;
+
+        if (!isset(self::$enumCache[$column])) {
+            $enumValues = [];
+
+            // Menggunakan query langsung untuk mendapatkan nilai-nilai enum
+            $type = DB::select("SHOW COLUMNS FROM {$instance->getTable()} WHERE Field = '{$column}'")[0]->Type;
+
+            preg_match('/^enum\((.*)\)$/', $type, $matches);
+
+            $enumValues = array_map(
+                'trim',
+                explode(',', str_replace("'", '', $matches[1]))
+            );
+
+            // Simpan hasil dalam cache
+            self::$enumCache[$column] = $enumValues;
+        }
+
+        return self::$enumCache[$column];
     }
 
     public function isAdmin()

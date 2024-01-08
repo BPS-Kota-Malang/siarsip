@@ -41,6 +41,7 @@
                                             <th>NIP</th>
                                             <th>User</th>
                                             <th>Pangkat</th>
+                                            <th>Role</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -54,6 +55,7 @@
                                                 <td>{{ $data->NIP }}</td>
                                                 <td>{{ $data->user->username }}</td>
                                                 <td>{{ $data->pangkat }}</td>
+                                                <td>{{ $data->user->role }}</td>
                                                 <td>
                                                     {{-- <form action="{{ route('delete-employee',$data->id) }}" method="POST">
                                                     @csrf
@@ -176,6 +178,19 @@
                                 <label class="col-sm-2 col-form-label">Pangkat</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="pangkat" name="pangkat">
+                                    <div class="valid-feedback">
+                                        Lengkap!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Role</label>
+                                <div class="col-sm-10">
+                                    <select name="phase" id="kategori" required>
+                                        @foreach(\App\Models\User::getPossibleEnumValues('role') as $role)
+                                            <option value="{{ $role }}">{{ $role }}</option>
+                                        @endforeach
+                                    </select>
                                     <div class="valid-feedback">
                                         Lengkap!
                                     </div>
