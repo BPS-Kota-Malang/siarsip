@@ -10,6 +10,7 @@
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
 
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="{{ asset('assets/modules/jqvmap/dist/jqvmap.min.css') }}">
@@ -159,6 +160,35 @@
             });
     });
 
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.copy-link').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var urlToCopy = this.getAttribute('data-link');
+
+                var tempInput = document.createElement('input');
+                tempInput.value = urlToCopy;
+                document.body.appendChild(tempInput);
+
+                tempInput.select();
+                document.execCommand('copy');
+
+                document.body.removeChild(tempInput);
+
+                Swal.fire({
+                    text: 'URL dicopy pada clipboard: ' + urlToCopy,
+                    toast: true,
+                    position: 'top-mid',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            });
+        });
+    });
 </script>
 
 

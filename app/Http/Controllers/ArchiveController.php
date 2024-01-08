@@ -45,8 +45,15 @@ class ArchiveController extends Controller
             $activityName = Activity::find($data['activity_id'])->name;
 
             foreach ($files as $file) {
+                // Menggunakan timestamp sekarang sebagai bagian dari nama file
                 $now = Carbon::now();
-                $fileName = $now->format('Ymd_His') . '_' . $file->getClientOriginalName();
+
+                // Membuang bagian waktu dari format default
+                $fileName = $now->format('Ymd') . '_' . $file->getClientOriginalName();
+
+                // Mengubah format nama file jika diperlukan
+                // $fileName = $file->getClientOriginalName();
+
                 $path = $file->storeAs('public/folder-upload', $fileName);
 
                 $archiveData = [
@@ -64,7 +71,9 @@ class ArchiveController extends Controller
         }
 
         return redirect()->route('archive')->with('success', 'File berhasil diunggah.');
+
     }
+
 
     public function downloadFile($id)
     {
@@ -114,8 +123,16 @@ class ArchiveController extends Controller
 
             // Process the new file
             $file = $request->file('file_content');
+
+            // Menggunakan timestamp sekarang sebagai bagian dari nama file
             $now = now();
+
+            // Membuang bagian waktu dari format default
             $fileName = $now->format('Ymd_His') . '_' . $file->getClientOriginalName();
+
+            // Mengubah format nama file jika diperlukan
+            // $fileName = $file->getClientOriginalName();
+
             $path = $file->storeAs('public/folder-upload', $fileName);
 
             // Update file-related fields in the database
@@ -125,6 +142,7 @@ class ArchiveController extends Controller
                 'file_path' => 'folder-upload/' . $fileName,
             ]);
         }
+
 
         return redirect()->route('archive')->with('success', 'Data Berhasil Update!');
     }
