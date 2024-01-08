@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
-use App\Exports\ActivityExport;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Controllers\Controller;
-use App\Imports\ActivityDivisionImport;
-use App\Policies\ActivityPolicy;
-use App\Imports\ActivityImport;
-use App\Exports\CustomActivityTemplateExport;
+use App\Models\Division;
 use Illuminate\Http\Request;
+use App\Exports\ActivityExport;
+use App\Imports\ActivityImport;
+use App\Policies\ActivityPolicy;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ActivityDivisionImport;
+use App\Exports\CustomActivityTemplateExport;
 
 class ActivityController extends Controller
 {
@@ -20,7 +21,8 @@ class ActivityController extends Controller
     public function index()
     {
         $datakegiatan = Activity::all();
-        return view('activity.activity',compact('datakegiatan'));
+        $kegiatans = Division::pluck('name', 'id');
+        return view('activity.activity',compact('datakegiatan', 'kegiatans'));
     }
 
     public function activityexport()
@@ -59,7 +61,7 @@ class ActivityController extends Controller
         Activity::create([
             'name'=>$request->name,
             'finance_code'=>$request->finance_code,
-            'division'=>$request->division,
+            'division_id'=>$request->division,
         ]);
 
         return redirect('activity')->with('success', 'Tambah Data Berhasil!');

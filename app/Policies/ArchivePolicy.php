@@ -20,7 +20,9 @@ class ArchivePolicy
     {
         // Super admin dapat mengedit seluruh data
         if ($user->isAdmin()) {
-            return true;
+            return true
+            ? Response::allow()
+            : Response::deny('You do not own this post.');
         }
 
      // Ketua tim dapat menghapus data dari timnya sendiri dan anggotanya dengan divisi yang sama

@@ -46,7 +46,7 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->finance_code }}</td>
-                                            <td>{{ $data->division->name }}</td>
+                                            <td>{{ optional($data->division)->name }}</td>
                                             <td>
                                                 <div class="icon-container">
                                                 {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#edit-activity" data-id="{{ $data->id }}"><i class="fas fa-edit"></i></a> --}}
@@ -106,12 +106,12 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Divisi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="division" name="division">
-                                    {{-- <select class="form-control" name="division" id="division">
-                                        @foreach ($datakegiatan as $data)
-                                            <option value="{{ $data }}">{{ $data->division }}</option>
+                                    <select class="form-control" id="division" name="division">
+                                        <option value="" disabled selected>Pilih Divisi</option>
+                                    @foreach ($kegiatans as $id => $name)
+                                            <option value="{{ $id }}" data-name="{{ $name }}">{{ $name }}</option>
                                         @endforeach
-                                    </select> --}}
+                                    </select>
                                     <div class="valid-feedback">
                                         Lengkap!
                                     </div>
@@ -202,7 +202,13 @@
                           <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Divisi</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="division" name="division" value="{{ $data->divisionName }}">
+                                <option value="" disabled {{ $data->division_id ? '' : 'selected' }}>Pilih Divisi</option>
+                                                @foreach ($divisions as $division)
+                                                    <option value="{{ $division->id }}" {{ $data->division_id == $division->id ? 'selected' : '' }}>
+                                                        {{ $division->name }}
+                                                    </option>
+                                                @endforeach
+                              {{-- <input type="text" class="form-control" id="division" name="division" value="{{ $data->divisionName }}"> --}}
                               <div class="valid-feedback">
                                 Lengkap!
                               </div>

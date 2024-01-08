@@ -67,6 +67,7 @@ class EmployeeController extends Controller
         'NIP' => 'required',
         'email' => ['required', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@bps\.go\.id$/'],
         'pangkat' => 'required',
+        'role' => 'required',
     ]);
 
         // Ambil username dari email menggunakan regex
@@ -80,6 +81,7 @@ class EmployeeController extends Controller
             'name' => $request->nama,
             'username' => $username,
             'password' => bcrypt('3573'), // Password default 3573
+            'role' => $request->role,
     ]);
 
         // Temukan divisi berdasarkan nama
