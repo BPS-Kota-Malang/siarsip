@@ -147,14 +147,21 @@ class ArchiveController extends Controller
 
         return redirect()->route('archive')->with('success', 'Data Berhasil Update!');
     }
+    /**
+     * Backup Tim
+    */
+    // public function destroy(Archive $archive, string $id)
+    // {
+    //     $this->authorize('delete', $archive);
+    //     $upload = Archive::findorfail($id);
+    //     $upload->delete();
+    //     // $archive->delete();
+
+    //     return back()->with('info', 'Data Berhasil Dihapus!');
+    // }
 
     public function destroy(Archive $archive, string $id)
     {
         $this->authorize('delete', $archive);
-        $upload = Archive::findorfail($id);
-        $upload->delete();
-        // $archive->delete();
-
-        return back()->with('info', 'Data Berhasil Dihapus!');
     }
 }

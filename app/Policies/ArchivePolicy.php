@@ -45,7 +45,15 @@ class ArchivePolicy
      */
     public function delete(User $user, Archive $archive): bool
     {
-        //
+        if ($user->isSuperadmin()) {
+            return true;
+        }
+
+        elseif ($user->isTeamLeader() && ($user->division_id == $archive->division_id || $user->id == $archive->user_id)){
+            return true;
+        }
+
+        return $user->id == $archive->user_id;
     }
 
     /**
