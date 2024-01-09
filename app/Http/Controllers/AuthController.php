@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Employee;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -36,13 +37,12 @@ class AuthController extends Controller
                 ->withInput();
         }
 
-        $remember = true; // Sesuaikan dengan kebutuhan Anda
+        $remember = true;
 
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password], $remember)) {
             $user = Auth::user();
             $request->session()->put('user_id', $user->id);
 
-            // Membuat dan menyimpan token "remember me"
             $token = $user->createToken("auth-token")->plainTextToken;
             $user->update(['remember_token' => $token]);
 
@@ -98,7 +98,6 @@ class AuthController extends Controller
         return redirect('/login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
-    // Menampilkan form reset password
     public function showResetForm(Request $request, $token = null)
     {
         return view('auth.reset-password')->with(
@@ -111,7 +110,6 @@ class AuthController extends Controller
         return view('auth.forgot-password');
     }
 
-    // Mengirim email tautan reset password
     public function sendResetLinkEmail(Request $request)
     {
         $request->validate(['email' => 'required|email']);
@@ -125,7 +123,6 @@ class AuthController extends Controller
             : back()->withErrors(['email' => __($status)]);
     }
 
-    // Menangani proses reset password
     public function resetPassword(Request $request)
     {
         $request->validate([
@@ -141,7 +138,6 @@ class AuthController extends Controller
                     'password' => bcrypt($password),
                     'remember_token' => Str::random(60),
                 ])->save();
-                // Hapus token "remember me" setelah reset password
                 $user->tokens()->delete();
             }
         );
@@ -153,12 +149,10 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $guard = 'web'; // Sesuaikan dengan guard yang digunakan
+        $guard = 'web';
 
-        // Hapus seluruh cookie sesi
         Session::flush();
 
-        // Logout pengguna
         Auth::guard($guard)->logout();
 
         return redirect('/login')->with('success', 'Terimakasih sudah logout! Silakan login kembali.');
@@ -167,8 +161,6 @@ class AuthController extends Controller
     public function checkSlug(Request $request)
     {
         $email = $request->input('email');
-
-        // Mengambil bagian sebelum "@" dari alamat email sebagai slug
         $emailParts = explode('@', $email);
         $username = count($emailParts) > 0 ? $emailParts[0] : '';
 
