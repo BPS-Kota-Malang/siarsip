@@ -67,6 +67,7 @@ class EmployeeController extends Controller
         'NIP' => 'required',
         'email' => ['required', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@bps\.go\.id$/'],
         'pangkat' => 'required',
+        'role' => 'required',
     ]);
 
         // Ambil username dari email menggunakan regex
@@ -80,6 +81,7 @@ class EmployeeController extends Controller
             'name' => $request->nama,
             'username' => $username,
             'password' => bcrypt('3573'), // Password default 3573
+            'role' => $request->role,
     ]);
 
         // Temukan divisi berdasarkan nama
@@ -132,9 +134,9 @@ class EmployeeController extends Controller
         $pegawai = Employee::findorfail($id);
         $pegawai->update([
             'nama' => $request->nama,
-            'division_id' => $request->division_id,
+            'division_id' => $request->division_name,
             'NIP' => $request->NIP,
-            'user_id' => $request->user_id,
+            // 'user_id' => $request->user_id,
             'pangkat' => $request->pangkat,
         ]);
 

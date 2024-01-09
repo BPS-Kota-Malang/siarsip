@@ -100,18 +100,18 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Divisi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="division_name" name="division_name">
+                                    {{-- <input type="text" class="form-control" id="division_name" name="division_name"> --}}
                                     {{-- <select class="form-control" name="division_id" id="division_id">
                                         @foreach ($datapegawai as $data)
                                             <option value="{{ $data }}">{{ $data->division->Name }}</option>
                                         @endforeach
                                     </select> --}}
-                                    {{-- <select class="form-control" name="division_id" id="division_id">
+                                    <select class="form-control" name="division_name" id="division_name">
                                         <option value="" disabled selected>Pilih Divisi</option>
                                         @foreach ($divisions as $division)
-                                            <option value="{{ $division->id }}">{{ $division->Name }}</option>
+                                            <option value="{{ $division->name }}">{{ $division->name }}</option>
                                         @endforeach
-                                    </select> --}}
+                                    </select>
                                     <div class="invalid-feedback">
                                         Tolong Isi Nama Divisi!
                                     </div>
@@ -186,7 +186,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Role</label>
                                 <div class="col-sm-10">
-                                    <select name="phase" id="kategori" required>
+                                    <select name="role" id="role" required>
                                         @foreach(\App\Models\User::getPossibleEnumValues('role') as $role)
                                             <option value="{{ $role }}">{{ $role }}</option>
                                         @endforeach
@@ -283,6 +283,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Role</label>
+                                <div class="col-sm-10">
+                                    <select name="phase" id="kategori" required>
+                                        @foreach(\App\Models\User::getPossibleEnumValues('role') as $role)
+                                            <option value="{{ $role }}">{{ $role }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="valid-feedback">
+                                        Lengkap!
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -316,7 +329,7 @@
                                         </select> --}}
                                         {{-- <input type="text" class="form-control" id="division_id" name="division_id"
                                             value="{{ $data->division->Name}}"> --}}
-                                            <select class="form-control" name="division_id" id="division_id">
+                                            <select class="form-control" name="division_name" id="division_name">
                                                 <option value="" disabled {{ $data->division_id ? '' : 'selected' }}>Pilih Divisi</option>
                                                 @foreach ($divisions as $division)
                                                     <option value="{{ $division->id }}" {{ $data->division_id == $division->id ? 'selected' : '' }}>
@@ -360,6 +373,19 @@
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="pangkat" name="pangkat"
                                             value="{{ $data->pangkat }}">
+                                        <div class="invalid-feedback">
+                                            Tolong isi pangkat!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Role</label>
+                                    <div class="col-sm-10">
+                                        <select name="role" id="role" required>
+                                            @foreach(\App\Models\User::getPossibleEnumValues('role') as $role)
+                                                <option value="{{ $role }}" {{ old('role') == $role ? 'selected' : '' }}>{{ $role }}</option>
+                                            @endforeach
+                                        </select>
                                         <div class="valid-feedback">
                                             Lengkap!
                                         </div>

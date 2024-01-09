@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Archive;
 use App\Models\User;
+use App\Models\archieve;
 use Illuminate\Auth\Access\Response;
 
-class ArchivePolicy
+class PostPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class ArchivePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Archive $archive): bool
+    public function view(User $user, archieve $archieve): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class ArchivePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Archive $archive): bool
+    public function update(User $user, archieve $archieve): bool
     {
         //
     }
@@ -43,23 +43,15 @@ class ArchivePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Archive $archive): bool
+    public function delete(User $user, archieve $archieve): bool
     {
-        if ($user->isSuperadmin()) {
-            return true;
-        }
-
-        elseif ($user->isTeamLeader() && ($user->division_id == $archive->division_id || $user->id == $archive->user_id)){
-            return true;
-        }
-
-        return $user->id == $archive->user_id;
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Archive $archive): bool
+    public function restore(User $user, archieve $archieve): bool
     {
         //
     }
@@ -67,7 +59,7 @@ class ArchivePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Archive $archive): bool
+    public function forceDelete(User $user, archieve $archieve): bool
     {
         //
     }
