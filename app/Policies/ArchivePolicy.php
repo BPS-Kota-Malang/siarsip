@@ -49,7 +49,7 @@ class ArchivePolicy
             return true;
         }
 
-        elseif ($user->isTeamLeader() && ($user->division_id == $archive->division_id || $user->id == $archive->user_id)){
+        elseif ($user->isTeamLeader() && ($user->division_id == $archive->user->employee->division_id || $user->id == $archive->user_id)){
             return true;
         }
 

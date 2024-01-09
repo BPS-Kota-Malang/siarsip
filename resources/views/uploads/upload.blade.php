@@ -83,6 +83,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Tambah Kegiatan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body">
                     <form action="{{ route('save-file') }}" class="needs-validation" novalidate="" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -102,7 +103,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Phase</label>
                                 <div class="col-sm-10">
-                                    <select name="phase" id="kategori" required>
+                                    <select class="form-control" name="phase" id="kategori" required>
                                         @foreach(\App\Models\Archive::getPossibleEnumValues('phase') as $phase)
                                             <option value="{{ $phase }}">{{ $phase }}</option>
                                         @endforeach
@@ -176,7 +177,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Phase</label>
                                     <div class="col-sm-10">
-                                        <select name="phase" id="kategori" required>
+                                        <select class="form-control" name="phase" id="kategori" required>
                                             @foreach(\App\Models\Archive::getPossibleEnumValues('phase') as $phase)
                                                 <option value="{{ $phase }}" {{ $data->phase == $phase ? 'selected' : '' }}>{{ $phase }}</option>
                                             @endforeach
