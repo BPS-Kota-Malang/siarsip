@@ -88,7 +88,7 @@ class User extends Authenticatable
         return self::$enumCache[$column];
     }
 
-    public function isAdmin()
+    public function isSuperAdmin()
     {
         return $this->role === 'superadmin'; // Gantilah dengan logika peran sesuai kebutuhan aplikasi Anda
     }
