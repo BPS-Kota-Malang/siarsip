@@ -88,7 +88,7 @@ Route::get('/edit-activity,{id}',[App\Http\Controllers\ActivityController::class
 Route::put('/update-activity,{id}',[App\Http\Controllers\ActivityController::class, 'update'])->name('update-activity');
 Route::delete('/delete-activity,{id}',[App\Http\Controllers\ActivityController::class, 'destroy'])->name('delete-activity');
 Route::get('/export-activity',[App\Http\Controllers\ActivityController::class, 'activityexport'])->name('export-activity');
-Route::get('/download-custom-template', [App\Http\Controllers\ActivityController::class, 'downloadTemplate'])->name('download-custom-activity-template');
+Route::get('/download-activity-template', [App\Http\Controllers\ActivityController::class, 'downloadTemplate'])->name('download-custom-activity-template');
 Route::post('/import-activity',[App\Http\Controllers\ActivityController::class, 'activityimport'])->name('import-activity');
 
 
@@ -98,7 +98,8 @@ Route::get('/add-file',[App\Http\Controllers\ArchiveController::class, 'create']
 Route::post('/save-file',[App\Http\Controllers\ArchiveController::class, 'store'])->name('save-file');
 Route::get('/edit-file,{id}',[App\Http\Controllers\ArchiveController::class, 'edit'])->name('edit-file');
 Route::put('/update-file,{id}',[App\Http\Controllers\ArchiveController::class, 'update'])->name('update-file');
-Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
+// Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
+Route::get('/delete/{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
 Route::get('/download/{id}', [ArchiveController::class, 'downloadFile'])->name('download-file');
 
 

@@ -1,0 +1,25 @@
+name : Publish Website to Cpanel Version 4.0.1
+on :
+  push :
+    branches :
+      - main
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+    - name : FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server : ${{secrets.FTP_SERVER}}
+        username : ${{secrets.FTP_USERNAME}}
+        password: ${{secrets.FTP_PASSWORD}}
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+    - name: Generate key
+      run: php artisan key:generate
