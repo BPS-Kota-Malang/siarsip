@@ -22,7 +22,6 @@ class EmployeeImport implements ToCollection
 
 
         foreach ($rows as $key => $row) {
-            // Skip header row
             if ($key === 0) {
                 continue;
             }
@@ -32,31 +31,26 @@ class EmployeeImport implements ToCollection
             $userEmail = $row[4];
             $username = $this->generateUsernameFromEmail($userEmail);
 
-            // Use regex to validate and extract domain
             $validDomain = preg_match('/@bps\.go\.id$/', $userEmail);
 
-            // If the domain is valid, proceed
             if ($validDomain) {
-                // Find the Division by name
                 $division = Division::where('name', $divisionName)->first();
 
-                // Check if the division exists
                 if (!$division) {
                     $division = Division::create([
                         'name' => $divisionName,
-                        'code' => uniqid(), // Sesuaikan dengan logika pemberian kode yang sesuai
+                        'code' => uniqid(),
                     ]);
                 }
 
-                // Find or create the User
                 $user = User::firstOrCreate(['email' => $userEmail], [
                     'name' => $row[1],
                     'email' => $userEmail,
                     'username' => $username,
                     'password' => bcrypt('3573'),
+                    'role' => 'anggota',
                 ]);
 
-                // Create the Employee and associate it with the Division and User
                 Employee::create([
                     'nama' => $row[1],
                     'division_id' => $division->id,

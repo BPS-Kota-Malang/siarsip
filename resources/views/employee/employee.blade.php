@@ -100,12 +100,6 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Divisi</label>
                                 <div class="col-sm-10">
-                                    {{-- <input type="text" class="form-control" id="division_name" name="division_name"> --}}
-                                    {{-- <select class="form-control" name="division_id" id="division_id">
-                                        @foreach ($datapegawai as $data)
-                                            <option value="{{ $data }}">{{ $data->division->Name }}</option>
-                                        @endforeach
-                                    </select> --}}
                                     <select class="form-control" name="division_name" id="division_name">
                                         <option value="" disabled selected>Pilih Divisi</option>
                                         @foreach ($divisions as $division)
@@ -130,18 +124,6 @@
                                 <label class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="email" name="email">
-                                    {{-- <input type="hidden" name="user_id" value="{{ $newUserId }}"> --}}
-                                    {{-- <select class="form-control" name="user_id" id="user_id">
-                                        @foreach ($datapegawai as $data)
-                                            <option value="{{ $data }}">{{ $data->user->email }}</option>
-                                        @endforeach
-                                    </select> --}}
-                                    {{-- <select class="form-control" name="user_id" id="user_id">
-                                        <option value="" disabled selected>Pilih Email</option>
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->email }}</option>
-                                        @endforeach
-                                    </select> --}}
                                     <div class="invalid-feedback">
                                         Tolong isi Email dengan Benar (Gunakan domain bps.go.id)!
                                     </div>
@@ -156,24 +138,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Username</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="username" name="username">
-                                    <div class="invalid-feedback">
-                                        Tolong Isi Username!
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="password" name="password">
-                                    <div class="invalid-feedback">
-                                        Tolong Isi Password!
-                                    </div>
-                                </div>
-                            </div> --}}
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Pangkat</label>
                                 <div class="col-sm-10">
@@ -186,7 +150,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Role</label>
                                 <div class="col-sm-10">
-                                    <select name="role" id="role" required>
+                                    <select class="form-control" name="role" id="role" required>
+                                        <option value="" disabled selected>Pilih Role</option>
                                         @foreach(\App\Models\User::getPossibleEnumValues('role') as $role)
                                             <option value="{{ $role }}">{{ $role }}</option>
                                         @endforeach
@@ -240,7 +205,7 @@
                                         <select class="form-control" name="division_id" id="division_id">
                                             <option value="" disabled selected>Pilih Divisi</option>
                                             @foreach ($divisions as $division)
-                                                <option value="{{ $division->id }}">{{ $division->Name }}</option>
+                                                <option value="{{ $division->id }}">{{ $division->name }}</option>
                                             @endforeach
                                         </select>
                                         <div class="invalid-feedback">
@@ -321,14 +286,6 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Divisi</label>
                                     <div class="col-sm-10">
-                                        {{-- <select class="form-control" name="division_id" id="division_id">
-                                            <option value="{{ $data->division_id }}" selected>{{ $data->division->Name }}</option>
-                                            @foreach ($divisions as $division)
-                                                <option value="{{ $division->id }}">{{ $division->Name }}</option>
-                                            @endforeach
-                                        </select> --}}
-                                        {{-- <input type="text" class="form-control" id="division_id" name="division_id"
-                                            value="{{ $data->division->Name}}"> --}}
                                             <select class="form-control" name="division_name" id="division_name">
                                                 <option value="" disabled {{ $data->division_id ? '' : 'selected' }}>Pilih Divisi</option>
                                                 @foreach ($divisions as $division)
@@ -357,14 +314,8 @@
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="user_id" name="user_id"
                                             value="{{ $data->user->username}}" readonly>
-                                            {{-- <select class="form-control" name="user_id" id="user_id">
-                                                <option value="" disabled selected>Pilih Email</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->email }}</option>
-                                                @endforeach
-                                            </select> --}}
                                         <div class="invalid-feedback">
-                                            Maaf, User ID tidak valid.
+                                            Maaf, User tidak valid.
                                         </div>
                                     </div>
                                 </div>
@@ -381,9 +332,10 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Role</label>
                                     <div class="col-sm-10">
-                                        <select name="role" id="role" required>
+                                        <select class="form-control" name="role" id="role" required>
+                                            <option value="" disabled {{ $data->user->role ? 'selected' : '' }}>Pilih Role</option>
                                             @foreach(\App\Models\User::getPossibleEnumValues('role') as $role)
-                                                <option value="{{ $role }}" {{ old('role') == $role ? 'selected' : '' }}>{{ $role }}</option>
+                                                <option value="{{ $role }}" {{ $data->user->role == $role ? 'selected' : '' }}>{{ $role }}</option>
                                             @endforeach
                                         </select>
                                         <div class="valid-feedback">
@@ -472,14 +424,11 @@
     </div>
 
     <script>
-        // Fungsi untuk mengisi otomatis field username
         function fillUsername() {
             var email = document.getElementById('email').value;
             var username = email.split('@')[0];
             document.getElementById('username').value = username;
         }
-
-        // Event listener untuk memanggil fungsi saat nilai email berubah
         document.getElementById('email').addEventListener('change', fillUsername);
     </script>
 @endsection

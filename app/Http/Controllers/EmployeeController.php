@@ -60,7 +60,6 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-       // Validasi form
         $request->validate([
         'nama' => 'required',
         'division_name' => 'required',
@@ -70,11 +69,9 @@ class EmployeeController extends Controller
         'role' => 'required',
     ]);
 
-        // Ambil username dari email menggunakan regex
         preg_match('/^[a-zA-Z0-9._%+-]+/', $request->email, $matches);
         $username = $matches[0];
 
-        // Buat atau dapatkan pengguna berdasarkan email
         $user = User::firstOrCreate([
             'email' => $request->email,
         ], [
@@ -84,10 +81,8 @@ class EmployeeController extends Controller
             'role' => $request->role,
     ]);
 
-        // Temukan divisi berdasarkan nama
         $division = Division::where('name', $request->division_name)->first();
 
-        // Jika divisi tidak ditemukan, buat baru
         if (!$division) {
             $division = Division::create([
                 'name' => $request->division_name,
@@ -95,7 +90,6 @@ class EmployeeController extends Controller
             ]);
         }
 
-        // Simpan data pegawai
         $pegawai = Employee::create([
             'nama' => $request->nama,
             'division_id' => $division->id,
@@ -131,7 +125,14 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $users = User::findorfail($id);
         $pegawai = Employee::findorfail($id);
+        $users = $pegawai->user;
+
+        $users->update([
+            'role' => $request->role,
+        ]);
+
         $pegawai->update([
             'nama' => $request->nama,
             'division_id' => $request->division_name,
@@ -150,6 +151,11 @@ class EmployeeController extends Controller
     {
         $pegawai = Employee::findorfail($id);
         $pegawai->delete();
+        $users = User::where('id', $pegawai->user_id)->first();
+        if ($users) {
+            $users->delete();
+        }
+
 
         return back()->with('info', 'Data Berhasil Dihapus!');
     }
