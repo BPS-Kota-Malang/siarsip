@@ -46,10 +46,10 @@
                                             <td>{{ $data->phase }}</td>
                                             <td>
                                                 <a href="{{ $data->preview_link }}" target="_blank" class="btn btn-info" data-link="{{ $data->preview_link }}">
-                                                    <i class="fa fa-eye"></i><span class="visually-hidden">Preview</span>
+                                                    <i class="fas fa-eye"></i><span class="visually-hidden">Preview</span>
                                                 </a>
                                                 <a href="javascript:void(0)" class="btn btn-info copy-link" data-link="{{ $data->preview_link }}">
-                                                    <i class="fa fa-file"></i><span class="visually-hidden">Copy</span>
+                                                    <i class="fas fa-file"></i><span class="visually-hidden">Copy</span>
                                                 </a>
                                             </td>
                                             <td><a href="{{ route('download-file', $data->id) }}" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i><span class="visually-hidden">Download</span></a></td>
