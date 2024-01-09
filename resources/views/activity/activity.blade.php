@@ -250,7 +250,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a href="download-custom-activity-template" class="btn btn-info mb-2">Unduh Template</a>
+                            <a href="/download-activity-template" class="btn btn-info mb-2">Unduh Template</a>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
