@@ -56,6 +56,8 @@ class ArchivePolicy
         return $user->id == $archive->user_id;
     }
 
+
+
     /**
      * Determine whether the user can restore the model.
      */

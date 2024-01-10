@@ -163,5 +163,10 @@ class ArchiveController extends Controller
     public function destroy(Archive $archive, string $id)
     {
         $this->authorize('delete', $archive);
+        $upload = Archive::findorfail($id);
+        $upload->delete();
+        // $archive->delete();
+
+        return back()->with('info', 'Data Berhasil Dihapus!');
     }
 }
