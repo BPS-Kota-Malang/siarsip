@@ -24,4 +24,9 @@ class Division extends Model
         return $this->hasMany(Activity::class);
     }
 
+    public function archive()
+    {
+        return $this->hasManyThrough(Employee::class, User::class);
+    }
+
 }

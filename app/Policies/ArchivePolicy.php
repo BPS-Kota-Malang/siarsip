@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Archive;
 use App\Models\User;
+use App\Models\Employee;
 use Illuminate\Auth\Access\Response;
 
 class ArchivePolicy
@@ -49,7 +50,7 @@ class ArchivePolicy
             return true;
         }
 
-        elseif ($user->isTeamLeader() && ($user->division_id == $archive->user->employee->division_id || $user->id == $archive->user_id)){
+        elseif ($user->isTeamLeader() && ($user->division_id == $archive->user->Employee->division_id || $user->id == $archive->user_id)){
             return true;
         }
 

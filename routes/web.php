@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth', 'web', 'cekrole:superadmin']], function (
     //Route::post('upload','HomeController@upload');
     Route::post('/upload',[App\Http\Controllers\HomeController::class, 'upload'])->name('upload');
     Route::get('/division', [App\Http\Controllers\UserController::class, 'division'])->name('division');
+    Route::resource('division', DivisionController::class);
     Route::get('/activity', [App\Http\Controllers\UserController::class, 'activity'])->name('activity');
     Route::get('/activity',[App\Http\Controllers\ActivityController::class, 'index'])->name('activity');
     Route::get('/add-activity',[App\Http\Controllers\ActivityController::class, 'create'])->name('add-activity');
@@ -111,7 +112,7 @@ Route::group(['middleware' => ['auth', 'web', 'cekrole:superadmin,ketuatim,anggo
     Route::get('/download/{id}', [ArchiveController::class, 'downloadFile'])->name('download-file');
 });
 
-Route::resource('division', DivisionController::class);
+
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

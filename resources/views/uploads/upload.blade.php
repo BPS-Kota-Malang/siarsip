@@ -54,7 +54,8 @@
                                             </td>
                                             <td><a href="{{ route('download-file', $data->id) }}" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i><span class="visually-hidden">Download</span></a></td>
                                             <td>{{ $data->file_content}}</td>
-                                            <td>{{ optional($data->user)->username }}</td>
+                                            {{-- <td>{{ optional($data->user)->username }}</td> --}}
+                                            <td>{{ $data->user->employee->name }}</td>
                                             <td>
                                                 <a href="#" class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity_id }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
                                                     <i class="fas fa-edit"></i>

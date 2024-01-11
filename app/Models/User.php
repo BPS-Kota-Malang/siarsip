@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use \Znck\Eloquent\Traits\BelongsToThrough;
 
 class User extends Authenticatable
 {
@@ -52,6 +53,7 @@ class User extends Authenticatable
 
     public function Employee()
     {
+
         return $this->hasOne(Employee::class);
     }
 
@@ -102,4 +104,7 @@ class User extends Authenticatable
     {
         return $this->role === 'anggota';
     }
+
+
+
 }
