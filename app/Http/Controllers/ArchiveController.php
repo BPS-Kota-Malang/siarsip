@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ArchiveController extends Controller
 {
+
+    public function testDivisionRelationship()
+    {
+        $archieve = Archive::find(1);
+
+        dd( $archieve -> activity -> division_id);
+    }
     public function index()
     {
         $dataUpload = Archive::all();
@@ -160,12 +167,15 @@ class ArchiveController extends Controller
     //     return back()->with('info', 'Data Berhasil Dihapus!');
     // }
 
-    public function destroy(Archive $archive, string $id)
+    public function destroy(string $id)
     {
+        $archive = Archive::with('activity')->find($id);
+        // dd($archive);
+
         $this->authorize('delete', $archive);
-        $upload = Archive::findorfail($id);
-        $upload->delete();
-        // $archive->delete();
+
+        $archive->delete();
+        // // $archive->delete();
 
         return back()->with('info', 'Data Berhasil Dihapus!');
     }

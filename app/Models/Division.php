@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Division extends Model
 {
@@ -13,20 +15,20 @@ class Division extends Model
         'id', 'name', 'code'
     ];
 
-    public function Employee()
+    public function employees() : HasMany
     {
         return $this->hasMany(Employee::class);
     }
     // Division.php
 
-    public function activities()
+    public function activities() : HasMany
     {
         return $this->hasMany(Activity::class);
     }
 
-    public function archive()
+    public function users()
     {
-        return $this->hasManyThrough(Employee::class, User::class);
+        return $this->hasManyThrough(User::class, Employee::class);
     }
 
 }

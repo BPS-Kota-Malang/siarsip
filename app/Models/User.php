@@ -11,6 +11,8 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use \Znck\Eloquent\Traits\BelongsToThrough;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+
 
 class User extends Authenticatable
 {
@@ -55,6 +57,11 @@ class User extends Authenticatable
     {
 
         return $this->hasOne(Employee::class);
+    }
+
+    public function divisionEmployee() : HasOneThrough
+    {
+        return $this->hasOneThrough( Division::class, Employee::class);
     }
 
     public function sluggable(): array

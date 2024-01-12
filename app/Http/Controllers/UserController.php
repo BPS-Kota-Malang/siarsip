@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+
+    public function testRelationship()
+    {
+    $userDivision = User::with('employee')->find(2);;
+
+        dd( $userDivision->employee->division_id);
+        // dd( $userDivision);
+  }
     public function index()
     {
         return view('index');

@@ -117,5 +117,9 @@ Route::group(['middleware' => ['auth', 'web', 'cekrole:superadmin,ketuatim,anggo
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
+/**
+ * Relationship Test
+ */
+Route::get('/user-division-test', [UserController::class, 'testRelationship']);
+Route::get('/archive-division-test', [ArchiveController::class, 'testDivisionRelationship']);
 
