@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activity;
-use App\Models\Archive;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use App\Models\Archive;
+use App\Models\Activity;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class ArchiveController extends Controller
 {
@@ -170,13 +171,17 @@ class ArchiveController extends Controller
     public function destroy(string $id)
     {
         $archive = Archive::with('activity')->find($id);
-        // dd($archive);
+        try {
+            $this->authorize('delete', $archive);
 
-        $this->authorize('delete', $archive);
+            // Lanjutkan dengan operasi penghapusan jika otorisasi berhasil
+            $archive->delete();
 
-        $archive->delete();
-        // // $archive->delete();
+            return redirect()->route('archive')->with('success', 'Arsip berhasil dihapus.');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('archive')->with('error', 'Akses hapus arsip ditolak!');
+        }
 
-        return back()->with('info', 'Data Berhasil Dihapus!');
+
     }
 }
