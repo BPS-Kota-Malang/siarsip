@@ -47,7 +47,7 @@
                                             <td>{{ optional($data->activity)->name }}</td>
                                             <td>{{ $data->phase }}</td>
                                             <td>
-                                                <a href="{{ $data->preview_link }}" target="_blank" class="btn btn-info" data-link="{{ $data->preview_link }}">
+                                                <a href="{{ route('preview-file', $data->id) }}" target="_blank" class="btn btn-info" data-link="{{ $data->preview_link }}">
                                                     <i class="fa fa-eye"></i><span class="visually-hidden">Preview</span>
                                                 </a>
                                                 <a href="javascript:void(0)" class="btn btn-info copy-link" data-link="{{ $data->preview_link }}">

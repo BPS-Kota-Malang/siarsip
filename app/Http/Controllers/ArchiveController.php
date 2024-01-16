@@ -82,6 +82,15 @@ class ArchiveController extends Controller
 
     }
 
+    public function previewArchive($id)
+    {
+        $archive = Archive::find($id);
+        // $url_path = Storage::url($archive->file_content);
+        $url = Storage::url($archive->file_content);
+        // $url = "app/public". $url_path;
+        // dd ($url);
+        return view('uploads.preview', compact('url'));
+    }
 
     public function downloadFile($id)
     {

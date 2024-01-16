@@ -109,6 +109,7 @@ Route::group(['middleware' => ['auth', 'web', 'cekrole:superadmin,ketuatim,anggo
     Route::put('/update-file,{id}',[App\Http\Controllers\ArchiveController::class, 'update'])->name('update-file');
     // Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
     Route::get('/delete/{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
+    Route::get('/archive/preview/{id}',[App\Http\Controllers\ArchiveController::class, 'previewArchive'])->name('preview-file');
     Route::get('/download/{id}', [ArchiveController::class, 'downloadFile'])->name('download-file');
 });
 
