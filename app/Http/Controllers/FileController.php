@@ -27,6 +27,12 @@ class FileController extends Controller
         $activities = Activity::all();
         $phases = Phase::all();
         $zones = Zone::all();
+
+        /**
+         * Add URL To Preview
+         */
+        // $preview_link = Storage::url('public/'.$division.'/'.$filename);
+
         return view('file.upload', compact('files', 'activities', 'phases', 'zones'));
     }
 
@@ -125,11 +131,43 @@ class FileController extends Controller
       * @param [type] $id
       * @return void
       */
-    public function previewFile($id)
+    // public function previewFile($id)
+    //  {
+    //     $data = File::find($id);
+    //     $division = $data->activity->division->name;
+    //     // dd($data);
+    //     if ($data && $data->file_name) {
+    //         $filePath = storage_path($data->file_name);
+    //         $filename = $data->file_name;
+    //         // // dd($filePath);
+    //         // // Pastikan file ada sebelum mencoba mendownload
+    //         if (Storage::disk('public')->exists($division.'/'.$filename)) {
+    //         //     dd($filename);
+    //         //     return response()->download($filePath, $filename);
+    //             // return Storage::url('public/'.$division.'/'.$filename);
+    //             $preview_link = Storage::url('public/'.$division.'/'.$filename);
+    //             $mimeType = Storage::mimeType('public/'.$division.'/'.$filename);
+    //             // return asset($preview_link);
+    //             // dd($mimeType);
+    //             // return view('file.preview', compact('preview_link', 'mimeType'));
+
+    //             return response()->file(public_path($preview_link));
+    //         }
+    //     }
+
+    //     // Jika file tidak ditemukan atau file_content null, redirect atau berikan respons error
+    //     return redirect()->route('file.index')->with('error', 'File tidak ditemukan.');
+    //  }
+
+     public function previewFile($uuid)
+    //  public function previewFile($id)
      {
-        $data = File::find($id);
+         $data = File::where('uuid', $uuid)->first();
+        //  $data_model = File::find($data['id']);
+        // $division = $data->activity_id;
         $division = $data->activity->division->name;
         // dd($data);
+        // dd($data, $division);
         if ($data && $data->file_name) {
             $filePath = storage_path($data->file_name);
             $filename = $data->file_name;
@@ -225,9 +263,9 @@ class FileController extends Controller
             // Lanjutkan dengan operasi penghapusan jika otorisasi berhasil
             $archive->delete();
 
-            return redirect()->route('archive')->with('success', 'Arsip berhasil dihapus.');
+            return redirect()->route('file.index')->with('success', 'Arsip berhasil dihapus.');
         } catch (AuthorizationException $e) {
-            return redirect()->route('archive')->with('error', 'Akses hapus arsip ditolak!');
+            return redirect()->route('file.index')->with('error', 'Akses hapus arsip ditolak!');
         }
 
     }

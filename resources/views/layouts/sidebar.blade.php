@@ -17,8 +17,7 @@
         <li><a class="nav-link" href="{{ route('division.index') }}"><i class="far fa-square"></i> <span>Data Tim Kerja</span></a></li>
         @endif
         <li class="menu-header">Archive</li>
-        <li><a class="nav-link" href="/archive"><i class="far fa-square"></i> <span>Arsip</span></a></li>
-        <li><a class="nav-link" href="/file"><i class="far fa-square"></i> <span>Files</span></a></li>
+        <li><a class="nav-link" href="/file"><i class="far fa-square"></i> <span>Arsip</span></a></li>
         @if (auth()->user()->role=='superadmin')
         <li class="menu-header">User</li>
         <li><a class="nav-link" href="{{ route('employee') }}"><i class="far fa-square"></i> <span>Data Pegawai</span></a></li>

@@ -21,7 +21,7 @@
                 <div class="card">
                     <div class="card-header">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-file">Add Archive</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-file">Tambahkan Arsip</button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -55,10 +55,11 @@
                                                 {{-- <a href="{{ route('previewFile'), $data->id }}" target="_blank" class="btn btn-info">
                                                     <i class="fa fa-eye"></i><span class="visually-hidden">Preview</span>
                                                 </a> --}}
-                                                <a href="{{ route('previewFile', $data->id) }}" target="_blank" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true">
-                                                    </i><span class="visually-hidden">Download</span>
+                                                {{-- <a href="{{ route('previewFile', $data->id) }}" target="_blank" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"> --}}
+                                                <a href="{{ route('previewFile', $data->uuid) }}" target="_blank" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true">
+                                                    </i><span class="visually-hidden">Preview</span>
                                                 </a>
-                                                <a href="javascript:void(0)" class="btn btn-info copy-link" data-link="{{ $data->preview_link }}">
+                                                <a href="javascript:void(0)" class="btn btn-info copy-link" data-link="{{ route('previewFile', $data->id) }}">
                                                     <i class="fa fa-file"></i><span class="visually-hidden">Copy</span>
                                                 </a>
                                                 <a href="{{ route('downloadFile', $data->id) }}" class="btn btn-success"><i class="fa fa-download" aria-hidden="true">
@@ -68,7 +69,7 @@
                                                 <a href="#" class="btn btn-info edit-button" data-bs-toggle="modal" data-bs-target="#edit-file" data-id="{{ $data->id }}" data-activity="{{ $data->activity_id }}" data-preview-link="{{ $data->preview_link }}" data-download-link="{{ $data->download_link }}">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a href="{{ route('delete-file', $data->id) }}">
+                                                <a href="{{ route('deleteFile', $data->id) }}">
                                                     <i class="btn btn-info fas fa-trash-alt" style="color: red"></i>
                                                 </a>
                                             </td>
@@ -226,6 +227,31 @@
 </section>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.copy-link').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var urlToCopy = this.getAttribute('data-link');
 
+                var tempInput = document.createElement('input');
+                tempInput.value = urlToCopy;
+                document.body.appendChild(tempInput);
+
+                tempInput.select();
+                document.execCommand('copy');
+
+                document.body.removeChild(tempInput);
+
+                Swal.fire({
+                    text: 'URL dicopy pada clipboard: ' + urlToCopy,
+                    toast: true,
+                    position: 'top-mid',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            });
+        });
+    });
+</script>
 
 @endsection

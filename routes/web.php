@@ -100,22 +100,15 @@ Route::group(['middleware' => ['auth', 'web', 'cekrole:superadmin']], function (
 
 Route::group(['middleware' => ['auth', 'web', 'cekrole:superadmin,ketuatim,anggota']], function () {
     Route::get('/index', [App\Http\Controllers\UserController::class, 'index'])->name('index');
-            //upload file
-    Route::get('/archive', [App\Http\Controllers\UserController::class, 'archive'])->name('archive');
-    Route::get('/archive',[App\Http\Controllers\ArchiveController::class, 'index'])->name('archive');
-    Route::get('/add-file',[App\Http\Controllers\ArchiveController::class, 'create'])->name('add-file');
-    Route::post('/save-file',[App\Http\Controllers\ArchiveController::class, 'store'])->name('save-file');
-    Route::get('/edit-file,{id}',[App\Http\Controllers\ArchiveController::class, 'edit'])->name('edit-file');
-    Route::put('/update-file,{id}',[App\Http\Controllers\ArchiveController::class, 'update'])->name('update-file');
-    // Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
-    Route::get('/delete/{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
-    Route::get('/archive/preview/{id}',[App\Http\Controllers\ArchiveController::class, 'previewArchive'])->name('preview-file');
-    // Route::get('/download/{id}', [ArchiveController::class, 'downloadFile'])->name('download-file');
     Route::get('/file/download/{id}', [FileController::class, 'downloadFile'])->name('downloadFile');
-    Route::get('/file/preview/{id}', [FileController::class, 'previewFile'])->name('previewFile');
+    Route::get('/file/delete/{id}', [FileController::class, 'destroy'])->name('deleteFile');
     Route::resource('file', FileController::class );
 });
 
+/**
+ * route for Preview -> Kipapp
+ */
+Route::get('/file/preview/{id}', [FileController::class, 'previewFile'])->name('previewFile');
 
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

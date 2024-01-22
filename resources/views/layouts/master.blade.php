@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
 
-  <title>SI Arsip &mdash; Stisla</title>
-  <title>Bootstrap Components &rsaquo; Modal &mdash; Stisla</title>
+  <title>Sistem Manajemen Arsip &mdash;</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -163,33 +162,6 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.copy-link').forEach(function (button) {
-            button.addEventListener('click', function () {
-                var urlToCopy = this.getAttribute('data-link');
-
-                var tempInput = document.createElement('input');
-                tempInput.value = urlToCopy;
-                document.body.appendChild(tempInput);
-
-                tempInput.select();
-                document.execCommand('copy');
-
-                document.body.removeChild(tempInput);
-
-                Swal.fire({
-                    text: 'URL dicopy pada clipboard: ' + urlToCopy,
-                    toast: true,
-                    position: 'top-mid',
-                    showConfirmButton: false,
-                    timer: 1000
-                });
-            });
-        });
-    });
-</script>
 
 
 </body>
