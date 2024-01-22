@@ -17,9 +17,9 @@ class ArchiveController extends Controller
 
     public function testDivisionRelationship()
     {
-        $archieve = Archive::find(1);
+        $archieve = Archive::find(10);
 
-        dd( $archieve -> activity -> division_id);
+        dd( $archieve -> activity -> division_id -> name);
     }
     public function index()
     {

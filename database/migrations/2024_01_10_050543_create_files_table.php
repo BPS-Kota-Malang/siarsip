@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->int('size');
+            $table->foreignId('activity_id')->constrained(); // foreign key
+            $table->foreignId('phase_id')->constrained();
+            $table->foreignId('zone_id')->constrained();
+            $table->uuid('uuid');
+            $table->string('file_name')->nullable();
+            $table->foreignId('user_id')->constrained(); // foreign key for user
             $table->timestamps();
         });
     }

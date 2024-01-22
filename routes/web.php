@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\DivisionController;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArchiveController;
+use App\Http\Controllers\FileController;
+use App\Models\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,7 +110,10 @@ Route::group(['middleware' => ['auth', 'web', 'cekrole:superadmin,ketuatim,anggo
     // Route::get('/delete-file,{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
     Route::get('/delete/{id}',[App\Http\Controllers\ArchiveController::class, 'destroy'])->name('delete-file');
     Route::get('/archive/preview/{id}',[App\Http\Controllers\ArchiveController::class, 'previewArchive'])->name('preview-file');
-    Route::get('/download/{id}', [ArchiveController::class, 'downloadFile'])->name('download-file');
+    // Route::get('/download/{id}', [ArchiveController::class, 'downloadFile'])->name('download-file');
+    Route::get('/file/download/{id}', [FileController::class, 'downloadFile'])->name('downloadFile');
+    Route::get('/file/preview/{id}', [FileController::class, 'previewFile'])->name('previewFile');
+    Route::resource('file', FileController::class );
 });
 
 

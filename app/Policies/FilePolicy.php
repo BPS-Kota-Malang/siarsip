@@ -37,7 +37,23 @@ class FilePolicy
      */
     public function update(User $user, File $file): bool
     {
-        //
+        if ($user->isSuperadmin()) {
+            // dd ($user->employee->division_id);
+            return true;
+        }
+
+        // elseif ($user->isTeamLeader() && ($user->employee->division_id == $archive->activity->division_id || $user->id == $archive->user_id)){
+        //     return true;
+        // }
+        if ($user->employee && $file->activity){
+            if (($user->isTeamLeader() && ($user->employee->division_id == $file->activity->division_id || $user->id == $file->user_id)))
+            {
+                // dd ($file->activity->division_id);
+                return true;
+            }
+        }
+        // dd ($file->activity);
+        return $user->id == $file->user_id;
     }
 
     /**
@@ -45,7 +61,23 @@ class FilePolicy
      */
     public function delete(User $user, File $file): bool
     {
-        //
+        if ($user->isSuperadmin()) {
+            // dd ($user->employee->division_id);
+            return true;
+        }
+
+        // elseif ($user->isTeamLeader() && ($user->employee->division_id == $archive->activity->division_id || $user->id == $archive->user_id)){
+        //     return true;
+        // }
+        if ($user->employee && $file->activity){
+            if (($user->isTeamLeader() && ($user->employee->division_id == $file->activity->division_id || $user->id == $file->user_id)))
+            {
+                // dd ($file->activity->division_id);
+                return true;
+            }
+        }
+        // dd ($file->activity);
+        return $user->id == $file->user_id;
     }
 
     /**
