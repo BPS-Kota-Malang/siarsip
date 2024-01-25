@@ -52,6 +52,8 @@ class FileController extends Controller
         $request->validate([
             'activity_id' => 'required',
             'phase_id' => 'required',
+            'zone_id' => 'required',
+            'year' => 'required',
             'file_content' => 'required',
         ]);
 
@@ -62,6 +64,7 @@ class FileController extends Controller
             'activity_id' => $request->input('activity_id'),
             'phase_id' => $request->input('phase_id'),
             'zone_id' => $request->input('zone_id'),
+            'year' => $request->input('year'),
             'user_id' => $userId,
             'uuid' => $uuid
         ];
@@ -84,6 +87,7 @@ class FileController extends Controller
                     'phase_id' => $data['phase_id'],
                     'zone_id' => $data['zone_id'],
                     'user_id' => $data['user_id'],
+                    'year' => $data['year'],
                     'uuid' => $data['uuid'],
                     // 'preview_link' => 'storage/folder-upload/' . $fileName,
                     'file_name' => $fileName,
@@ -211,7 +215,7 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(File $file, Request $request, string $id)
+    public function update(Request $request, string $id)
     {
         $file = File::findorFail($id);
         try {
@@ -220,7 +224,9 @@ class FileController extends Controller
             $request->validate([
                 'activity_id' => 'required',
                 'phase_id' => 'required',
-                'file_content' => 'required',
+                'zone_id' => 'required',
+                'year' => 'required',
+                // 'file_content' => 'required',
             ]);
 
             // Update only the necessary fields
@@ -228,6 +234,7 @@ class FileController extends Controller
                 'activity_id' => $request->input('activity_id'),
                 'phase_id' => $request->input('phase_id'),
                 'zone_id' => $request->input('zone_id'),
+                'year' => $request->input('year'),
             ]);
            /**
             * Melakukan pengecheckan jika mengupload File baru

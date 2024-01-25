@@ -30,6 +30,7 @@
                                     <tr>
                                         <th class="text-center">No</th>
                                         <th>Tim Kerja</th>
+                                        <th>Tahun</th>
                                         <th>Kegiatan</th>
                                         <th>Tahapan</th>
                                         <th>Pilar Zone Integritas</th>
@@ -44,6 +45,7 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ optional($data->activity)->division->name }}</td>
+                                            <td>{{ ($data->year) }}</td>
                                             <td>{{ optional($data->activity)->name }}</td>
                                             <td>{{ optional($data->phase)->name }}</td>
                                             <td>{{ optional($data->zone)->name }}</td>
@@ -59,7 +61,7 @@
                                                 <a href="{{ route('previewFile', $data->uuid) }}" target="_blank" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true">
                                                     </i><span class="visually-hidden">Preview</span>
                                                 </a>
-                                                <a href="javascript:void(0)" class="btn btn-info copy-link" data-link="{{ route('previewFile', $data->id) }}">
+                                                <a href="javascript:void(0)" class="btn btn-info copy-link" data-link="{{ route('previewFile', $data->uuid) }}">
                                                     <i class="fa fa-file"></i><span class="visually-hidden">Copy</span>
                                                 </a>
                                                 <a href="{{ route('downloadFile', $data->id) }}" class="btn btn-success"><i class="fa fa-download" aria-hidden="true">
@@ -130,12 +132,22 @@
                                     <div class="invalid-feedback">Kegiatan belum diisi</div>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Tahun Kegiatan</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="year" name="year">
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                    </select>
+                                    <div class="invalid-feedback">Kegiatan belum diisi</div>
+                                </div>
+                            </div>
 
                             <!-- Input untuk file -->
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Upload File</label>
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control" id="file_content" name="file_content[]" multiple>
+                                    <input   type="file" class="form-control" id="file_content" name="file_content[]" multiple>
                                     <div class="valid-feedback">File berhasil diunggah</div>
                                 </div>
                             </div>
@@ -203,20 +215,31 @@
                                         <div class="invalid-feedback">Kegiatan belum diisi</div>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Tahun Kegiatan</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="year" name="year">
+                                                <option value="2023">2023</option>
+                                                <option value="2024">2024</option>
+                                        </select>
+                                        <div class="invalid-feedback">Kegiatan belum diisi</div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">File Content</label>
+                                    <div class="col-sm-10">
+                                        @if ($data->file_content)
+                                            <p>File Sebelumnya: {{ $data->file_content }}</p>
+                                        @endif
+                                        <input type="file" class="form-control" id="file_content" name="file_content">
+                                        <div class="valid-feedback">File berhasil ditambah</div>
+                                    </div>
+                                </div>
+
                             </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">File Content</label>
-                            <div class="col-sm-10">
-                                @if ($data->file_content)
-                                    <p>File Sebelumnya: {{ $data->file_content }}</p>
-                                @endif
-                                <input type="file" class="form-control" id="file_content" name="file_content">
-                                <div class="valid-feedback">File berhasil ditambah</div>
+                            <div class="card-footer text-right">
+                                <button type="submit" class="btn btn-primary">Simpan Data</button>
                             </div>
-                        </div>
-                        <div class="card-footer text-right">
-                            <button type="submit" class="btn btn-primary">Simpan Data</button>
-                        </div>
                     </form>
                     @endif
                 </div>

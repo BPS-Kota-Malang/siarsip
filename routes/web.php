@@ -108,7 +108,7 @@ Route::group(['middleware' => ['auth', 'web', 'cekrole:superadmin,ketuatim,anggo
 /**
  * route for Preview -> Kipapp
  */
-Route::get('/file/preview/{id}', [FileController::class, 'previewFile'])->name('previewFile');
+Route::get('/file/preview/{uuid}', [FileController::class, 'previewFile'])->name('previewFile');
 
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
